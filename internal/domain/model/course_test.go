@@ -8,25 +8,25 @@ import (
 	"github.com/christian-gama/pd-solucoes/testutils/suite"
 )
 
-type CollegeSuite struct {
+type CourseSuite struct {
 	suite.Suite
 }
 
-func TestCollegeSuite(t *testing.T) {
-	suite.RunUnitTest(t, new(CollegeSuite))
+func TestCourseSuite(t *testing.T) {
+	suite.RunUnitTest(t, new(CourseSuite))
 }
 
-func (s *CollegeSuite) TestNewCollege() {
+func (s *CourseSuite) TestNewCourse() {
 	type Sut struct {
-		Sut  func() (*model.College, error)
-		Data *model.College
+		Sut  func() (*model.Course, error)
+		Data *model.Course
 	}
 
 	makeSut := func() *Sut {
-		data := fake.College()
+		data := fake.Course()
 
-		sut := func() (*model.College, error) {
-			return model.NewCollege(data.ID, data.Name, data.Cnpj)
+		sut := func() (*model.Course, error) {
+			return model.NewCourse(data.ID, data.Name, data.CollegeID)
 		}
 
 		return &Sut{Sut: sut, Data: data}
@@ -52,10 +52,10 @@ func (s *CollegeSuite) TestNewCollege() {
 		s.Nil(model, "model should be nil")
 	})
 
-	s.Run("should return an error when 'cnpj' is empty", func() {
+	s.Run("should return an error when 'collegeID' is zero", func() {
 		sut := makeSut()
 
-		sut.Data.Cnpj = ""
+		sut.Data.CollegeID = 0
 
 		model, err := sut.Sut()
 

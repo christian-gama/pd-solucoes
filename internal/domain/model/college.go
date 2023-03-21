@@ -12,8 +12,9 @@ type College struct {
 	Cnpj string `faker:"cnpj"`
 }
 
-func NewCollege(name, cnpj string) (*College, error) {
+func NewCollege(id uint, name, cnpj string) (*College, error) {
 	m := &College{
+		ID:   id,
 		Name: name,
 		Cnpj: cnpj,
 	}
