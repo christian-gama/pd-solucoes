@@ -9,7 +9,6 @@ import (
 )
 
 func InitializeProviders() {
-
 	_ = faker.AddProvider("cpf", func(v reflect.Value) (any, error) {
 		return providers.Cpf(), nil
 	})
@@ -33,7 +32,6 @@ func InitializeProviders() {
 	_ = faker.AddProvider("time_zero", func(v reflect.Value) (any, error) {
 		return providers.TimeZero(), nil
 	})
-
 }
 
 func Setup() {

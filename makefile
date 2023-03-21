@@ -6,3 +6,9 @@ init:
 tidy:
 	@go mod tidy
 	@go mod vendor
+
+lint:
+	@sh -c "$(PWD)/scripts/linter.sh"
+
+test_unit:
+	@TEST_MODE=unit go test ./...

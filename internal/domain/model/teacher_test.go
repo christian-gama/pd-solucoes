@@ -62,5 +62,4 @@ func (s *TeacherSuite) TestNewTeacher() {
 		s.Error(err)
 		s.Nil(model, "model should be nil")
 	})
-
 }

@@ -6,6 +6,7 @@ import (
 	"github.com/christian-gama/pd-solucoes/pkg/errutil"
 )
 
+// College is the model of a college.
 type College struct {
 	ID      uint   `faker:"uint"`
 	Name    string `faker:"len=50"`
@@ -13,6 +14,7 @@ type College struct {
 	Courses []*Course
 }
 
+// NewCollege creates a new College.
 func NewCollege(id uint, name, cnpj string, courses []*Course) (*College, error) {
 	m := &College{
 		ID:      id,
@@ -28,6 +30,7 @@ func NewCollege(id uint, name, cnpj string, courses []*Course) (*College, error)
 	return m, nil
 }
 
+// Validate validates the College.
 func (m *College) Validate() error {
 	var errs *errutil.Error
 

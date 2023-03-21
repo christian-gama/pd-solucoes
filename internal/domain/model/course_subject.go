@@ -6,12 +6,14 @@ import (
 	"github.com/christian-gama/pd-solucoes/pkg/errutil"
 )
 
+// CourseSubject is the model that contains the relationship between courses and subjects.
 type CourseSubject struct {
 	ID        uint `faker:"uint"`
 	CourseID  uint `faker:"uint"`
 	SubjectID uint `faker:"uint"`
 }
 
+// NewCourseSubject creates a new CourseSubject.
 func NewCourseSubject(id, courseID, subjectID uint) (*CourseSubject, error) {
 	m := &CourseSubject{
 		ID:        id,
@@ -26,6 +28,7 @@ func NewCourseSubject(id, courseID, subjectID uint) (*CourseSubject, error) {
 	return m, nil
 }
 
+// Validate validates the CourseSubject.
 func (m *CourseSubject) Validate() error {
 	var errs *errutil.Error
 

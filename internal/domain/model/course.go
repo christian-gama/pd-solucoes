@@ -6,12 +6,14 @@ import (
 	"github.com/christian-gama/pd-solucoes/pkg/errutil"
 )
 
+// Course is a model that represents a course of a college.
 type Course struct {
 	ID        uint   `faker:"uint"`
 	Name      string `faker:"len=50"`
 	CollegeID uint   `faker:"uint"`
 }
 
+// NewCourse creates a new Course.
 func NewCourse(id uint, name string, collegeID uint) (*Course, error) {
 	m := &Course{
 		ID:        id,
@@ -26,6 +28,7 @@ func NewCourse(id uint, name string, collegeID uint) (*Course, error) {
 	return m, nil
 }
 
+// Validate validates the Course.
 func (m *Course) Validate() error {
 	var errs *errutil.Error
 

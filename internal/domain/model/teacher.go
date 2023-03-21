@@ -6,12 +6,14 @@ import (
 	"github.com/christian-gama/pd-solucoes/pkg/errutil"
 )
 
+// Teacher is the model that contains the teacher information.
 type Teacher struct {
 	ID     uint   `faker:"uint"`
 	Name   string `faker:"len=50"`
 	Degree string `faker:"len=50"`
 }
 
+// NewTeacher creates a new Teacher.
 func NewTeacher(id uint, name string, degree string) (*Teacher, error) {
 	m := &Teacher{
 		ID:     id,
@@ -26,6 +28,7 @@ func NewTeacher(id uint, name string, degree string) (*Teacher, error) {
 	return m, nil
 }
 
+// Validate validates the Teacher.
 func (m *Teacher) Validate() error {
 	var errs *errutil.Error
 
