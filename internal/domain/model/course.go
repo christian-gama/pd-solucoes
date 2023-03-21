@@ -34,7 +34,7 @@ func (m *Course) Validate() error {
 	}
 
 	if m.CollegeID == 0 {
-		errs = errutil.Append(errs, errors.New("college id is required"))
+		errs = errutil.Append(errs, errors.New("collegeID is required"))
 	}
 
 	if errs.HasErrors() {
