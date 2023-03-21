@@ -26,7 +26,7 @@ func (s *TeacherSuite) TestNewTeacher() {
 		data := fake.Teacher()
 
 		sut := func() (*model.Teacher, error) {
-			return model.NewTeacher(data.ID, data.Name, data.Degree)
+			return model.NewTeacher(data.ID, data.Name, data.Degree, data.Subjects)
 		}
 
 		return &Sut{Sut: sut, Data: data}
@@ -56,6 +56,28 @@ func (s *TeacherSuite) TestNewTeacher() {
 		sut := makeSut()
 
 		sut.Data.Degree = ""
+
+		model, err := sut.Sut()
+
+		s.Error(err)
+		s.Nil(model, "model should be nil")
+	})
+
+	s.Run("should return an error when 'subjects' is nil", func() {
+		sut := makeSut()
+
+		sut.Data.Subjects = nil
+
+		model, err := sut.Sut()
+
+		s.Error(err)
+		s.Nil(model, "model should be nil")
+	})
+
+	s.Run("should return an error when 'subjects' has an invalid item", func() {
+		sut := makeSut()
+
+		sut.Data.Subjects[0].Name = ""
 
 		model, err := sut.Sut()
 

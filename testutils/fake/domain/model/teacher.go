@@ -11,6 +11,11 @@ func Teacher() *model.Teacher {
 	teacher := new(model.Teacher)
 	faker.FakeData(teacher)
 
+	teacher.Subjects = make([]*model.Subject, 2)
+	for i := range teacher.Subjects {
+		teacher.Subjects[i] = Subject()
+	}
+
 	if err := teacher.Validate(); err != nil {
 		panic(fmt.Errorf("error while generating fake teacher: %w", err))
 	}
