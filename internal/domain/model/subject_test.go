@@ -26,7 +26,7 @@ func (s *SubjectSuite) TestNewSubject() {
 		data := fake.Subject()
 
 		sut := func() (*model.Subject, error) {
-			return model.NewSubject(data.ID, data.Name, data.TeacherID)
+			return model.NewSubject(data.ID, data.Name, data.Teacher)
 		}
 
 		return &Sut{Sut: sut, Data: data}
@@ -52,10 +52,10 @@ func (s *SubjectSuite) TestNewSubject() {
 		s.Nil(model, "model should be nil")
 	})
 
-	s.Run("should return an error when 'teacherID' is zero", func() {
+	s.Run("should return an error when 'teacherID' is nil", func() {
 		sut := makeSut()
 
-		sut.Data.TeacherID = 0
+		sut.Data.Teacher = nil
 
 		model, err := sut.Sut()
 
