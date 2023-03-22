@@ -6,6 +6,11 @@ services:
     image: postgres:15.2-alpine
     restart: "no"
     command: -p $DB_PORT
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U $DB_USER -d $DB_NAME" ]
+      interval: 2s
+      timeout: 5s
+      retries: 5
     environment:
       - POSTGRES_USER=$DB_USER
       - POSTGRES_PASSWORD=$DB_PASSWORD
@@ -24,6 +29,7 @@ services:
     restart: "no"
     build:
       context: .
+      target: api
       dockerfile: Dockerfile
       args:
         - WORKDIR=$WORKDIR
@@ -47,6 +53,7 @@ services:
     restart: "no"
     build:
       context: .
+      target: api
       dockerfile: Dockerfile
       args:
         - WORKDIR=$WORKDIR
@@ -64,6 +71,7 @@ services:
     restart: "no"
     build:
       context: .
+      target: test
       dockerfile: Dockerfile
       args:
         - WORKDIR=$WORKDIR

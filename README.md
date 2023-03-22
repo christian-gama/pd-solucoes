@@ -15,6 +15,9 @@ This project is following the principles of Clean Architecture, SOLID and Domain
 - Git
 - Docker (optional)
 
+Even though Docker is optional, it is recommended to use it to run the project, as it will make the process of setting up the environment, dependencies and migrations easier. You can find the installation instructions for Docker [here](https://docs.docker.com/get-docker/).
+If you plan to not use Docker, you will need to install the dependencies and run the migrations manually.
+
 ## Getting Started
 
 ### Cloning the repository
@@ -35,11 +38,13 @@ The .env.dev file is used to run the project locally, the .env.test file is used
 
 ### Initializing the project
 
-To initialize the project, run the following command:
+To initialize the project, run the following command (requires Docker):
 
 ```bash
 make init
 ```
+
+If you don't have Docker installed, you can run the commands inside the Makefile manually.
 
 ### Running the tests
 
