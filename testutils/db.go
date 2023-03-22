@@ -3,6 +3,7 @@ package testutils
 import (
 	gosql "database/sql"
 	"errors"
+	"fmt"
 
 	"github.com/christian-gama/pd-solucoes/internal/infra/sql"
 	"gorm.io/gorm"
@@ -15,7 +16,7 @@ func Transaction(fn func(tx *gorm.DB)) {
 		defer func() {
 			if r := recover(); r != nil {
 				tx.Rollback()
-				panic(r)
+				panic(fmt.Errorf("Rolling back transaction because of panic: %v", r))
 			}
 		}()
 

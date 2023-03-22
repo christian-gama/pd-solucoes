@@ -23,6 +23,7 @@ func CreateCollege(db *gorm.DB, deps *CollegeDeps) *CollegeDeps {
 	college := deps.College
 	if college == nil {
 		college = fake.College()
+		college.Courses = nil
 
 		college, err := persistence.NewCollege(db).
 			Create(context.Background(), repo.CreateCollegeParams{

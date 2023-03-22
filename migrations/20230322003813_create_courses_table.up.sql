@@ -8,7 +8,7 @@ CREATE TABLE "courses" (
 
 ALTER TABLE "courses"
 ADD CONSTRAINT "fk__id__college.id"
-FOREIGN KEY ("id")
+FOREIGN KEY ("college_id")
 REFERENCES "colleges" ("id")
 ON DELETE CASCADE ON UPDATE CASCADE;
 

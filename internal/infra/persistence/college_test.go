@@ -56,10 +56,10 @@ func (s *CollegeSuite) TestCreate() {
 	s.Run("should create a new college", func(db *gorm.DB) {
 		sut := makeSut(db)
 
-		model, err := sut.Sut(sut.Ctx, sut.Params)
+		college, err := sut.Sut(sut.Ctx, sut.Params)
 
 		s.NoError(err)
-		s.NotZero(model.ID, "should have an ID")
+		s.NotZero(college.ID, "should have an ID")
 	})
 
 	s.Run("should return an error when the college already exists", func(db *gorm.DB) {
