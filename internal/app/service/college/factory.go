@@ -19,3 +19,7 @@ func MakeFindOneCollege() FindOneCollege {
 func MakeFindAllColleges() FindAllColleges {
 	return NewFindAllColleges(persistence.MakeCollege())
 }
+
+func MakeDeleteCollege() DeleteCollege {
+	return NewDeleteCollege(persistence.MakeCollege())
+}

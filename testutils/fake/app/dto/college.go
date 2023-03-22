@@ -32,3 +32,10 @@ func FindAllCollegesInput() *dto.FindAllCollegesInput {
 
 	return dto
 }
+
+func DeleteCollegeInput() *dto.DeleteCollegeInput {
+	dto := new(dto.DeleteCollegeInput)
+	faker.FakeData(dto)
+
+	return dto
+}

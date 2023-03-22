@@ -37,3 +37,7 @@ type FindAllCollegesInput struct {
 }
 
 type FindAllCollegesOutput = queryingPort.PaginationOutput[*FindOneCollegeOutput]
+
+type DeleteCollegeInput struct {
+	ID uint `uri:"id" validate:"required" faker:"uint"`
+}

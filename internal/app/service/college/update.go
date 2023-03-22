@@ -22,7 +22,7 @@ func NewUpdateCollege(collegeRepo repo.College) UpdateCollege {
 	return &updateCollegeImpl{College: collegeRepo}
 }
 
-// Handle updates a new college.
+// Handle updates a college.
 func (s *updateCollegeImpl) Handle(
 	ctx context.Context,
 	input *dto.UpdateCollegeInput,

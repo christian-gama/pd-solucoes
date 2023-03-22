@@ -17,3 +17,7 @@ func MakeFindOneCollege() FindOneCollege {
 func MakeFindAllColleges() FindAllColleges {
 	return NewFindAllColleges(service.MakeFindAllColleges())
 }
+
+func MakeDeleteCollege() DeleteCollege {
+	return NewDeleteCollege(service.MakeDeleteCollege())
+}

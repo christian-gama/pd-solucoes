@@ -46,3 +46,8 @@ func Ok(ctx *gin.Context, data any) {
 
 	ctx.AbortWithStatusJSON(http.StatusOK, Data(data))
 }
+
+// NoContent is a helper function to return a no content response.
+func NoContent(ctx *gin.Context) {
+	ctx.AbortWithStatus(http.StatusNoContent)
+}
