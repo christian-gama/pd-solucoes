@@ -105,10 +105,6 @@ func (p *courseImpl) FindOne(
 
 	if err := db.
 		Model(&courseSchema).
-		Scopes(
-			sql.PreloadScope(preload),
-			querying.FilterScope(params.Filterer),
-		).
 		Where("id = ?", params.ID).
 		First(&courseSchema).
 		Error; err != nil {

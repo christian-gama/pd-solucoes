@@ -137,8 +137,7 @@ func (s *SubjectSuite) TestFindOne() {
 	makeSut := func(db *gorm.DB) Sut {
 		ctx := context.Background()
 		params := repo.FindOneSubjectParams{
-			Filterer: querying.Filter{},
-			ID:       0,
+			ID: 0,
 		}
 		sut := s.Subject(db).FindOne
 
@@ -170,35 +169,6 @@ func (s *SubjectSuite) TestFindOne() {
 		_, err := sut.Sut(sut.Ctx, sut.Params)
 
 		s.Error(err)
-	})
-
-	s.Run("should return a subject with filtered fields", func(db *gorm.DB) {
-		sut := makeSut(db)
-
-		subjectDeps := fixture.CreateSubject(db, nil)
-
-		sut.Params.ID = subjectDeps.Subject.ID
-		sut.Params.Filterer = querying.AddFilter("name", querying.EqOperator, subjectDeps.Subject.Name)
-
-		subject, err := sut.Sut(sut.Ctx, sut.Params)
-
-		s.NoError(err)
-		s.Equal(subject.ID, subjectDeps.Subject.ID, "should have the same ID")
-		s.Equal(subject.Name, subjectDeps.Subject.Name, "should have the same name")
-	})
-
-	s.Run("should not return a subject if filter does not met the condition", func(db *gorm.DB) {
-		sut := makeSut(db)
-
-		subjectDeps := fixture.CreateSubject(db, nil)
-
-		sut.Params.ID = subjectDeps.Subject.ID
-		sut.Params.Filterer = querying.AddFilter("name", querying.EqOperator, "wrong name")
-
-		subject, err := sut.Sut(sut.Ctx, sut.Params)
-
-		s.Error(err)
-		s.Nil(subject, "should not return a subject")
 	})
 }
 

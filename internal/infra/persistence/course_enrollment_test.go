@@ -141,8 +141,7 @@ func (s *CourseEnrollmentSuite) TestFindOne() {
 	makeSut := func(db *gorm.DB) Sut {
 		ctx := context.Background()
 		params := repo.FindOneCourseEnrollmentParams{
-			Filterer: querying.Filter{},
-			ID:       0,
+			ID: 0,
 		}
 		sut := s.CourseEnrollment(db).FindOne
 
@@ -179,50 +178,6 @@ func (s *CourseEnrollmentSuite) TestFindOne() {
 
 		s.Error(err)
 	})
-
-	s.Run("should return a courseEnrollment with filtered fields", func(db *gorm.DB) {
-		sut := makeSut(db)
-
-		courseEnrollmentDeps := fixture.CreateCourseEnrollment(db, nil)
-
-		sut.Params.ID = courseEnrollmentDeps.CourseEnrollment.ID
-		sut.Params.Filterer = querying.AddFilter(
-			"studentID",
-			querying.EqOperator,
-			courseEnrollmentDeps.CourseEnrollment.StudentID,
-		)
-
-		courseEnrollment, err := sut.Sut(sut.Ctx, sut.Params)
-
-		s.NoError(err)
-		s.Equal(
-			courseEnrollment.ID,
-			courseEnrollmentDeps.CourseEnrollment.ID,
-			"should have the same ID",
-		)
-		s.Equal(
-			courseEnrollment.StudentID,
-			courseEnrollmentDeps.CourseEnrollment.StudentID,
-			"should have the same subjectID",
-		)
-	})
-
-	s.Run(
-		"should not return a courseEnrollment if filter does not met the condition",
-		func(db *gorm.DB) {
-			sut := makeSut(db)
-
-			courseEnrollmentDeps := fixture.CreateCourseEnrollment(db, nil)
-
-			sut.Params.ID = courseEnrollmentDeps.CourseEnrollment.ID
-			sut.Params.Filterer = querying.AddFilter("name", querying.EqOperator, "wrong name")
-
-			courseEnrollment, err := sut.Sut(sut.Ctx, sut.Params)
-
-			s.Error(err)
-			s.Nil(courseEnrollment, "should not return a courseEnrollment")
-		},
-	)
 }
 
 func (s *CourseEnrollmentSuite) TestFindAll() {

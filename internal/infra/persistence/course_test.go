@@ -137,8 +137,7 @@ func (s *CourseSuite) TestFindOne() {
 	makeSut := func(db *gorm.DB) Sut {
 		ctx := context.Background()
 		params := repo.FindOneCourseParams{
-			Filterer: querying.Filter{},
-			ID:       0,
+			ID: 0,
 		}
 		sut := s.Course(db).FindOne
 
@@ -170,35 +169,6 @@ func (s *CourseSuite) TestFindOne() {
 		_, err := sut.Sut(sut.Ctx, sut.Params)
 
 		s.Error(err)
-	})
-
-	s.Run("should return a course with filtered fields", func(db *gorm.DB) {
-		sut := makeSut(db)
-
-		courseDeps := fixture.CreateCourse(db, nil)
-
-		sut.Params.ID = courseDeps.Course.ID
-		sut.Params.Filterer = querying.AddFilter("name", querying.EqOperator, courseDeps.Course.Name)
-
-		course, err := sut.Sut(sut.Ctx, sut.Params)
-
-		s.NoError(err)
-		s.Equal(course.ID, courseDeps.Course.ID, "should have the same ID")
-		s.Equal(course.Name, courseDeps.Course.Name, "should have the same name")
-	})
-
-	s.Run("should not return a course if filter does not met the condition", func(db *gorm.DB) {
-		sut := makeSut(db)
-
-		courseDeps := fixture.CreateCourse(db, nil)
-
-		sut.Params.ID = courseDeps.Course.ID
-		sut.Params.Filterer = querying.AddFilter("name", querying.EqOperator, "wrong name")
-
-		course, err := sut.Sut(sut.Ctx, sut.Params)
-
-		s.Error(err)
-		s.Nil(course, "should not return a course")
 	})
 }
 

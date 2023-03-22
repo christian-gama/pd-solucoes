@@ -28,8 +28,6 @@ type (
 
 	FindOneCourseEnrollmentParams struct {
 		ID uint
-
-		Filterer querying.Filterer
 	}
 )
 

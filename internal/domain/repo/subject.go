@@ -28,8 +28,6 @@ type (
 
 	FindOneSubjectParams struct {
 		ID uint
-
-		Filterer querying.Filterer
 	}
 )
 

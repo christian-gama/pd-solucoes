@@ -128,8 +128,7 @@ func (s *StudentSuite) TestFindOne() {
 	makeSut := func(db *gorm.DB) Sut {
 		ctx := context.Background()
 		params := repo.FindOneStudentParams{
-			Filterer: querying.Filter{},
-			ID:       0,
+			ID: 0,
 		}
 		sut := s.Student(db).FindOne
 
@@ -161,35 +160,6 @@ func (s *StudentSuite) TestFindOne() {
 		_, err := sut.Sut(sut.Ctx, sut.Params)
 
 		s.Error(err)
-	})
-
-	s.Run("should return a student with filtered fields", func(db *gorm.DB) {
-		sut := makeSut(db)
-
-		studentDeps := fixture.CreateStudent(db, nil)
-
-		sut.Params.ID = studentDeps.Student.ID
-		sut.Params.Filterer = querying.AddFilter("name", querying.EqOperator, studentDeps.Student.Name)
-
-		student, err := sut.Sut(sut.Ctx, sut.Params)
-
-		s.NoError(err)
-		s.Equal(student.ID, studentDeps.Student.ID, "should have the same ID")
-		s.Equal(student.Name, studentDeps.Student.Name, "should have the same name")
-	})
-
-	s.Run("should not return a student if filter does not met the condition", func(db *gorm.DB) {
-		sut := makeSut(db)
-
-		studentDeps := fixture.CreateStudent(db, nil)
-
-		sut.Params.ID = studentDeps.Student.ID
-		sut.Params.Filterer = querying.AddFilter("name", querying.EqOperator, "wrong name")
-
-		student, err := sut.Sut(sut.Ctx, sut.Params)
-
-		s.Error(err)
-		s.Nil(student, "should not return a student")
 	})
 }
 

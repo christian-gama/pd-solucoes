@@ -105,10 +105,6 @@ func (p *subjectImpl) FindOne(
 
 	if err := db.
 		Model(&subjectSchema).
-		Scopes(
-			sql.PreloadScope(preload),
-			querying.FilterScope(params.Filterer),
-		).
 		Where("id = ?", params.ID).
 		First(&subjectSchema).
 		Error; err != nil {
