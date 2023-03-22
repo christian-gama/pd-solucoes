@@ -15,38 +15,38 @@ import (
 	"github.com/stretchr/testify/mock"
 )
 
-type UpdateCollegeSuite struct {
+type FindOneCollegeSuite struct {
 	suite.Suite
 }
 
-func TestUpdateCollegeSuite(t *testing.T) {
-	suite.RunUnitTest(t, new(UpdateCollegeSuite))
+func TestFindOneCollegeSuite(t *testing.T) {
+	suite.RunUnitTest(t, new(FindOneCollegeSuite))
 }
 
-func (s *UpdateCollegeSuite) TestHandle() {
+func (s *FindOneCollegeSuite) TestHandle() {
 	type Sut struct {
-		Sut         service.UpdateCollege
+		Sut         service.FindOneCollege
 		CollegeRepo *mocks.College
-		Input       *dto.UpdateCollegeInput
+		Input       *dto.FindOneCollegeInput
 		College     *model.College
 	}
 
 	makeSut := func() *Sut {
 		collegeRepo := mocks.NewCollege(s.T())
-		sut := service.NewUpdateCollege(collegeRepo)
+		sut := service.NewFindOneCollege(collegeRepo)
 
 		return &Sut{
 			Sut:         sut,
 			CollegeRepo: collegeRepo,
-			Input:       fake.UpdateCollegeInput(),
+			Input:       fake.FindOneCollegeInput(),
 			College:     fakeModel.College(),
 		}
 	}
 
-	s.Run("should add update a college", func() {
+	s.Run("should find one college", func() {
 		sut := makeSut()
 
-		sut.CollegeRepo.On("Update", mock.Anything, mock.Anything).Return(sut.College, nil)
+		sut.CollegeRepo.On("FindOne", mock.Anything, mock.Anything).Return(sut.College, nil)
 
 		result, err := sut.Sut.Handle(context.Background(), sut.Input)
 
@@ -56,25 +56,14 @@ func (s *UpdateCollegeSuite) TestHandle() {
 		s.Equal(sut.College.Cnpj, result.Cnpj)
 	})
 
-	s.Run("collegeRepo.Update returns an error", func() {
+	s.Run("collegeRepo.FindOne returns an error", func() {
 		sut := makeSut()
 
-		sut.CollegeRepo.On("Update", mock.Anything, mock.Anything).Return(nil, assert.AnError)
+		sut.CollegeRepo.On("FindOne", mock.Anything, mock.Anything).Return(nil, assert.AnError)
 
 		result, err := sut.Sut.Handle(context.Background(), sut.Input)
 
 		s.ErrorIs(err, assert.AnError)
-		s.Nil(result)
-	})
-
-	s.Run("should return an error if domain validation fails", func() {
-		sut := makeSut()
-
-		sut.Input.Name = ""
-
-		result, err := sut.Sut.Handle(context.Background(), sut.Input)
-
-		s.Error(err)
 		s.Nil(result)
 	})
 }
