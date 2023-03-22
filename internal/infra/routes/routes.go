@@ -20,6 +20,7 @@ func College() *routing.Routing {
 		Group: "/college",
 		Routes: []*routing.Route{
 			{Controller: collegeController.MakeCreateCollege()},
+			{Controller: collegeController.MakeUpdateCollege()},
 		},
 	}
 }

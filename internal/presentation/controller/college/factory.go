@@ -5,3 +5,7 @@ import service "github.com/christian-gama/pd-solucoes/internal/app/service/colle
 func MakeCreateCollege() CreateCollege {
 	return NewCreateCollege(service.MakeCreateCollege())
 }
+
+func MakeUpdateCollege() UpdateCollege {
+	return NewUpdateCollege(service.MakeUpdateCollege())
+}

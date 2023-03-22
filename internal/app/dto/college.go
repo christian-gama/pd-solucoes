@@ -10,3 +10,10 @@ type CreateCollegeOutput struct {
 	Name string `json:"name"`
 	Cnpj string `json:"cnpj"`
 }
+
+type UpdateCollegeInput struct {
+	ID uint `uri:"id" validate:"required"`
+	CreateCollegeInput
+}
+
+type UpdateCollegeOutput = CreateCollegeOutput

@@ -17,7 +17,7 @@ func NewError(log log.Logger) Error {
 	return http.NewMiddleware(
 		func(ctx *gin.Context) {
 			defer func() {
-				if r := recover(); r == nil {
+				if r := recover(); r != nil {
 					var msg string
 
 					if err, ok := r.(error); ok {

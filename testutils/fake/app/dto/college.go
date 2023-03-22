@@ -11,3 +11,10 @@ func CreateCollegeInput() *dto.CreateCollegeInput {
 
 	return dto
 }
+
+func UpdateCollegeInput() *dto.UpdateCollegeInput {
+	dto := new(dto.UpdateCollegeInput)
+	faker.FakeData(dto)
+
+	return dto
+}

@@ -9,27 +9,28 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-// CreateCollege is a controller to create a college.
-type CreateCollege = http.Controller
+// UpdateCollege is a controller to update a college.
+type UpdateCollege = http.Controller
 
-// NewCreateCollege returns a new controller to create a college.
-func NewCreateCollege(service service.CreateCollege) CreateCollege {
+// NewUpdateCollege returns a new controller to update a college.
+func NewUpdateCollege(service service.UpdateCollege) UpdateCollege {
 	if service == nil {
 		panic(errors.New("service cannot be nil"))
 	}
 
 	return http.NewController(
-		func(ctx *gin.Context, input *dto.CreateCollegeInput) {
+		func(ctx *gin.Context, input *dto.UpdateCollegeInput) {
 			college, err := service.Handle(ctx.Request.Context(), input)
 			if err != nil {
 				panic(err)
 			}
-			http.Created(ctx, college)
+			http.Ok(ctx, college)
 		},
 
 		http.ControllerOptions{
 			Path:   "/",
-			Method: http.MethodPost,
+			Method: http.MethodPut,
+			Params: []string{"id"},
 		},
 	)
 }

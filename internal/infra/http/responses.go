@@ -8,7 +8,6 @@ import (
 
 // InternalServerError is a helper function to return an internal server error.
 // It will panic and be recovered by the middleware from errors module.
-// The middleware will persist the error in the database.
 func InternalServerError(ctx *gin.Context, err error) {
 	ctx.Errors = append(ctx.Errors, ctx.Error(err))
 	panic(err)

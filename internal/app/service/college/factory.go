@@ -7,3 +7,7 @@ import (
 func MakeCreateCollege() CreateCollege {
 	return NewCreateCollege(persistence.MakeCollege())
 }
+
+func MakeUpdateCollege() UpdateCollege {
+	return NewUpdateCollege(persistence.MakeCollege())
+}
