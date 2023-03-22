@@ -7,16 +7,16 @@ import (
 )
 
 type Subject struct {
-	ID      uint   `faker:"uint"`
-	Name    string `faker:"len=50"`
-	Teacher *Teacher
+	ID        uint   `faker:"uint"`
+	Name      string `faker:"len=50"`
+	TeacherID uint
 }
 
-func NewSubject(id uint, name string, teacher *Teacher) (*Subject, error) {
+func NewSubject(id uint, name string, teacherID uint) (*Subject, error) {
 	m := &Subject{
-		ID:      id,
-		Name:    name,
-		Teacher: teacher,
+		ID:        id,
+		Name:      name,
+		TeacherID: teacherID,
 	}
 
 	if err := m.Validate(); err != nil {
@@ -33,7 +33,7 @@ func (m *Subject) Validate() error {
 		errs = errutil.Append(errs, errors.New("name is required"))
 	}
 
-	if m.Teacher == nil {
+	if m.TeacherID == 0 {
 		errs = errutil.Append(errs, errors.New("teacher is required"))
 	}
 
