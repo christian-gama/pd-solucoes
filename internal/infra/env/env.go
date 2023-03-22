@@ -16,12 +16,20 @@ type app struct {
 	Port int    `env:"APP_PORT,required"`
 }
 
+// config is the application configuration.
+type config struct {
+	GlobalRateLimit uint `env:"CONFIG_GLOBAL_RATE_LIMIT,required"`
+}
+
 var (
 	// DB is the database environment variables.c.
 	DB = &db{}
 
 	// App is the application environment variables.
 	App = &app{}
+
+	// Config is the application configuration.
+	Config = &config{}
 )
 
 const (

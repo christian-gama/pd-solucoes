@@ -29,6 +29,10 @@ func Load(envFile string) {
 		panic(fmt.Errorf("Error loading App environment variables: %w", err))
 	}
 
+	if err := envconfig.Process(ctx, Config); err != nil {
+		panic(fmt.Errorf("Error loading Config environment variables: %w", err))
+	}
+
 	validate()
 }
 

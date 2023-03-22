@@ -20,7 +20,7 @@ This project is following the principles of Clean Architecture, SOLID and Domain
 ### Cloning the repository
 
 ```bash
-git clone "https://github.com/christian-gama/pg-solucoes"
+git clone "https://github.com/christian-gama/pd-solucoes"
 ```
 
 ### Setting up the environment

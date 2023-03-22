@@ -6,7 +6,7 @@ MAKE = make --no-print-directory
 
 
 # WORKDIR is used to set the working directory for Dockerfile builds.
-export WORKDIR=/go/src/github.com/christian-gama/pg-solucoes
+export WORKDIR=/go/src/github.com/christian-gama/pd-solucoes
 
 -include $(ENV_FILE)
 

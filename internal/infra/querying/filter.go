@@ -144,3 +144,14 @@ var filterOperators = map[string]func(column, value string) clause.Expression{
 		return clause.IN{Column: clause.Column{Name: column}, Values: anyValues}
 	},
 }
+
+// AllowedFilterOperators returns a string that contains all allowed operators for filter
+// parameters.
+func AllowedFilterOperators() string {
+	allowedFilterOperators := ""
+	for k := range filterOperators {
+		allowedFilterOperators += fmt.Sprintf("%s|", k)
+	}
+
+	return strings.TrimSuffix(allowedFilterOperators, "|")
+}
