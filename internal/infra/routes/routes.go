@@ -19,7 +19,7 @@ func Global() *routing.Routing {
 
 func College() *routing.Routing {
 	return &routing.Routing{
-		Group: "/college",
+		Group: "/colleges",
 		Routes: []*routing.Route{
 			{Controller: collegeController.MakeCreateCollege()},
 			{Controller: collegeController.MakeUpdateCollege()},
@@ -32,7 +32,7 @@ func College() *routing.Routing {
 
 func Teacher() *routing.Routing {
 	return &routing.Routing{
-		Group: "/teacher",
+		Group: "/teachers",
 		Routes: []*routing.Route{
 			{Controller: teacherController.MakeCreateTeacher()},
 			{Controller: teacherController.MakeUpdateTeacher()},
@@ -45,7 +45,7 @@ func Teacher() *routing.Routing {
 
 func Student() *routing.Routing {
 	return &routing.Routing{
-		Group: "/student",
+		Group: "/students",
 		Routes: []*routing.Route{
 			{Controller: studentController.MakeCreateStudent()},
 			{Controller: studentController.MakeUpdateStudent()},
