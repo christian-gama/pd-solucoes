@@ -14,5 +14,5 @@ type Filterer interface {
 	Slice() []string
 
 	// Add adds a filter to the filterer.
-	Add(field string, operator string, value string) Filterer
+	Add(field string, operator string, value any) Filterer
 }
