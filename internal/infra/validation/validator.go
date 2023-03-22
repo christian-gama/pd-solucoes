@@ -22,6 +22,7 @@ func New() Validator {
 	validate.RegisterValidation("cpf", validateCPF)
 	validate.RegisterValidation("sort", validateSort)
 	validate.RegisterValidation("filter", validateFilter)
+	validate.RegisterValidation("cnpj", validateCnpj)
 	validate.RegisterAlias("query", "dive,omitempty")
 
 	return &validatorImpl{}

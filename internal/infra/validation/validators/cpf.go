@@ -9,7 +9,7 @@ type cpfValidator struct {
 }
 
 // Cpf returns true if the string is a valid CPF. It will validate the format,
-// the blacklist and the check digits. A valid cpf contains numbers only.
+// the blacklist and the check digits. A valid CPF contains numbers only.
 func Cpf(v string) bool {
 	validator := cpfValidator{v}
 	return validator.validate()

@@ -9,6 +9,14 @@ import (
 	"github.com/go-playground/validator/v10"
 )
 
+func validateCnpj(fl validator.FieldLevel) bool {
+	if fl.Field().Type().Kind() != reflect.String {
+		return false
+	}
+
+	return validators.Cnpj(fl.Field().String())
+}
+
 func validateCPF(fl validator.FieldLevel) bool {
 	if fl.Field().Type().Kind() != reflect.String {
 		return false

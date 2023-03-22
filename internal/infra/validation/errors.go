@@ -14,7 +14,7 @@ var ErrorMap = map[string]func(field string, param string) error{
 		return errutil.NewErrInvalid(
 			field,
 			fmt.Sprintf(
-				"must have the format 'field:name,%s:value' and only one of the fields are allowed: %s",
+				"must have the format 'field=name,op=%s,value=' and only one of the fields are allowed: %s",
 				querying.AllowedFilterOperators(),
 				param,
 			),
@@ -29,6 +29,10 @@ var ErrorMap = map[string]func(field string, param string) error{
 				param,
 			),
 		)
+	},
+
+	"cnpj": func(field string, param string) error {
+		return errutil.NewErrInvalid(field, "is not a valid CNPJ")
 	},
 
 	"cpf": func(field string, param string) error {
