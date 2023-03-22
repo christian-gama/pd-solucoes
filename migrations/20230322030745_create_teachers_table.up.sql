@@ -1,0 +1,9 @@
+BEGIN;
+
+CREATE TABLE "teachers" (
+  "id" SERIAL PRIMARY KEY,
+  "name" VARCHAR(255) NOT NULL,
+  "degree" VARCHAR(255) NOT NULL
+);
+
+COMMIT;
