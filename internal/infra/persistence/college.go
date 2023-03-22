@@ -62,7 +62,6 @@ func (p *collegeImpl) Delete(ctx context.Context, params repo.DeleteCollegeParam
 func (p *collegeImpl) FindAll(
 	ctx context.Context,
 	params repo.FindAllCollegeParams,
-	preload ...string,
 ) (*queryingPort.PaginationOutput[*model.College], error) {
 	db := p.db.WithContext(ctx)
 
@@ -71,7 +70,6 @@ func (p *collegeImpl) FindAll(
 	if err := db.
 		Model(&schema.College{}).
 		Scopes(
-			sql.PreloadScope(preload),
 			querying.FilterScope(params.Filterer),
 			querying.PaginationScope(params.Paginator),
 			querying.SortScope(params.Sorter),
@@ -97,7 +95,6 @@ func (p *collegeImpl) FindAll(
 func (p *collegeImpl) FindOne(
 	ctx context.Context,
 	params repo.FindOneCollegeParams,
-	preload ...string,
 ) (*model.College, error) {
 	db := p.db.WithContext(ctx)
 
@@ -106,7 +103,6 @@ func (p *collegeImpl) FindOne(
 	if err := db.
 		Model(&collegeSchema).
 		Scopes(
-			sql.PreloadScope(preload),
 			querying.FilterScope(params.Filterer),
 		).
 		Where("id = ?", params.ID).

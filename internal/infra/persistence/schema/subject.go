@@ -2,9 +2,10 @@ package schema
 
 // Subject represents the subject database schema.
 type Subject struct {
-	ID        uint `gorm:"primaryKey"`
+	ID        uint
 	Name      string
 	TeacherID uint
+	Teacher   *Teacher
 }
 
 // TableName returns the table name.

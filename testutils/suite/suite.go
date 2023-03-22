@@ -35,7 +35,7 @@ func TestSetupTestsSuite(t *testing.T) {
 
 func (s *SuiteWithConn) Run(name string, f func(tx *gorm.DB)) bool {
 	return s.Suite.Run(name, func() {
-		testutils.Transaction(func(tx *gorm.DB) {
+		testutils.Transaction(s.T(), func(tx *gorm.DB) {
 			f(tx)
 		})
 	})

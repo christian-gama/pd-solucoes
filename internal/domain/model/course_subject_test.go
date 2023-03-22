@@ -26,7 +26,13 @@ func (s *CourseSubjectSuite) TestNewCourseSubject() {
 		data := fake.CourseSubject()
 
 		sut := func() (*model.CourseSubject, error) {
-			return model.NewCourseSubject(data.ID, data.CourseID, data.SubjectID)
+			return model.NewCourseSubject(
+				data.ID,
+				data.CourseID,
+				data.SubjectID,
+				data.Course,
+				data.Subject,
+			)
 		}
 
 		return &Sut{Sut: sut, Data: data}
@@ -56,6 +62,50 @@ func (s *CourseSubjectSuite) TestNewCourseSubject() {
 		sut := makeSut()
 
 		sut.Data.SubjectID = 0
+
+		model, err := sut.Sut()
+
+		s.Error(err)
+		s.Nil(model, "model should be nil")
+	})
+
+	s.Run("should return an error when 'course' is nil", func() {
+		sut := makeSut()
+
+		sut.Data.Course = nil
+
+		model, err := sut.Sut()
+
+		s.Error(err)
+		s.Nil(model, "model should be nil")
+	})
+
+	s.Run("should return an error when 'course' is invalid", func() {
+		sut := makeSut()
+
+		sut.Data.Course.Name = ""
+
+		model, err := sut.Sut()
+
+		s.Error(err)
+		s.Nil(model, "model should be nil")
+	})
+
+	s.Run("should return an error when 'subject' is nil", func() {
+		sut := makeSut()
+
+		sut.Data.Subject = nil
+
+		model, err := sut.Sut()
+
+		s.Error(err)
+		s.Nil(model, "model should be nil")
+	})
+
+	s.Run("should return an error when 'subject' is invalid", func() {
+		sut := makeSut()
+
+		sut.Data.Subject.Name = ""
 
 		model, err := sut.Sut()
 

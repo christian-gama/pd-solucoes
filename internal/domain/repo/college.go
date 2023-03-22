@@ -50,14 +50,12 @@ type College interface {
 	FindAll(
 		ctx context.Context,
 		params FindAllCollegeParams,
-		preload ...string,
 	) (*querying.PaginationOutput[*model.College], error)
 
 	// FindOne returns a college by its ID.
 	FindOne(
 		ctx context.Context,
 		params FindOneCollegeParams,
-		preload ...string,
 	) (*model.College, error)
 
 	// Update updates a college.

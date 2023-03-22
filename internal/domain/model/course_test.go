@@ -26,7 +26,7 @@ func (s *CourseSuite) TestNewCourse() {
 		data := fake.Course()
 
 		sut := func() (*model.Course, error) {
-			return model.NewCourse(data.ID, data.Name, data.CollegeID)
+			return model.NewCourse(data.ID, data.Name, data.CollegeID, data.College)
 		}
 
 		return &Sut{Sut: sut, Data: data}
@@ -56,6 +56,28 @@ func (s *CourseSuite) TestNewCourse() {
 		sut := makeSut()
 
 		sut.Data.CollegeID = 0
+
+		model, err := sut.Sut()
+
+		s.Error(err)
+		s.Nil(model, "model should be nil")
+	})
+
+	s.Run("should return an error when 'college' is nil", func() {
+		sut := makeSut()
+
+		sut.Data.College = nil
+
+		model, err := sut.Sut()
+
+		s.Error(err)
+		s.Nil(model, "model should be nil")
+	})
+
+	s.Run("should return an error when 'college' is invalid", func() {
+		sut := makeSut()
+
+		sut.Data.College.Name = ""
 
 		model, err := sut.Sut()
 

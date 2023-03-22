@@ -120,7 +120,6 @@ func (s *CollegeSuite) TestFindOne() {
 		Sut func(
 			ctx context.Context,
 			params repo.FindOneCollegeParams,
-			preload ...string,
 		) (*model.College, error)
 		Ctx    context.Context
 		Params repo.FindOneCollegeParams
@@ -199,7 +198,6 @@ func (s *CollegeSuite) TestFindAll() {
 		Sut func(
 			ctx context.Context,
 			params repo.FindAllCollegeParams,
-			preload ...string,
 		) (*queryingPort.PaginationOutput[*model.College], error)
 		Ctx    context.Context
 		Params repo.FindAllCollegeParams
