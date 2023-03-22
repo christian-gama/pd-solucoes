@@ -1,0 +1,9 @@
+BEGIN;
+
+CREATE TABLE "colleges" (
+  "id" SERIAL PRIMARY KEY,
+  "name" VARCHAR(255) NOT NULL,
+  "cnpj" VARCHAR(14) NOT NULL
+);
+
+COMMIT;
