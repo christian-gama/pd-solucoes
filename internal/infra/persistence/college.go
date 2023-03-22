@@ -102,9 +102,6 @@ func (p *collegeImpl) FindOne(
 
 	if err := db.
 		Model(&collegeSchema).
-		Scopes(
-			querying.FilterScope(params.Filterer),
-		).
 		Where("id = ?", params.ID).
 		First(&collegeSchema).
 		Error; err != nil {

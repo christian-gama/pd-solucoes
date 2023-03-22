@@ -113,10 +113,14 @@ test-integration: cmd-exists-go clear-screen
 
 .PHONY: test
 test: cmd-exists-go clear-screen
-	@docker compose --env-file .env.test up -d psql_test
+	@docker-compose --env-file .env.test up -d psql_test
+	@until docker inspect --format "{{.State.Health.Status}}" pd-solucoes-psql-test | grep "healthy" > /dev/null; do \
+	  >&2 echo "Postgres is unavailable - waiting..."; \
+	  sleep 2; \
+	done
 	@go run ./cmd/migrate/*.go -e .env.test drop ""
 	@go run ./cmd/migrate/*.go -e .env.test up ""
-	@./scripts/wait-for-db.sh pd-solucoes-psql-test TEST_MODE=integration go test ./...
+	@TEST_MODE=integration go test ./...
 
 
 .PHONY: lint

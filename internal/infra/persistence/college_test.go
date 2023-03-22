@@ -128,8 +128,7 @@ func (s *CollegeSuite) TestFindOne() {
 	makeSut := func(db *gorm.DB) Sut {
 		ctx := context.Background()
 		params := repo.FindOneCollegeParams{
-			Filterer: querying.Filter{},
-			ID:       0,
+			ID: 0,
 		}
 		sut := s.College(db).FindOne
 
@@ -161,35 +160,6 @@ func (s *CollegeSuite) TestFindOne() {
 		_, err := sut.Sut(sut.Ctx, sut.Params)
 
 		s.Error(err)
-	})
-
-	s.Run("should return a college with filtered fields", func(db *gorm.DB) {
-		sut := makeSut(db)
-
-		collegeDeps := fixture.CreateCollege(db, nil)
-
-		sut.Params.ID = collegeDeps.College.ID
-		sut.Params.Filterer = querying.AddFilter("name", querying.EqOperator, collegeDeps.College.Name)
-
-		college, err := sut.Sut(sut.Ctx, sut.Params)
-
-		s.NoError(err)
-		s.Equal(college.ID, collegeDeps.College.ID, "should have the same ID")
-		s.Equal(college.Name, collegeDeps.College.Name, "should have the same name")
-	})
-
-	s.Run("should not return a college if filter does not met the condition", func(db *gorm.DB) {
-		sut := makeSut(db)
-
-		collegeDeps := fixture.CreateCollege(db, nil)
-
-		sut.Params.ID = collegeDeps.College.ID
-		sut.Params.Filterer = querying.AddFilter("name", querying.EqOperator, "wrong name")
-
-		college, err := sut.Sut(sut.Ctx, sut.Params)
-
-		s.Error(err)
-		s.Nil(college, "should not return a college")
 	})
 }
 

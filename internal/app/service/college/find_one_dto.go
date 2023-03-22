@@ -1,10 +1,7 @@
 package service
 
-import "github.com/christian-gama/pd-solucoes/internal/infra/querying"
-
 type FindOneCollegeInput struct {
-	ID     uint            `validate:"required"               uri:"id"`
-	Filter querying.Filter `validate:"query,filter=name cnpj"          form:"filter" faker:"-"`
+	ID uint `validate:"required" uri:"id"`
 }
 
 type FindOneCollegeOutput struct {

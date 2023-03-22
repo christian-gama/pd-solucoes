@@ -26,8 +26,7 @@ func (s *findOneCollegeImpl) Handle(
 	input *FindOneCollegeInput,
 ) (*FindOneCollegeOutput, error) {
 	findOneCollegeParams := repo.FindOneCollegeParams{
-		ID:       input.ID,
-		Filterer: input.Filter,
+		ID: input.ID,
 	}
 	college, err := s.College.FindOne(ctx, findOneCollegeParams)
 	if err != nil {

@@ -102,9 +102,6 @@ func (p *teacherImpl) FindOne(
 
 	if err := db.
 		Model(&teacherSchema).
-		Scopes(
-			querying.FilterScope(params.Filterer),
-		).
 		Where("id = ?", params.ID).
 		First(&teacherSchema).
 		Error; err != nil {

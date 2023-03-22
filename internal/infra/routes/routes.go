@@ -4,6 +4,7 @@ import (
 	"github.com/christian-gama/pd-solucoes/internal/infra/http"
 	"github.com/christian-gama/pd-solucoes/internal/infra/router/routing"
 	collegeController "github.com/christian-gama/pd-solucoes/internal/presentation/controller/college"
+	teacherController "github.com/christian-gama/pd-solucoes/internal/presentation/controller/teacher"
 	"github.com/christian-gama/pd-solucoes/internal/presentation/middleware"
 )
 
@@ -24,6 +25,19 @@ func College() *routing.Routing {
 			{Controller: collegeController.MakeFindOneCollege()},
 			{Controller: collegeController.MakeFindAllColleges()},
 			{Controller: collegeController.MakeDeleteCollege()},
+		},
+	}
+}
+
+func Teacher() *routing.Routing {
+	return &routing.Routing{
+		Group: "/teacher",
+		Routes: []*routing.Route{
+			{Controller: teacherController.MakeCreateTeacher()},
+			{Controller: teacherController.MakeUpdateTeacher()},
+			{Controller: teacherController.MakeFindOneTeacher()},
+			{Controller: teacherController.MakeFindAllTeachers()},
+			{Controller: teacherController.MakeDeleteTeacher()},
 		},
 	}
 }

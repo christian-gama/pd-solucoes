@@ -8,9 +8,9 @@ services:
     command: -p $DB_PORT
     healthcheck:
       test: [ "CMD-SHELL", "pg_isready -U $DB_USER -d $DB_NAME" ]
-      interval: 2s
-      timeout: 5s
-      retries: 5
+      interval: 1s
+      timeout: 1s
+      retries: 10
     environment:
       - POSTGRES_USER=$DB_USER
       - POSTGRES_PASSWORD=$DB_PASSWORD
@@ -99,9 +99,9 @@ services:
     command: -c fsync=off -c full_page_writes=off -c synchronous_commit=off -p $DB_PORT
     healthcheck:
       test: [ "CMD-SHELL", "pg_isready -U $DB_USER -d $DB_NAME" ]
-      interval: 2s
-      timeout: 5s
-      retries: 5
+      interval: 1s
+      timeout: 1s
+      retries: 10
     ports:
       - "$DB_PORT:$DB_PORT"
     environment:
