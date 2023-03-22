@@ -25,6 +25,10 @@ func (s *deleteCollegeImpl) Handle(
 	ctx context.Context,
 	input *DeleteCollegeInput,
 ) error {
+	if _, err := s.College.FindOne(ctx, repo.FindOneCollegeParams{ID: input.ID}); err != nil {
+		return err
+	}
+
 	deleteCollegeParams := repo.DeleteCollegeParams{
 		ID: input.ID,
 	}

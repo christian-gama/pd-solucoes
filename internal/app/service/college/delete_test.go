@@ -43,6 +43,7 @@ func (s *DeleteCollegeSuite) TestHandle() {
 	s.Run("should find one college", func() {
 		sut := makeSut()
 
+		sut.CollegeRepo.On("FindOne", mock.Anything, mock.Anything).Return(sut.College, nil)
 		sut.CollegeRepo.On("Delete", mock.Anything, mock.Anything).Return(nil)
 
 		err := sut.Sut.Handle(context.Background(), sut.Input)
@@ -53,7 +54,18 @@ func (s *DeleteCollegeSuite) TestHandle() {
 	s.Run("collegeRepo.Delete returns an error", func() {
 		sut := makeSut()
 
+		sut.CollegeRepo.On("FindOne", mock.Anything, mock.Anything).Return(sut.College, nil)
 		sut.CollegeRepo.On("Delete", mock.Anything, mock.Anything).Return(assert.AnError)
+
+		err := sut.Sut.Handle(context.Background(), sut.Input)
+
+		s.ErrorIs(err, assert.AnError)
+	})
+
+	s.Run("collegeRepo.FindOne returns an error", func() {
+		sut := makeSut()
+
+		sut.CollegeRepo.On("FindOne", mock.Anything, mock.Anything).Return(nil, assert.AnError)
 
 		err := sut.Sut.Handle(context.Background(), sut.Input)
 
