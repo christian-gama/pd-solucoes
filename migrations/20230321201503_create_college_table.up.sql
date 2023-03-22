@@ -6,4 +6,7 @@ CREATE TABLE "colleges" (
   "cnpj" VARCHAR(14) NOT NULL
 );
 
+CREATE UNIQUE INDEX "uidx__colleges__cnpj"
+ON "colleges" ("cnpj");
+
 COMMIT;
