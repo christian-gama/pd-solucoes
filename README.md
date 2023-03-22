@@ -1,6 +1,7 @@
 ## Passei Direto API
 
 This is a RESTful API built using GoLang and PostgreSQL for the Passei Direto college. The API provides CRUD operations for the entity-relationship model of the college.
+This project is following the principles of Clean Architecture, SOLID and Domain-Driven Design.
 
 ## Technologies Used
 
