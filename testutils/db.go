@@ -3,20 +3,22 @@ package testutils
 import (
 	gosql "database/sql"
 	"errors"
-	"testing"
 
 	"github.com/christian-gama/pd-solucoes/internal/infra/sql"
 	"gorm.io/gorm"
 )
 
-func Transaction(t *testing.T, fn func(tx *gorm.DB)) {
+func Transaction(
+	failFn func(failureMessage string, msgAndArgs ...interface{}) bool,
+	fn func(tx *gorm.DB),
+) {
 	db := sql.MakePostgres()
 
 	tx := func(tx *gorm.DB) error {
 		defer func() {
 			if r := recover(); r != nil {
 				tx.Rollback()
-				t.Fatalf("test panicked: %v", r)
+				failFn("test panicked", "panic: %v", r)
 			}
 		}()
 

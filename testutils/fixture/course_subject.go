@@ -26,19 +26,23 @@ func CreateCourseSubject(db *gorm.DB, deps *CourseSubjectDeps) *CourseSubjectDep
 	if course == nil {
 		courseDeps := CreateCourse(db, nil)
 		course = courseDeps.Course
+		deps.Course = course
 	}
 
 	subject := deps.Subject
 	if subject == nil {
 		subjectDeps := CreateSubject(db, nil)
 		subject = subjectDeps.Subject
+		deps.Subject = subject
 	}
 
 	courseSubject := deps.CourseSubject
 	if courseSubject == nil {
 		courseSubject = fake.CourseSubject()
 		courseSubject.CourseID = course.ID
+		courseSubject.Course = course
 		courseSubject.SubjectID = subject.ID
+		courseSubject.Subject = subject
 
 		courseSubject, err := persistence.NewCourseSubject(db).
 			Create(context.Background(), repo.CreateCourseSubjectParams{

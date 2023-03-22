@@ -25,12 +25,14 @@ func CreateCourse(db *gorm.DB, deps *CourseDeps) *CourseDeps {
 	if college == nil {
 		collegeDeps := CreateCollege(db, nil)
 		college = collegeDeps.College
+		deps.College = college
 	}
 
 	course := deps.Course
 	if course == nil {
 		course = fake.Course()
 		course.CollegeID = college.ID
+		course.College = college
 
 		course, err := persistence.NewCourse(db).
 			Create(context.Background(), repo.CreateCourseParams{

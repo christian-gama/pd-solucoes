@@ -25,12 +25,14 @@ func CreateSubject(db *gorm.DB, deps *SubjectDeps) *SubjectDeps {
 	if teacher == nil {
 		teacherDeps := CreateTeacher(db, nil)
 		teacher = teacherDeps.Teacher
+		deps.Teacher = teacher
 	}
 
 	subject := deps.Subject
 	if subject == nil {
 		subject = fake.Subject()
 		subject.TeacherID = teacher.ID
+		subject.Teacher = teacher
 
 		subject, err := persistence.NewSubject(db).
 			Create(context.Background(), repo.CreateSubjectParams{
