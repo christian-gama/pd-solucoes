@@ -1,0 +1,106 @@
+version: '3.8'
+
+services:
+  psql:
+    container_name: pd-solucoes-psql
+    image: postgres:15.2-alpine
+    restart: "no"
+    command: -p $DB_PORT
+    environment:
+      - POSTGRES_USER=$DB_USER
+      - POSTGRES_PASSWORD=$DB_PASSWORD
+      - POSTGRES_DB=$DB_NAME
+      - POSTGRES_HOST=$DB_HOST
+      - POSTGRES_PORT=$DB_PORT
+    volumes:
+      - ./.generated/db_data/$APP_ENV:/var/lib/postgresql/data
+    ports:
+      - "$DB_PORT:$DB_PORT"
+    expose:
+      - "$DB_PORT"
+
+  api:
+    container_name: pd-solucoes
+    restart: "no"
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        - WORKDIR=$WORKDIR
+    ports:
+      - "$APP_PORT:$APP_PORT"
+    env_file:
+      - .env.$APP_ENV
+    depends_on:
+      - psql
+    links:
+      - psql
+    volumes:
+      - ./.cache/go:/root/.cache
+      - ./.generated/build:$WORKDIR/.generated/build
+      - ./internal:$WORKDIR/internal
+      - ./pkg:$WORKDIR/pkg
+      - ./cmd:$WORKDIR/cmd
+
+  migration:
+    container_name: pd-solucoes-migration
+    restart: "no"
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        - WORKDIR=$WORKDIR
+    env_file:
+      - .env.$APP_ENV
+    depends_on:
+      - psql
+    links:
+      - psql
+    volumes:
+      - ./migrations:$WORKDIR/migrations
+
+  test:
+    container_name: pd-solucoes-test
+    restart: "no"
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        - WORKDIR=$WORKDIR
+    env_file:
+      - .env.test
+    depends_on:
+      - psql_test
+    links:
+      - psql_test
+    volumes:
+      - ./.cache/go:/root/.cache
+      - ./.generated/build:$WORKDIR/.generated/build
+      - ./internal:$WORKDIR/internal
+      - ./pkg:$WORKDIR/pkg
+      - ./cmd:$WORKDIR/cmd
+      - ./testutils:$WORKDIR/testutils
+      - ./migrations:$WORKDIR/migrations
+    environment:
+      - DOCKER=true
+
+  psql_test:
+    container_name: pd-solucoes-psql-test
+    image: postgres:15.2-alpine
+    restart: always
+    command: -c fsync=off -c full_page_writes=off -c synchronous_commit=off -p $DB_PORT
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U $DB_USER -d $DB_NAME" ]
+      interval: 2s
+      timeout: 5s
+      retries: 5
+    ports:
+      - "$DB_PORT:$DB_PORT"
+    environment:
+      - POSTGRES_USER=$DB_USER
+      - POSTGRES_PASSWORD=$DB_PASSWORD
+      - POSTGRES_DB=$DB_NAME
+      - POSTGRES_HOST=$DB_HOST
+      - POSTGRES_PORT=$DB_PORT
+    tmpfs:
+      - /var/lib/postgresql/data

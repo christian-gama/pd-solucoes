@@ -1,2 +1,7 @@
 .cache/
 .vscode/
+.generated/
+
+.*env
+.env.*
+!.env.example
