@@ -9,9 +9,9 @@ import (
 )
 
 // Filter returns true if the string is a valid filter field.
-// For example: "field:name,eq:John" or "field:name,like:John" or "field:name,in:[1 2 3]".
+// For example: "field=name,op=eq,value=John".
 func Filter(v string, params []string) bool {
-	reg := fmt.Sprintf(`field=(\w+),(%s)=(\w+|\[[^\]]*\])`, querying.AllowedFilterOperators())
+	reg := fmt.Sprintf(`field=(\w+)\,op=(%s)\,value=(.*)`, querying.AllowedFilterOperators())
 
 	if !regexp.MustCompile(reg).MatchString(v) {
 		return false

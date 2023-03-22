@@ -21,6 +21,7 @@ func College() *routing.Routing {
 		Routes: []*routing.Route{
 			{Controller: collegeController.MakeCreateCollege()},
 			{Controller: collegeController.MakeUpdateCollege()},
+			{Controller: collegeController.MakeFindOneCollege()},
 		},
 	}
 }

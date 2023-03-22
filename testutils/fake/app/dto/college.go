@@ -18,3 +18,10 @@ func UpdateCollegeInput() *dto.UpdateCollegeInput {
 
 	return dto
 }
+
+func FindOneCollegeInput() *dto.FindOneCollegeInput {
+	dto := new(dto.FindOneCollegeInput)
+	faker.FakeData(dto)
+
+	return dto
+}

@@ -25,9 +25,9 @@ func NewCreateCollege(collegeRepo repo.College) CreateCollege {
 // Handle creates a new college.
 func (s *createCollegeImpl) Handle(
 	ctx context.Context,
-	params *dto.CreateCollegeInput,
+	input *dto.CreateCollegeInput,
 ) (*dto.CreateCollegeOutput, error) {
-	college, err := model.NewCollege(0, params.Name, params.Cnpj)
+	college, err := model.NewCollege(0, input.Name, input.Cnpj)
 	if err != nil {
 		return nil, err
 	}

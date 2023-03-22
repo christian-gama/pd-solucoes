@@ -25,9 +25,9 @@ func NewUpdateCollege(collegeRepo repo.College) UpdateCollege {
 // Handle updates a new college.
 func (s *updateCollegeImpl) Handle(
 	ctx context.Context,
-	params *dto.UpdateCollegeInput,
+	input *dto.UpdateCollegeInput,
 ) (*dto.UpdateCollegeOutput, error) {
-	college, err := model.NewCollege(params.ID, params.Name, params.Cnpj)
+	college, err := model.NewCollege(input.ID, input.Name, input.Cnpj)
 	if err != nil {
 		return nil, err
 	}

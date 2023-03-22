@@ -20,7 +20,7 @@ func AddFilter(field string, operator string, value any) querying.Filterer {
 
 // Add implements Filterer.
 func (f Filter) Add(field string, operator string, value any) querying.Filterer {
-	f = append(f, fmt.Sprintf("%s=%s,%v", field, operator, value))
+	f = append(f, fmt.Sprintf("field=%s,op=%s,value=%v", field, operator, value))
 	return f
 }
 
@@ -30,8 +30,10 @@ func (f Filter) Field(idx int) string {
 		return ""
 	}
 
-	parts := strings.Split(f[idx], "=")
-	return parts[0]
+	// field=name,operator=value
+	parts := strings.Split(f[idx], ",")
+	fieldPart := strings.Split(parts[0], "=")
+	return fieldPart[1]
 }
 
 // Operator implements Filterer.
@@ -40,9 +42,9 @@ func (f Filter) Operator(idx int) string {
 		return ""
 	}
 
-	parts := strings.Split(f[idx], "=")
-	subparts := strings.SplitN(parts[1], ",", 2)
-	return subparts[0]
+	parts := strings.Split(f[idx], ",")
+	operatorPart := strings.Split(parts[1], "=")
+	return operatorPart[1]
 }
 
 // Slice implements Filterer.
@@ -56,9 +58,10 @@ func (f Filter) Value(idx int) string {
 		return ""
 	}
 
-	parts := strings.Split(f[idx], "=")
-	subparts := strings.SplitN(parts[1], ",", 2)
-	return subparts[1]
+	// field=name,operator=value
+	parts := strings.Split(f[idx], ",")
+	valuePart := strings.Split(parts[2], "=")
+	return valuePart[1]
 }
 
 // FilterScope returns a GORM scope that applies filtering to the query.
@@ -69,6 +72,7 @@ func FilterScope(filter querying.Filterer) func(db *gorm.DB) *gorm.DB {
 		}
 
 		for i := range filter.Slice() {
+			fmt.Println(filter.Slice()[i])
 			fmt.Println(filter.Field(i), filter.Value(i), filter.Operator(i))
 			if filter.Field(i) == "" || filter.Value(i) == "" || filter.Operator(i) == "" {
 				continue

@@ -15,15 +15,15 @@ type CreateCollege struct {
 }
 
 // Handle provides a mock function with given fields: ctx, params
-func (_m *CreateCollege) Handle(ctx context.Context, params *dto.CreateCollegeInput) (*dto.CreateCollegeOutput, error) {
+func (_m *CreateCollege) Handle(ctx context.Context, params *dto.CreateCollegeInput) (*dto.FindOneCollegeOutput, error) {
 	ret := _m.Called(ctx, params)
 
-	var r0 *dto.CreateCollegeOutput
-	if rf, ok := ret.Get(0).(func(context.Context, *dto.CreateCollegeInput) *dto.CreateCollegeOutput); ok {
+	var r0 *dto.FindOneCollegeOutput
+	if rf, ok := ret.Get(0).(func(context.Context, *dto.CreateCollegeInput) *dto.FindOneCollegeOutput); ok {
 		r0 = rf(ctx, params)
 	} else {
 		if ret.Get(0) != nil {
-			r0 = ret.Get(0).(*dto.CreateCollegeOutput)
+			r0 = ret.Get(0).(*dto.FindOneCollegeOutput)
 		}
 	}
 

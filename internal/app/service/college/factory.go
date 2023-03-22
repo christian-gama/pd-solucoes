@@ -11,3 +11,7 @@ func MakeCreateCollege() CreateCollege {
 func MakeUpdateCollege() UpdateCollege {
 	return NewUpdateCollege(persistence.MakeCollege())
 }
+
+func MakeFindOneCollege() FindOneCollege {
+	return NewFindOneCollege(persistence.MakeCollege())
+}

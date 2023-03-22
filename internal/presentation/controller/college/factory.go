@@ -9,3 +9,7 @@ func MakeCreateCollege() CreateCollege {
 func MakeUpdateCollege() UpdateCollege {
 	return NewUpdateCollege(service.MakeUpdateCollege())
 }
+
+func MakeFindOneCollege() FindOneCollege {
+	return NewFindOneCollege(service.MakeFindOneCollege())
+}
