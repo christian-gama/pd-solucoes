@@ -19,11 +19,11 @@ type College struct {
 }
 
 // Create provides a mock function with given fields: ctx, params
-func (_m *College) Create(ctx context.Context, params *repo.CreateCollegeParams) (*model.College, error) {
+func (_m *College) Create(ctx context.Context, params repo.CreateCollegeParams) (*model.College, error) {
 	ret := _m.Called(ctx, params)
 
 	var r0 *model.College
-	if rf, ok := ret.Get(0).(func(context.Context, *repo.CreateCollegeParams) *model.College); ok {
+	if rf, ok := ret.Get(0).(func(context.Context, repo.CreateCollegeParams) *model.College); ok {
 		r0 = rf(ctx, params)
 	} else {
 		if ret.Get(0) != nil {
@@ -32,7 +32,7 @@ func (_m *College) Create(ctx context.Context, params *repo.CreateCollegeParams)
 	}
 
 	var r1 error
-	if rf, ok := ret.Get(1).(func(context.Context, *repo.CreateCollegeParams) error); ok {
+	if rf, ok := ret.Get(1).(func(context.Context, repo.CreateCollegeParams) error); ok {
 		r1 = rf(ctx, params)
 	} else {
 		r1 = ret.Error(1)
@@ -42,11 +42,11 @@ func (_m *College) Create(ctx context.Context, params *repo.CreateCollegeParams)
 }
 
 // Delete provides a mock function with given fields: ctx, params
-func (_m *College) Delete(ctx context.Context, params *repo.DeleteCollegeParams) error {
+func (_m *College) Delete(ctx context.Context, params repo.DeleteCollegeParams) error {
 	ret := _m.Called(ctx, params)
 
 	var r0 error
-	if rf, ok := ret.Get(0).(func(context.Context, *repo.DeleteCollegeParams) error); ok {
+	if rf, ok := ret.Get(0).(func(context.Context, repo.DeleteCollegeParams) error); ok {
 		r0 = rf(ctx, params)
 	} else {
 		r0 = ret.Error(0)
@@ -56,7 +56,7 @@ func (_m *College) Delete(ctx context.Context, params *repo.DeleteCollegeParams)
 }
 
 // FindAll provides a mock function with given fields: ctx, params, preload
-func (_m *College) FindAll(ctx context.Context, params *repo.FindAllCollegeParams, preload ...string) (*querying.PaginationOutput[*model.College], error) {
+func (_m *College) FindAll(ctx context.Context, params repo.FindAllCollegeParams, preload ...string) (*querying.PaginationOutput[*model.College], error) {
 	_va := make([]interface{}, len(preload))
 	for _i := range preload {
 		_va[_i] = preload[_i]
@@ -67,7 +67,7 @@ func (_m *College) FindAll(ctx context.Context, params *repo.FindAllCollegeParam
 	ret := _m.Called(_ca...)
 
 	var r0 *querying.PaginationOutput[*model.College]
-	if rf, ok := ret.Get(0).(func(context.Context, *repo.FindAllCollegeParams, ...string) *querying.PaginationOutput[*model.College]); ok {
+	if rf, ok := ret.Get(0).(func(context.Context, repo.FindAllCollegeParams, ...string) *querying.PaginationOutput[*model.College]); ok {
 		r0 = rf(ctx, params, preload...)
 	} else {
 		if ret.Get(0) != nil {
@@ -76,7 +76,7 @@ func (_m *College) FindAll(ctx context.Context, params *repo.FindAllCollegeParam
 	}
 
 	var r1 error
-	if rf, ok := ret.Get(1).(func(context.Context, *repo.FindAllCollegeParams, ...string) error); ok {
+	if rf, ok := ret.Get(1).(func(context.Context, repo.FindAllCollegeParams, ...string) error); ok {
 		r1 = rf(ctx, params, preload...)
 	} else {
 		r1 = ret.Error(1)
@@ -85,8 +85,8 @@ func (_m *College) FindAll(ctx context.Context, params *repo.FindAllCollegeParam
 	return r0, r1
 }
 
-// FindByID provides a mock function with given fields: ctx, params, preload
-func (_m *College) FindByID(ctx context.Context, params *repo.FindCollegeByIDParams, preload ...string) (*model.College, error) {
+// FindOne provides a mock function with given fields: ctx, params, preload
+func (_m *College) FindOne(ctx context.Context, params repo.FindOneCollegeParams, preload ...string) (*model.College, error) {
 	_va := make([]interface{}, len(preload))
 	for _i := range preload {
 		_va[_i] = preload[_i]
@@ -97,7 +97,7 @@ func (_m *College) FindByID(ctx context.Context, params *repo.FindCollegeByIDPar
 	ret := _m.Called(_ca...)
 
 	var r0 *model.College
-	if rf, ok := ret.Get(0).(func(context.Context, *repo.FindCollegeByIDParams, ...string) *model.College); ok {
+	if rf, ok := ret.Get(0).(func(context.Context, repo.FindOneCollegeParams, ...string) *model.College); ok {
 		r0 = rf(ctx, params, preload...)
 	} else {
 		if ret.Get(0) != nil {
@@ -106,7 +106,7 @@ func (_m *College) FindByID(ctx context.Context, params *repo.FindCollegeByIDPar
 	}
 
 	var r1 error
-	if rf, ok := ret.Get(1).(func(context.Context, *repo.FindCollegeByIDParams, ...string) error); ok {
+	if rf, ok := ret.Get(1).(func(context.Context, repo.FindOneCollegeParams, ...string) error); ok {
 		r1 = rf(ctx, params, preload...)
 	} else {
 		r1 = ret.Error(1)
@@ -116,11 +116,11 @@ func (_m *College) FindByID(ctx context.Context, params *repo.FindCollegeByIDPar
 }
 
 // Update provides a mock function with given fields: ctx, params
-func (_m *College) Update(ctx context.Context, params *repo.UpdateCollegeParams) (*model.College, error) {
+func (_m *College) Update(ctx context.Context, params repo.UpdateCollegeParams) (*model.College, error) {
 	ret := _m.Called(ctx, params)
 
 	var r0 *model.College
-	if rf, ok := ret.Get(0).(func(context.Context, *repo.UpdateCollegeParams) *model.College); ok {
+	if rf, ok := ret.Get(0).(func(context.Context, repo.UpdateCollegeParams) *model.College); ok {
 		r0 = rf(ctx, params)
 	} else {
 		if ret.Get(0) != nil {
@@ -129,7 +129,7 @@ func (_m *College) Update(ctx context.Context, params *repo.UpdateCollegeParams)
 	}
 
 	var r1 error
-	if rf, ok := ret.Get(1).(func(context.Context, *repo.UpdateCollegeParams) error); ok {
+	if rf, ok := ret.Get(1).(func(context.Context, repo.UpdateCollegeParams) error); ok {
 		r1 = rf(ctx, params)
 	} else {
 		r1 = ret.Error(1)

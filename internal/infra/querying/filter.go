@@ -64,7 +64,12 @@ func (f Filter) Value(idx int) string {
 // FilterScope returns a GORM scope that applies filtering to the query.
 func FilterScope(filter querying.Filterer) func(db *gorm.DB) *gorm.DB {
 	return func(db *gorm.DB) *gorm.DB {
+		if filter == nil {
+			return db
+		}
+
 		for i := range filter.Slice() {
+			fmt.Println(filter.Field(i), filter.Value(i), filter.Operator(i))
 			if filter.Field(i) == "" || filter.Value(i) == "" || filter.Operator(i) == "" {
 				continue
 			}

@@ -26,7 +26,7 @@ type (
 		Sorter    querying.Sorter
 	}
 
-	FindCollegeByIDParams struct {
+	FindOneCollegeParams struct {
 		ID uint
 
 		Filterer querying.Filterer
@@ -37,32 +37,32 @@ type College interface {
 	// Create creates a new college.
 	Create(
 		ctx context.Context,
-		params *CreateCollegeParams,
+		params CreateCollegeParams,
 	) (*model.College, error)
 
 	// Delete deletes a college by its ID.
 	Delete(
 		ctx context.Context,
-		params *DeleteCollegeParams,
+		params DeleteCollegeParams,
 	) error
 
 	// FindAll returns a list of colleges.
 	FindAll(
 		ctx context.Context,
-		params *FindAllCollegeParams,
+		params FindAllCollegeParams,
 		preload ...string,
 	) (*querying.PaginationOutput[*model.College], error)
 
-	// FindByID returns a college by its ID.
-	FindByID(
+	// FindOne returns a college by its ID.
+	FindOne(
 		ctx context.Context,
-		params *FindCollegeByIDParams,
+		params FindOneCollegeParams,
 		preload ...string,
 	) (*model.College, error)
 
 	// Update updates a college.
 	Update(
 		ctx context.Context,
-		params *UpdateCollegeParams,
+		params UpdateCollegeParams,
 	) (*model.College, error)
 }

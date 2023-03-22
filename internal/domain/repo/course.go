@@ -26,7 +26,7 @@ type (
 		Sorter    querying.Sorter
 	}
 
-	FindCourseByIDParams struct {
+	FindOneCourseParams struct {
 		ID uint
 
 		Filterer querying.Filterer
@@ -37,32 +37,32 @@ type Course interface {
 	// Create creates a new course.
 	Create(
 		ctx context.Context,
-		params *CreateCourseParams,
+		params CreateCourseParams,
 	) (*model.Course, error)
 
 	// Delete deletes a course by its ID.
 	Delete(
 		ctx context.Context,
-		params *DeleteCourseParams,
+		params DeleteCourseParams,
 	) error
 
 	// FindAll returns a list of courses.
 	FindAll(
 		ctx context.Context,
-		params *FindAllCourseParams,
+		params FindAllCourseParams,
 		preload ...string,
 	) (*querying.PaginationOutput[*model.Course], error)
 
-	// FindByID returns a course by its ID.
-	FindByID(
+	// FindOne returns a course by its ID.
+	FindOne(
 		ctx context.Context,
-		params *FindCourseByIDParams,
+		params FindOneCourseParams,
 		preload ...string,
 	) (*model.Course, error)
 
 	// Update updates a course.
 	Update(
 		ctx context.Context,
-		params *UpdateCourseParams,
+		params UpdateCourseParams,
 	) (*model.Course, error)
 }

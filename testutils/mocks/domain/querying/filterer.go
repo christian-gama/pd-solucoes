@@ -13,11 +13,11 @@ type Filterer struct {
 }
 
 // Add provides a mock function with given fields: field, operator, value
-func (_m *Filterer) Add(field string, operator string, value string) querying.Filterer {
+func (_m *Filterer) Add(field string, operator string, value interface{}) querying.Filterer {
 	ret := _m.Called(field, operator, value)
 
 	var r0 querying.Filterer
-	if rf, ok := ret.Get(0).(func(string, string, string) querying.Filterer); ok {
+	if rf, ok := ret.Get(0).(func(string, string, interface{}) querying.Filterer); ok {
 		r0 = rf(field, operator, value)
 	} else {
 		if ret.Get(0) != nil {

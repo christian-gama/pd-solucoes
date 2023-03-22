@@ -19,11 +19,11 @@ type Course struct {
 }
 
 // Create provides a mock function with given fields: ctx, params
-func (_m *Course) Create(ctx context.Context, params *repo.CreateCourseParams) (*model.Course, error) {
+func (_m *Course) Create(ctx context.Context, params repo.CreateCourseParams) (*model.Course, error) {
 	ret := _m.Called(ctx, params)
 
 	var r0 *model.Course
-	if rf, ok := ret.Get(0).(func(context.Context, *repo.CreateCourseParams) *model.Course); ok {
+	if rf, ok := ret.Get(0).(func(context.Context, repo.CreateCourseParams) *model.Course); ok {
 		r0 = rf(ctx, params)
 	} else {
 		if ret.Get(0) != nil {
@@ -32,7 +32,7 @@ func (_m *Course) Create(ctx context.Context, params *repo.CreateCourseParams) (
 	}
 
 	var r1 error
-	if rf, ok := ret.Get(1).(func(context.Context, *repo.CreateCourseParams) error); ok {
+	if rf, ok := ret.Get(1).(func(context.Context, repo.CreateCourseParams) error); ok {
 		r1 = rf(ctx, params)
 	} else {
 		r1 = ret.Error(1)
@@ -42,11 +42,11 @@ func (_m *Course) Create(ctx context.Context, params *repo.CreateCourseParams) (
 }
 
 // Delete provides a mock function with given fields: ctx, params
-func (_m *Course) Delete(ctx context.Context, params *repo.DeleteCourseParams) error {
+func (_m *Course) Delete(ctx context.Context, params repo.DeleteCourseParams) error {
 	ret := _m.Called(ctx, params)
 
 	var r0 error
-	if rf, ok := ret.Get(0).(func(context.Context, *repo.DeleteCourseParams) error); ok {
+	if rf, ok := ret.Get(0).(func(context.Context, repo.DeleteCourseParams) error); ok {
 		r0 = rf(ctx, params)
 	} else {
 		r0 = ret.Error(0)
@@ -56,7 +56,7 @@ func (_m *Course) Delete(ctx context.Context, params *repo.DeleteCourseParams) e
 }
 
 // FindAll provides a mock function with given fields: ctx, params, preload
-func (_m *Course) FindAll(ctx context.Context, params *repo.FindAllCourseParams, preload ...string) (*querying.PaginationOutput[*model.Course], error) {
+func (_m *Course) FindAll(ctx context.Context, params repo.FindAllCourseParams, preload ...string) (*querying.PaginationOutput[*model.Course], error) {
 	_va := make([]interface{}, len(preload))
 	for _i := range preload {
 		_va[_i] = preload[_i]
@@ -67,7 +67,7 @@ func (_m *Course) FindAll(ctx context.Context, params *repo.FindAllCourseParams,
 	ret := _m.Called(_ca...)
 
 	var r0 *querying.PaginationOutput[*model.Course]
-	if rf, ok := ret.Get(0).(func(context.Context, *repo.FindAllCourseParams, ...string) *querying.PaginationOutput[*model.Course]); ok {
+	if rf, ok := ret.Get(0).(func(context.Context, repo.FindAllCourseParams, ...string) *querying.PaginationOutput[*model.Course]); ok {
 		r0 = rf(ctx, params, preload...)
 	} else {
 		if ret.Get(0) != nil {
@@ -76,7 +76,7 @@ func (_m *Course) FindAll(ctx context.Context, params *repo.FindAllCourseParams,
 	}
 
 	var r1 error
-	if rf, ok := ret.Get(1).(func(context.Context, *repo.FindAllCourseParams, ...string) error); ok {
+	if rf, ok := ret.Get(1).(func(context.Context, repo.FindAllCourseParams, ...string) error); ok {
 		r1 = rf(ctx, params, preload...)
 	} else {
 		r1 = ret.Error(1)
@@ -85,8 +85,8 @@ func (_m *Course) FindAll(ctx context.Context, params *repo.FindAllCourseParams,
 	return r0, r1
 }
 
-// FindByID provides a mock function with given fields: ctx, params, preload
-func (_m *Course) FindByID(ctx context.Context, params *repo.FindCourseByIDParams, preload ...string) (*model.Course, error) {
+// FindOne provides a mock function with given fields: ctx, params, preload
+func (_m *Course) FindOne(ctx context.Context, params repo.FindOneCourseParams, preload ...string) (*model.Course, error) {
 	_va := make([]interface{}, len(preload))
 	for _i := range preload {
 		_va[_i] = preload[_i]
@@ -97,7 +97,7 @@ func (_m *Course) FindByID(ctx context.Context, params *repo.FindCourseByIDParam
 	ret := _m.Called(_ca...)
 
 	var r0 *model.Course
-	if rf, ok := ret.Get(0).(func(context.Context, *repo.FindCourseByIDParams, ...string) *model.Course); ok {
+	if rf, ok := ret.Get(0).(func(context.Context, repo.FindOneCourseParams, ...string) *model.Course); ok {
 		r0 = rf(ctx, params, preload...)
 	} else {
 		if ret.Get(0) != nil {
@@ -106,7 +106,7 @@ func (_m *Course) FindByID(ctx context.Context, params *repo.FindCourseByIDParam
 	}
 
 	var r1 error
-	if rf, ok := ret.Get(1).(func(context.Context, *repo.FindCourseByIDParams, ...string) error); ok {
+	if rf, ok := ret.Get(1).(func(context.Context, repo.FindOneCourseParams, ...string) error); ok {
 		r1 = rf(ctx, params, preload...)
 	} else {
 		r1 = ret.Error(1)
@@ -116,11 +116,11 @@ func (_m *Course) FindByID(ctx context.Context, params *repo.FindCourseByIDParam
 }
 
 // Update provides a mock function with given fields: ctx, params
-func (_m *Course) Update(ctx context.Context, params *repo.UpdateCourseParams) (*model.Course, error) {
+func (_m *Course) Update(ctx context.Context, params repo.UpdateCourseParams) (*model.Course, error) {
 	ret := _m.Called(ctx, params)
 
 	var r0 *model.Course
-	if rf, ok := ret.Get(0).(func(context.Context, *repo.UpdateCourseParams) *model.Course); ok {
+	if rf, ok := ret.Get(0).(func(context.Context, repo.UpdateCourseParams) *model.Course); ok {
 		r0 = rf(ctx, params)
 	} else {
 		if ret.Get(0) != nil {
@@ -129,7 +129,7 @@ func (_m *Course) Update(ctx context.Context, params *repo.UpdateCourseParams) (
 	}
 
 	var r1 error
-	if rf, ok := ret.Get(1).(func(context.Context, *repo.UpdateCourseParams) error); ok {
+	if rf, ok := ret.Get(1).(func(context.Context, repo.UpdateCourseParams) error); ok {
 		r1 = rf(ctx, params)
 	} else {
 		r1 = ret.Error(1)

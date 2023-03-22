@@ -14,6 +14,7 @@ func College() *model.College {
 	college.Courses = make([]*model.Course, 3)
 	for i := range college.Courses {
 		college.Courses[i] = Course()
+		college.Courses[i].CollegeID = college.ID
 	}
 
 	if err := college.Validate(); err != nil {

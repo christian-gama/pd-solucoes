@@ -57,6 +57,10 @@ func (s Sort) Slice() []string {
 // SortScope returns a GORM scope that applies sorting to the query.
 func SortScope(sorter querying.Sorter) func(db *gorm.DB) *gorm.DB {
 	return func(db *gorm.DB) *gorm.DB {
+		if sorter == nil {
+			return db
+		}
+
 		for i := range sorter.Slice() {
 			if sorter.Field(i) == "" {
 				continue

@@ -18,6 +18,12 @@ init: cmd-exists-git
 	@$(MAKE) remake
 
 
+.PHONE: tidy
+tidy:
+	@go mod tidy
+	@go mod vendor
+
+
 .PHONY: clear-screen
 clear-screen:
 	@printf "\033c"
