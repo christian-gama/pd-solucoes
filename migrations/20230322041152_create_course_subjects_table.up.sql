@@ -7,13 +7,13 @@ CREATE TABLE "course_subjects" (
 );
 
 ALTER TABLE "course_subjects"
-ADD CONSTRAINT "fk__course_subjects__course_id"
+ADD CONSTRAINT "fk__course_id__courses.id"
 FOREIGN KEY ("course_id")
 REFERENCES "courses" ("id")
 ON DELETE CASCADE ON UPDATE CASCADE;
 
 ALTER TABLE "course_subjects"
-ADD CONSTRAINT "fk__course_subjects__subject_id"
+ADD CONSTRAINT "fk__subject_id__subjects.id"
 FOREIGN KEY ("subject_id")
 REFERENCES "subjects" ("id")
 ON DELETE CASCADE ON UPDATE CASCADE;
