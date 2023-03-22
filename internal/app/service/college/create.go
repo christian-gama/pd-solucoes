@@ -3,14 +3,13 @@ package service
 import (
 	"context"
 
-	"github.com/christian-gama/pd-solucoes/internal/app/dto"
 	"github.com/christian-gama/pd-solucoes/internal/domain/model"
 	"github.com/christian-gama/pd-solucoes/internal/domain/repo"
 )
 
 type CreateCollege interface {
 	// Handle creates a new college.
-	Handle(ctx context.Context, params *dto.CreateCollegeInput) (*dto.CreateCollegeOutput, error)
+	Handle(ctx context.Context, input *CreateCollegeInput) (*CreateCollegeOutput, error)
 }
 
 type createCollegeImpl struct {
@@ -25,8 +24,8 @@ func NewCreateCollege(collegeRepo repo.College) CreateCollege {
 // Handle creates a new college.
 func (s *createCollegeImpl) Handle(
 	ctx context.Context,
-	input *dto.CreateCollegeInput,
-) (*dto.CreateCollegeOutput, error) {
+	input *CreateCollegeInput,
+) (*CreateCollegeOutput, error) {
 	college, err := model.NewCollege(0, input.Name, input.Cnpj)
 	if err != nil {
 		return nil, err
@@ -40,7 +39,7 @@ func (s *createCollegeImpl) Handle(
 		return nil, err
 	}
 
-	output := &dto.CreateCollegeOutput{
+	output := &CreateCollegeOutput{
 		ID:   college.ID,
 		Name: college.Name,
 		Cnpj: college.Cnpj,

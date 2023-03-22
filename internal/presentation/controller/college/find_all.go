@@ -3,7 +3,6 @@ package controller
 import (
 	"errors"
 
-	"github.com/christian-gama/pd-solucoes/internal/app/dto"
 	service "github.com/christian-gama/pd-solucoes/internal/app/service/college"
 	"github.com/christian-gama/pd-solucoes/internal/infra/http"
 	"github.com/gin-gonic/gin"
@@ -13,14 +12,14 @@ import (
 type FindAllColleges = http.Controller
 
 // NewFindAllColleges returns a new controller to find all colleges.
-func NewFindAllColleges(service service.FindAllColleges) FindAllColleges {
-	if service == nil {
+func NewFindAllColleges(s service.FindAllColleges) FindAllColleges {
+	if s == nil {
 		panic(errors.New("service cannot be nil"))
 	}
 
 	return http.NewController(
-		func(ctx *gin.Context, input *dto.FindAllCollegesInput) {
-			college, err := service.Handle(ctx.Request.Context(), input)
+		func(ctx *gin.Context, input *service.FindAllCollegesInput) {
+			college, err := s.Handle(ctx.Request.Context(), input)
 			if err != nil {
 				panic(err)
 			}

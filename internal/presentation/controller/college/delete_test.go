@@ -5,9 +5,9 @@ import (
 	"net/http"
 	"testing"
 
-	"github.com/christian-gama/pd-solucoes/internal/app/dto"
+	service "github.com/christian-gama/pd-solucoes/internal/app/service/college"
 	controller "github.com/christian-gama/pd-solucoes/internal/presentation/controller/college"
-	fake "github.com/christian-gama/pd-solucoes/testutils/fake/app/dto"
+	fake "github.com/christian-gama/pd-solucoes/testutils/fake/app/service/college"
 	"github.com/christian-gama/pd-solucoes/testutils/gintest"
 	mocks "github.com/christian-gama/pd-solucoes/testutils/mocks/app/service/college"
 	"github.com/christian-gama/pd-solucoes/testutils/suite"
@@ -26,7 +26,7 @@ func TestDeleteCollegeSuite(t *testing.T) {
 func (s *DeleteCollegeSuite) TestHandle() {
 	type Sut struct {
 		Sut           controller.DeleteCollege
-		Input         *dto.DeleteCollegeInput
+		Input         *service.DeleteCollegeInput
 		DeleteCollege *mocks.DeleteCollege
 	}
 

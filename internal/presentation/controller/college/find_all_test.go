@@ -4,9 +4,9 @@ import (
 	"net/http"
 	"testing"
 
-	"github.com/christian-gama/pd-solucoes/internal/app/dto"
+	service "github.com/christian-gama/pd-solucoes/internal/app/service/college"
 	controller "github.com/christian-gama/pd-solucoes/internal/presentation/controller/college"
-	fake "github.com/christian-gama/pd-solucoes/testutils/fake/app/dto"
+	fake "github.com/christian-gama/pd-solucoes/testutils/fake/app/service/college"
 	"github.com/christian-gama/pd-solucoes/testutils/gintest"
 	mocks "github.com/christian-gama/pd-solucoes/testutils/mocks/app/service/college"
 	"github.com/christian-gama/pd-solucoes/testutils/suite"
@@ -25,7 +25,7 @@ func TestFindAllCollegeSuite(t *testing.T) {
 func (s *FindAllCollegeSuite) TestHandle() {
 	type Sut struct {
 		Sut             controller.FindAllColleges
-		Input           *dto.FindAllCollegesInput
+		Input           *service.FindAllCollegesInput
 		FindAllColleges *mocks.FindAllColleges
 	}
 
@@ -40,7 +40,7 @@ func (s *FindAllCollegeSuite) TestHandle() {
 		sut := makeSut()
 
 		sut.FindAllColleges.On("Handle", mock.Anything, mock.Anything).
-			Return(&dto.FindAllCollegesOutput{}, nil)
+			Return(&service.FindAllCollegesOutput{}, nil)
 
 		ctx := gintest.MustRequest(sut.Sut, gintest.Option{})
 

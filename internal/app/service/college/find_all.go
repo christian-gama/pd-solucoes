@@ -3,13 +3,12 @@ package service
 import (
 	"context"
 
-	"github.com/christian-gama/pd-solucoes/internal/app/dto"
 	"github.com/christian-gama/pd-solucoes/internal/domain/repo"
 )
 
 type FindAllColleges interface {
 	// Handle finds all colleges.
-	Handle(ctx context.Context, params *dto.FindAllCollegesInput) (*dto.FindAllCollegesOutput, error)
+	Handle(ctx context.Context, input *FindAllCollegesInput) (*FindAllCollegesOutput, error)
 }
 
 type findAllCollegesImpl struct {
@@ -24,8 +23,8 @@ func NewFindAllColleges(collegeRepo repo.College) FindAllColleges {
 // Handle findAlls a new college.
 func (s *findAllCollegesImpl) Handle(
 	ctx context.Context,
-	input *dto.FindAllCollegesInput,
-) (*dto.FindAllCollegesOutput, error) {
+	input *FindAllCollegesInput,
+) (*FindAllCollegesOutput, error) {
 	findAllCollegeParams := repo.FindAllCollegeParams{
 		Paginator: &input.Pagination,
 		Filterer:  input.Filter,
@@ -36,16 +35,16 @@ func (s *findAllCollegesImpl) Handle(
 		return nil, err
 	}
 
-	result := make([]*dto.FindOneCollegeOutput, 0, len(college.Results))
+	result := make([]*FindOneCollegeOutput, 0, len(college.Results))
 	for _, c := range college.Results {
-		result = append(result, &dto.FindOneCollegeOutput{
+		result = append(result, &FindOneCollegeOutput{
 			ID:   c.ID,
 			Name: c.Name,
 			Cnpj: c.Cnpj,
 		})
 	}
 
-	output := &dto.FindAllCollegesOutput{
+	output := &FindAllCollegesOutput{
 		Total:   college.Total,
 		Results: result,
 	}

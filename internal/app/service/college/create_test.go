@@ -4,10 +4,9 @@ import (
 	"context"
 	"testing"
 
-	"github.com/christian-gama/pd-solucoes/internal/app/dto"
 	service "github.com/christian-gama/pd-solucoes/internal/app/service/college"
 	"github.com/christian-gama/pd-solucoes/internal/domain/model"
-	fake "github.com/christian-gama/pd-solucoes/testutils/fake/app/dto"
+	fake "github.com/christian-gama/pd-solucoes/testutils/fake/app/service/college"
 	fakeModel "github.com/christian-gama/pd-solucoes/testutils/fake/domain/model"
 	mocks "github.com/christian-gama/pd-solucoes/testutils/mocks/domain/repo"
 	"github.com/christian-gama/pd-solucoes/testutils/suite"
@@ -27,7 +26,7 @@ func (s *CreateCollegeSuite) TestHandle() {
 	type Sut struct {
 		Sut         service.CreateCollege
 		CollegeRepo *mocks.College
-		Input       *dto.CreateCollegeInput
+		Input       *service.CreateCollegeInput
 		College     *model.College
 	}
 

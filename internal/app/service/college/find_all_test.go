@@ -4,11 +4,10 @@ import (
 	"context"
 	"testing"
 
-	"github.com/christian-gama/pd-solucoes/internal/app/dto"
 	service "github.com/christian-gama/pd-solucoes/internal/app/service/college"
 	"github.com/christian-gama/pd-solucoes/internal/domain/model"
 	"github.com/christian-gama/pd-solucoes/internal/domain/querying"
-	fake "github.com/christian-gama/pd-solucoes/testutils/fake/app/dto"
+	fake "github.com/christian-gama/pd-solucoes/testutils/fake/app/service/college"
 	fakeModel "github.com/christian-gama/pd-solucoes/testutils/fake/domain/model"
 	mocks "github.com/christian-gama/pd-solucoes/testutils/mocks/domain/repo"
 	"github.com/christian-gama/pd-solucoes/testutils/suite"
@@ -28,7 +27,7 @@ func (s *FindAllCollegeSuite) TestHandle() {
 	type Sut struct {
 		Sut         service.FindAllColleges
 		CollegeRepo *mocks.College
-		Input       *dto.FindAllCollegesInput
+		Input       *service.FindAllCollegesInput
 		Pagination  *querying.PaginationOutput[*model.College]
 	}
 

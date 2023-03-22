@@ -3,13 +3,12 @@ package service
 import (
 	"context"
 
-	"github.com/christian-gama/pd-solucoes/internal/app/dto"
 	"github.com/christian-gama/pd-solucoes/internal/domain/repo"
 )
 
 type DeleteCollege interface {
 	// Handle deletes a college.
-	Handle(ctx context.Context, params *dto.DeleteCollegeInput) error
+	Handle(ctx context.Context, input *DeleteCollegeInput) error
 }
 
 type deleteCollegeImpl struct {
@@ -24,7 +23,7 @@ func NewDeleteCollege(collegeRepo repo.College) DeleteCollege {
 // Handle deletes a college.
 func (s *deleteCollegeImpl) Handle(
 	ctx context.Context,
-	input *dto.DeleteCollegeInput,
+	input *DeleteCollegeInput,
 ) error {
 	deleteCollegeParams := repo.DeleteCollegeParams{
 		ID: input.ID,

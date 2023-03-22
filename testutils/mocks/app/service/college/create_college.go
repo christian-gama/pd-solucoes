@@ -5,7 +5,7 @@ package mocks
 import (
 	context "context"
 
-	dto "github.com/christian-gama/pd-solucoes/internal/app/dto"
+	service "github.com/christian-gama/pd-solucoes/internal/app/service/college"
 	mock "github.com/stretchr/testify/mock"
 )
 
@@ -14,22 +14,22 @@ type CreateCollege struct {
 	mock.Mock
 }
 
-// Handle provides a mock function with given fields: ctx, params
-func (_m *CreateCollege) Handle(ctx context.Context, params *dto.CreateCollegeInput) (*dto.FindOneCollegeOutput, error) {
-	ret := _m.Called(ctx, params)
+// Handle provides a mock function with given fields: ctx, input
+func (_m *CreateCollege) Handle(ctx context.Context, input *service.CreateCollegeInput) (*service.FindOneCollegeOutput, error) {
+	ret := _m.Called(ctx, input)
 
-	var r0 *dto.FindOneCollegeOutput
-	if rf, ok := ret.Get(0).(func(context.Context, *dto.CreateCollegeInput) *dto.FindOneCollegeOutput); ok {
-		r0 = rf(ctx, params)
+	var r0 *service.FindOneCollegeOutput
+	if rf, ok := ret.Get(0).(func(context.Context, *service.CreateCollegeInput) *service.FindOneCollegeOutput); ok {
+		r0 = rf(ctx, input)
 	} else {
 		if ret.Get(0) != nil {
-			r0 = ret.Get(0).(*dto.FindOneCollegeOutput)
+			r0 = ret.Get(0).(*service.FindOneCollegeOutput)
 		}
 	}
 
 	var r1 error
-	if rf, ok := ret.Get(1).(func(context.Context, *dto.CreateCollegeInput) error); ok {
-		r1 = rf(ctx, params)
+	if rf, ok := ret.Get(1).(func(context.Context, *service.CreateCollegeInput) error); ok {
+		r1 = rf(ctx, input)
 	} else {
 		r1 = ret.Error(1)
 	}

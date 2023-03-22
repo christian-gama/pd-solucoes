@@ -4,10 +4,9 @@ import (
 	"context"
 	"testing"
 
-	"github.com/christian-gama/pd-solucoes/internal/app/dto"
 	service "github.com/christian-gama/pd-solucoes/internal/app/service/college"
 	"github.com/christian-gama/pd-solucoes/internal/domain/model"
-	fake "github.com/christian-gama/pd-solucoes/testutils/fake/app/dto"
+	fake "github.com/christian-gama/pd-solucoes/testutils/fake/app/service/college"
 	mocks "github.com/christian-gama/pd-solucoes/testutils/mocks/domain/repo"
 	"github.com/christian-gama/pd-solucoes/testutils/suite"
 	"github.com/stretchr/testify/assert"
@@ -26,7 +25,7 @@ func (s *DeleteCollegeSuite) TestHandle() {
 	type Sut struct {
 		Sut         service.DeleteCollege
 		CollegeRepo *mocks.College
-		Input       *dto.DeleteCollegeInput
+		Input       *service.DeleteCollegeInput
 		College     *model.College
 	}
 

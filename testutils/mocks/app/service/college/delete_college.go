@@ -5,7 +5,7 @@ package mocks
 import (
 	context "context"
 
-	dto "github.com/christian-gama/pd-solucoes/internal/app/dto"
+	service "github.com/christian-gama/pd-solucoes/internal/app/service/college"
 	mock "github.com/stretchr/testify/mock"
 )
 
@@ -14,13 +14,13 @@ type DeleteCollege struct {
 	mock.Mock
 }
 
-// Handle provides a mock function with given fields: ctx, params
-func (_m *DeleteCollege) Handle(ctx context.Context, params *dto.DeleteCollegeInput) error {
-	ret := _m.Called(ctx, params)
+// Handle provides a mock function with given fields: ctx, input
+func (_m *DeleteCollege) Handle(ctx context.Context, input *service.DeleteCollegeInput) error {
+	ret := _m.Called(ctx, input)
 
 	var r0 error
-	if rf, ok := ret.Get(0).(func(context.Context, *dto.DeleteCollegeInput) error); ok {
-		r0 = rf(ctx, params)
+	if rf, ok := ret.Get(0).(func(context.Context, *service.DeleteCollegeInput) error); ok {
+		r0 = rf(ctx, input)
 	} else {
 		r0 = ret.Error(0)
 	}

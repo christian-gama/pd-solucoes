@@ -3,14 +3,13 @@ package service
 import (
 	"context"
 
-	"github.com/christian-gama/pd-solucoes/internal/app/dto"
 	"github.com/christian-gama/pd-solucoes/internal/domain/model"
 	"github.com/christian-gama/pd-solucoes/internal/domain/repo"
 )
 
 type UpdateCollege interface {
 	// Handle updates a college.
-	Handle(ctx context.Context, params *dto.UpdateCollegeInput) (*dto.UpdateCollegeOutput, error)
+	Handle(ctx context.Context, input *UpdateCollegeInput) (*UpdateCollegeOutput, error)
 }
 
 type updateCollegeImpl struct {
@@ -25,8 +24,8 @@ func NewUpdateCollege(collegeRepo repo.College) UpdateCollege {
 // Handle updates a college.
 func (s *updateCollegeImpl) Handle(
 	ctx context.Context,
-	input *dto.UpdateCollegeInput,
-) (*dto.UpdateCollegeOutput, error) {
+	input *UpdateCollegeInput,
+) (*UpdateCollegeOutput, error) {
 	college, err := model.NewCollege(input.ID, input.Name, input.Cnpj)
 	if err != nil {
 		return nil, err
@@ -40,7 +39,7 @@ func (s *updateCollegeImpl) Handle(
 		return nil, err
 	}
 
-	output := &dto.UpdateCollegeOutput{
+	output := &UpdateCollegeOutput{
 		ID:   college.ID,
 		Name: college.Name,
 		Cnpj: college.Cnpj,
