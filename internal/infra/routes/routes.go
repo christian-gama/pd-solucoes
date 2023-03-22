@@ -22,6 +22,7 @@ func College() *routing.Routing {
 			{Controller: collegeController.MakeCreateCollege()},
 			{Controller: collegeController.MakeUpdateCollege()},
 			{Controller: collegeController.MakeFindOneCollege()},
+			{Controller: collegeController.MakeFindAllColleges()},
 		},
 	}
 }

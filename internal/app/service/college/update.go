@@ -9,7 +9,7 @@ import (
 )
 
 type UpdateCollege interface {
-	// Handle updates a new college.
+	// Handle updates a college.
 	Handle(ctx context.Context, params *dto.UpdateCollegeInput) (*dto.UpdateCollegeOutput, error)
 }
 
@@ -17,7 +17,7 @@ type updateCollegeImpl struct {
 	repo.College
 }
 
-// NewUpdateCollege updates a new CollegeService.
+// NewUpdateCollege returns a UpdateCollege.
 func NewUpdateCollege(collegeRepo repo.College) UpdateCollege {
 	return &updateCollegeImpl{College: collegeRepo}
 }

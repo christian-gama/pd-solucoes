@@ -37,7 +37,7 @@ func (s *FindOneCollegeSuite) TestHandle() {
 		return &Sut{Sut: sut, FindOneCollege: findOneCollege, Input: input}
 	}
 
-	s.Run("should findOne a college", func() {
+	s.Run("should find one college", func() {
 		sut := makeSut()
 
 		sut.FindOneCollege.On("Handle", mock.Anything, sut.Input).

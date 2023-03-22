@@ -17,7 +17,7 @@ type createCollegeImpl struct {
 	repo.College
 }
 
-// NewCreateCollege creates a new CollegeService.
+// NewCreateCollege returns a CreateCollege.
 func NewCreateCollege(collegeRepo repo.College) CreateCollege {
 	return &createCollegeImpl{College: collegeRepo}
 }

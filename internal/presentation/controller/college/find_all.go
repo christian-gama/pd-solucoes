@@ -9,17 +9,17 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-// FindOneCollege is a controller to find one college.
-type FindOneCollege = http.Controller
+// FindAllColleges is a controller to find all colleges.
+type FindAllColleges = http.Controller
 
-// NewFindOneCollege returns a new controller to find one college.
-func NewFindOneCollege(service service.FindOneCollege) FindOneCollege {
+// NewFindAllColleges returns a new controller to find all colleges.
+func NewFindAllColleges(service service.FindAllColleges) FindAllColleges {
 	if service == nil {
 		panic(errors.New("service cannot be nil"))
 	}
 
 	return http.NewController(
-		func(ctx *gin.Context, input *dto.FindOneCollegeInput) {
+		func(ctx *gin.Context, input *dto.FindAllCollegesInput) {
 			college, err := service.Handle(ctx.Request.Context(), input)
 			if err != nil {
 				panic(err)
@@ -30,7 +30,6 @@ func NewFindOneCollege(service service.FindOneCollege) FindOneCollege {
 		http.ControllerOptions{
 			Path:   "/",
 			Method: http.MethodGet,
-			Params: []string{"id"},
 		},
 	)
 }

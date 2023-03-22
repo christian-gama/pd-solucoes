@@ -8,7 +8,7 @@ import (
 )
 
 type FindOneCollege interface {
-	// Handle find one college.
+	// Handle finds one college.
 	Handle(ctx context.Context, params *dto.FindOneCollegeInput) (*dto.FindOneCollegeOutput, error)
 }
 
@@ -16,7 +16,7 @@ type findOneCollegeImpl struct {
 	repo.College
 }
 
-// NewFindOneCollege findOnes a new CollegeService.
+// NewFindOneCollege returns a FindOneCollege.
 func NewFindOneCollege(collegeRepo repo.College) FindOneCollege {
 	return &findOneCollegeImpl{College: collegeRepo}
 }

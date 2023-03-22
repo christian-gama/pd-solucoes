@@ -15,3 +15,7 @@ func MakeUpdateCollege() UpdateCollege {
 func MakeFindOneCollege() FindOneCollege {
 	return NewFindOneCollege(persistence.MakeCollege())
 }
+
+func MakeFindAllColleges() FindAllColleges {
+	return NewFindAllColleges(persistence.MakeCollege())
+}

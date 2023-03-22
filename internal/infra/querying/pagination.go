@@ -13,13 +13,17 @@ type PaginationOutput[Schema any] struct {
 
 // Pagination is a struct used to paginate queries.
 type Pagination struct {
-	Page  int `form:"page"`
-	Limit int `form:"limit"`
+	Page  int `form:"page"  validate:"omitempty,min=1"`
+	Limit int `form:"limit" validate:"omitempty,max=100,min=1"`
 }
 
 // GetLimit implements querying.Paginator.
 func (p *Pagination) GetLimit() int {
-	if p.Limit <= 0 || p.Limit > 100 {
+	if p.Limit <= 0 {
+		p.Limit = 10
+	}
+
+	if p.Limit > 100 {
 		p.Limit = 100
 	}
 

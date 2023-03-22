@@ -13,3 +13,7 @@ func MakeUpdateCollege() UpdateCollege {
 func MakeFindOneCollege() FindOneCollege {
 	return NewFindOneCollege(service.MakeFindOneCollege())
 }
+
+func MakeFindAllColleges() FindAllColleges {
+	return NewFindAllColleges(service.MakeFindAllColleges())
+}

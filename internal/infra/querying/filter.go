@@ -72,13 +72,11 @@ func FilterScope(filter querying.Filterer) func(db *gorm.DB) *gorm.DB {
 		}
 
 		for i := range filter.Slice() {
-			fmt.Println(filter.Slice()[i])
-			fmt.Println(filter.Field(i), filter.Value(i), filter.Operator(i))
 			if filter.Field(i) == "" || filter.Value(i) == "" || filter.Operator(i) == "" {
 				continue
 			}
 
-			columName := schema.NamingStrategy{}.ColumnName("", filter.Field(i))
+			columnName := schema.NamingStrategy{}.ColumnName("", filter.Field(i))
 
 			value := filter.Value(i)
 			if filter.Operator(i) == "like" {
@@ -86,7 +84,7 @@ func FilterScope(filter querying.Filterer) func(db *gorm.DB) *gorm.DB {
 			}
 
 			if expr, ok := filterOperators[filter.Operator(i)]; ok {
-				db = db.Where(expr(columName, value))
+				db = db.Where(expr(columnName, value))
 			}
 		}
 
