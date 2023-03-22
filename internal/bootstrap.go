@@ -24,6 +24,7 @@ func Bootstrap(ctx context.Context, log log.Logger, envFile string) {
 		routes.Global(),
 		routes.College(),
 		routes.Teacher(),
+		routes.Student(),
 	)
 
 	server.Start(ctx, r, log)
