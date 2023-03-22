@@ -20,7 +20,7 @@ func AddFilter(field string, operator string, value any) querying.Filterer {
 
 // Add implements Filterer.
 func (f Filter) Add(field string, operator string, value any) querying.Filterer {
-	f = append(f, fmt.Sprintf("%s=%s,%s", field, operator, value))
+	f = append(f, fmt.Sprintf("%s=%s,%v", field, operator, value))
 	return f
 }
 
