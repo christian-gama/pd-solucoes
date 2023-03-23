@@ -1,0 +1,74 @@
+name: Run linter and tests
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  create-env:
+    runs-on: ubuntu-latest
+    environment: test
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - uses: ./.github/actions/create-env
+        with:
+          APP_ENV: ${{ secrets.ENV }}
+          APP_HOST: ${{ secrets.APP_HOST }}
+          APP_PORT: ${{ secrets.APP_PORT }}
+          CONFIG_GLOBAL_RATE_LIMIT: ${{ secrets.CONFIG_GLOBAL_RATE_LIMIT }}
+          DB_NAME: ${{ secrets.DB_NAME }}
+          DB_USER: ${{ secrets.DB_USER }}
+          DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
+          DB_HOST: ${{ secrets.DB_HOST }}
+          DB_PORT: ${{ secrets.DB_PORT }}
+          DB_SSL_MODE: ${{ secrets.DB_SSL_MODE }}
+          DB_SGBD: ${{ secrets.DB_SGBD }}
+
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Cache linter dependencies
+        uses: actions/cache@v3
+        with:
+          path: |
+            ${{ github.workspace }}/.cache/linter
+          key: ${{ runner.os }}-linter-${{ hashFiles('**.go') }}
+          restore-keys: |
+            ${{ runner.os }}-linter-
+
+      - name: Lint
+        run: make lint
+
+  test:
+    needs: create-env
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Setup environment
+        uses: ./.github/actions/setup
+
+      - name: Cache test dependencies
+        uses: actions/cache@v3
+        with:
+          path: |
+            ${{ github.workspace }}/.cache/go
+          key: ${{ runner.os }}-test-${{ hashFiles('**.go') }}
+          restore-keys: |
+            ${{ runner.os }}-test
+
+      - name: Test
+        run: make test
+
+      - name: Delete Artifact
+        uses: GeekyEggo/delete-artifact@v2.0.0
+        with:
+          name: env-file
+          failOnError: false

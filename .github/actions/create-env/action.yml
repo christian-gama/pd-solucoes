@@ -1,0 +1,74 @@
+name: Create env file
+description: Creates an env file for use in the application.
+inputs:
+    APP_ENV:
+        description: The environment to use (dev, prod, or test)
+        required: true
+        default: test
+
+    APP_HOST:
+        description: The hostname or IP address of the application server.
+        required: true
+
+    APP_PORT:
+        description: The port number the application is listening on.
+        required: true
+
+    CONFIG_GLOBAL_RATE_LIMIT:
+        description: The global rate limit for the application.
+        required: true
+
+    DB_NAME:
+        description: The name of the database.
+        required: true
+
+    DB_USER:
+        description: The username for the database.
+        required: true
+
+    DB_PASSWORD:
+        description: The password for the database user.
+        required: true
+
+    DB_HOST:
+        description: The hostname or IP address of the database server.
+        required: true
+
+    DB_PORT:
+        description: The port number the database is listening on.
+        required: true
+
+    DB_SSL_MODE:
+        description: Whether or not to use SSL to connect to the database.
+        required: true
+
+    DB_SGBD:
+        description: The type of database management system (e.g. postgresql).
+        required: true
+
+runs:
+    using: "composite"
+    steps:
+        - id: create-env
+          name: Create env file
+          shell: bash
+          run: |
+              touch .env.${{ inputs.APP_ENV }}
+              echo "APP_ENV=${{ inputs.APP_ENV }}" >> .env.${{ inputs.APP_ENV }}
+              echo "APP_HOST=${{ inputs.APP_HOST }}" >> .env.${{ inputs.APP_ENV }}
+              echo "APP_PORT=${{ inputs.APP_PORT }}" >> .env.${{ inputs.APP_ENV }}
+              echo "CONFIG_GLOBAL_RATE_LIMIT=${{ inputs.CONFIG_GLOBAL_RATE_LIMIT }}" >> .env.${{ inputs.APP_ENV }}
+              echo "DB_NAME=${{ inputs.DB_NAME }}" >> .env.${{ inputs.APP_ENV }}
+              echo "DB_USER=${{ inputs.DB_USER }}" >> .env.${{ inputs.APP_ENV }}
+              echo "DB_PASSWORD=${{ inputs.DB_PASSWORD }}" >> .env.${{ inputs.APP_ENV }}
+              echo "DB_HOST=${{ inputs.DB_HOST }}" >> .env.${{ inputs.APP_ENV }}
+              echo "DB_PORT=${{ inputs.DB_PORT }}" >> .env.${{ inputs.APP_ENV }}
+              echo "DB_SSL_MODE=${{ inputs.DB_SSL_MODE }}" >> .env.${{ inputs.APP_ENV }}
+              echo "DB_SGBD=${{ inputs.DB_SGBD }}" >> .env.${{ inputs.APP_ENV }}
+              mkdir -p env
+              mv .env.${{ inputs.APP_ENV }} env/
+
+        - uses: actions/upload-artifact@v3
+          with:
+              name: env-file
+              path: env

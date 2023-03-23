@@ -1,0 +1,14 @@
+name: Setup
+description: Set up the necessary environment variables for the application.
+runs:
+  using: "composite"
+  steps:
+    - name: Download env file
+      uses: actions/download-artifact@v3
+      with:
+        name: env-file
+        path: env
+
+    - name: Move env file
+      shell: bash
+      run: mv env/.env.test .env.test
