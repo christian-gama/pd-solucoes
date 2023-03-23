@@ -52,7 +52,7 @@ func (s *UpdateCourseSuite) TestHandle() {
 		s.NoError(err)
 		s.Equal(sut.Course.ID, result.ID)
 		s.Equal(sut.Course.Name, result.Name)
-		s.Equal(sut.Course.College.ID, result.CollegeID)
+		s.Equal(sut.Course.CollegeID, result.CollegeID)
 	})
 
 	s.Run("courseRepo.Update returns an error", func() {

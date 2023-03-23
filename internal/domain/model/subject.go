@@ -6,6 +6,7 @@ import (
 	"github.com/christian-gama/pd-solucoes/pkg/errutil"
 )
 
+// Subject is the model of a subject.
 type Subject struct {
 	ID        uint   `faker:"uint"`
 	Name      string `faker:"len=50"`

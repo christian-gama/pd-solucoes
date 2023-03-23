@@ -7,6 +7,7 @@ import (
 	"github.com/christian-gama/pd-solucoes/pkg/errutil"
 )
 
+// CourseEnrollment is the model of a course enrollment.
 type CourseEnrollment struct {
 	ID              uint `faker:"uint"`
 	StudentID       uint `faker:"uint"`

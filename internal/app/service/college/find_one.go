@@ -28,15 +28,24 @@ func (s *findOneCollegeImpl) Handle(
 	findOneCollegeParams := repo.FindOneCollegeParams{
 		ID: input.ID,
 	}
-	college, err := s.College.FindOne(ctx, findOneCollegeParams)
+	college, err := s.College.FindOne(ctx, findOneCollegeParams, "courses")
 	if err != nil {
 		return nil, err
 	}
 
+	courseOuput := make([]*findOneCollegeCourseOutput, len(college.Courses))
+	for i, course := range college.Courses {
+		courseOuput[i] = &findOneCollegeCourseOutput{
+			ID:   course.ID,
+			Name: course.Name,
+		}
+	}
+
 	output := &FindOneCollegeOutput{
-		ID:   college.ID,
-		Name: college.Name,
-		Cnpj: college.Cnpj,
+		ID:      college.ID,
+		Name:    college.Name,
+		Cnpj:    college.Cnpj,
+		Courses: courseOuput,
 	}
 
 	return output, nil

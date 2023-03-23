@@ -5,7 +5,13 @@ type FindOneCollegeInput struct {
 }
 
 type FindOneCollegeOutput struct {
+	ID      uint                          `json:"id"`
+	Name    string                        `json:"name"`
+	Cnpj    string                        `json:"cnpj"`
+	Courses []*findOneCollegeCourseOutput `json:"courses"`
+}
+
+type findOneCollegeCourseOutput struct {
 	ID   uint   `json:"id"`
 	Name string `json:"name"`
-	Cnpj string `json:"cnpj"`
 }

@@ -30,18 +30,27 @@ func (s *findAllCollegesImpl) Handle(
 		Filterer:  input.Filter,
 		Sorter:    input.Sort,
 	}
-	college, err := s.College.FindAll(ctx, findAllCollegeParams)
+	college, err := s.College.FindAll(ctx, findAllCollegeParams, "courses")
 	if err != nil {
 		return nil, err
 	}
 
-	result := make([]*FindOneCollegeOutput, 0, len(college.Results))
-	for _, c := range college.Results {
-		result = append(result, &FindOneCollegeOutput{
-			ID:   c.ID,
-			Name: c.Name,
-			Cnpj: c.Cnpj,
-		})
+	result := make([]*FindOneCollegeOutput, len(college.Results))
+	for i, c := range college.Results {
+		coursesOutput := make([]*findOneCollegeCourseOutput, len(c.Courses))
+		for j, course := range c.Courses {
+			coursesOutput[j] = &findOneCollegeCourseOutput{
+				ID:   course.ID,
+				Name: course.Name,
+			}
+		}
+
+		result[i] = &FindOneCollegeOutput{
+			ID:      c.ID,
+			Name:    c.Name,
+			Cnpj:    c.Cnpj,
+			Courses: coursesOutput,
+		}
 	}
 
 	output := &FindAllCollegesOutput{

@@ -8,17 +8,19 @@ import (
 
 // College is the model of a college.
 type College struct {
-	ID   uint   `faker:"uint"`
-	Name string `faker:"len=50"`
-	Cnpj string `faker:"cnpj"`
+	ID      uint   `faker:"uint"`
+	Name    string `faker:"len=50"`
+	Cnpj    string `faker:"cnpj"`
+	Courses []*Course
 }
 
 // NewCollege creates a new College.
 func NewCollege(id uint, name, cnpj string) (*College, error) {
 	m := &College{
-		ID:   id,
-		Name: name,
-		Cnpj: cnpj,
+		ID:      id,
+		Name:    name,
+		Cnpj:    cnpj,
+		Courses: make([]*Course, 0),
 	}
 
 	if err := m.Validate(); err != nil {

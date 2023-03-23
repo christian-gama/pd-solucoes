@@ -5,7 +5,6 @@ type Course struct {
 	ID        uint `gorm:"primaryKey"`
 	Name      string
 	CollegeID uint
-	College   *College
 }
 
 // TableName returns the table name.

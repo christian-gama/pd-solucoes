@@ -3,7 +3,6 @@ package service
 import (
 	"context"
 
-	service "github.com/christian-gama/pd-solucoes/internal/app/service/college"
 	"github.com/christian-gama/pd-solucoes/internal/domain/repo"
 )
 
@@ -31,7 +30,7 @@ func (s *findAllCoursesImpl) Handle(
 		Filterer:  input.Filter,
 		Sorter:    input.Sort,
 	}
-	course, err := s.Course.FindAll(ctx, findAllCourseParams, "college")
+	course, err := s.Course.FindAll(ctx, findAllCourseParams)
 	if err != nil {
 		return nil, err
 	}
@@ -39,9 +38,8 @@ func (s *findAllCoursesImpl) Handle(
 	result := make([]*FindOneCourseOutput, 0, len(course.Results))
 	for _, c := range course.Results {
 		result = append(result, &FindOneCourseOutput{
-			ID:      c.ID,
-			Name:    c.Name,
-			College: (*service.FindOneCollegeOutput)(c.College),
+			ID:   c.ID,
+			Name: c.Name,
 		})
 	}
 

@@ -3,7 +3,6 @@ package service
 import (
 	"context"
 
-	service "github.com/christian-gama/pd-solucoes/internal/app/service/college"
 	"github.com/christian-gama/pd-solucoes/internal/domain/repo"
 )
 
@@ -29,15 +28,14 @@ func (s *findOneCourseImpl) Handle(
 	findOneCourseParams := repo.FindOneCourseParams{
 		ID: input.ID,
 	}
-	course, err := s.Course.FindOne(ctx, findOneCourseParams, "college")
+	course, err := s.Course.FindOne(ctx, findOneCourseParams)
 	if err != nil {
 		return nil, err
 	}
 
 	output := &FindOneCourseOutput{
-		ID:      course.ID,
-		Name:    course.Name,
-		College: (*service.FindOneCollegeOutput)(course.College),
+		ID:   course.ID,
+		Name: course.Name,
 	}
 
 	return output, nil

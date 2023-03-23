@@ -52,7 +52,6 @@ func (s *FindOneCourseSuite) TestHandle() {
 		s.NoError(err)
 		s.Equal(sut.Course.ID, result.ID)
 		s.Equal(sut.Course.Name, result.Name)
-		s.Equal(sut.Course.College.ID, result.College.ID)
 	})
 
 	s.Run("courseRepo.FindOne returns an error", func() {

@@ -49,7 +49,8 @@ func (s *FindAllCollegeSuite) TestHandle() {
 	s.Run("should find one college", func() {
 		sut := makeSut()
 
-		sut.CollegeRepo.On("FindAll", mock.Anything, mock.Anything).Return(sut.Pagination, nil)
+		sut.CollegeRepo.On("FindAll", mock.Anything, mock.Anything, "courses").
+			Return(sut.Pagination, nil)
 
 		result, err := sut.Sut.Handle(context.Background(), sut.Input)
 
@@ -61,7 +62,8 @@ func (s *FindAllCollegeSuite) TestHandle() {
 	s.Run("collegeRepo.FindAll returns an error", func() {
 		sut := makeSut()
 
-		sut.CollegeRepo.On("FindAll", mock.Anything, mock.Anything).Return(nil, assert.AnError)
+		sut.CollegeRepo.On("FindAll", mock.Anything, mock.Anything, "courses").
+			Return(nil, assert.AnError)
 
 		result, err := sut.Sut.Handle(context.Background(), sut.Input)
 
