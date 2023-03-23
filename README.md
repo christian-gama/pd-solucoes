@@ -4,7 +4,7 @@ This is a RESTful API built using GoLang and PostgreSQL for the Passei Direto co
 This project is following the principles of Clean Architecture, SOLID and Domain-Driven Design.
 
 ## Features
-- All endpoints have sorting, filtering and pagination (consult API documentation for more details)
+- All endpoints have **sorting**, **filtering** and **pagination** (consult API documentation for more details)
 - All endpoints have validation for the request body
 - Over 600 tests, including unit and integration tests
 - All endpoints have documentation
@@ -13,7 +13,7 @@ This project is following the principles of Clean Architecture, SOLID and Domain
 - SOLID principles
 - CI/CD pipeline with GitHub Actions
 - Docker containers for the API and the database
-- Automatic migrations
+- Easy migrations using task automation
 - Code linting
 - Easy project setup by using Docker and Makefiles
 - Git commit messages following the Conventional Commits specification
@@ -70,7 +70,15 @@ make test
 It will start a PostgreSQL container, run migrations and run the tests.
 
 ### Running the project
-To run the project, run the following command:
+To run the project, you have to make sure the migrations are up-to-date. To do that, run the following command:
+
+```bash
+make migrate-up ENV_FILE=.env.dev
+```
+Change from `dev` to `prod` if you want to run the migrations in the production environment.
+
+After that, you are ready to go. To run the project, run the following command:
+
 
 ```bash
 make docker-dev
