@@ -45,7 +45,9 @@ func (s *FindOneTeacherSuite) TestHandle() {
 	s.Run("should find one teacher", func() {
 		sut := makeSut()
 
-		sut.TeacherRepo.On("FindOne", mock.Anything, mock.Anything).Return(sut.Teacher, nil)
+		sut.TeacherRepo.
+			On("FindOne", mock.Anything, mock.Anything, "subjects").
+			Return(sut.Teacher, nil)
 
 		result, err := sut.Sut.Handle(context.Background(), sut.Input)
 
@@ -53,12 +55,15 @@ func (s *FindOneTeacherSuite) TestHandle() {
 		s.Equal(sut.Teacher.ID, result.ID)
 		s.Equal(sut.Teacher.Name, result.Name)
 		s.Equal(sut.Teacher.Degree, result.Degree)
+		s.Equal(sut.Teacher.Subjects, result.Subjects)
 	})
 
 	s.Run("teacherRepo.FindOne returns an error", func() {
 		sut := makeSut()
 
-		sut.TeacherRepo.On("FindOne", mock.Anything, mock.Anything).Return(nil, assert.AnError)
+		sut.TeacherRepo.
+			On("FindOne", mock.Anything, mock.Anything, "subjects").
+			Return(nil, assert.AnError)
 
 		result, err := sut.Sut.Handle(context.Background(), sut.Input)
 

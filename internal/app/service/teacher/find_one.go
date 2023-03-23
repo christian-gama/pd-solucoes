@@ -29,7 +29,7 @@ func (s *findOneTeacherImpl) Handle(
 	findOneTeacherParams := repo.FindOneTeacherParams{
 		ID: input.ID,
 	}
-	teacher, err := s.Teacher.FindOne(ctx, findOneTeacherParams)
+	teacher, err := s.Teacher.FindOne(ctx, findOneTeacherParams, "subjects")
 	if err != nil {
 		return nil, err
 	}
