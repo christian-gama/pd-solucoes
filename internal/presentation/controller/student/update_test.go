@@ -7,6 +7,7 @@ import (
 	"testing"
 
 	service "github.com/christian-gama/pd-solucoes/internal/app/service/student"
+	"github.com/christian-gama/pd-solucoes/internal/domain/model"
 	controller "github.com/christian-gama/pd-solucoes/internal/presentation/controller/student"
 	fake "github.com/christian-gama/pd-solucoes/testutils/fake/app/service/student"
 	"github.com/christian-gama/pd-solucoes/testutils/gintest"
@@ -41,8 +42,9 @@ func (s *UpdateStudentSuite) TestHandle() {
 	s.Run("should update a student", func() {
 		sut := makeSut()
 
-		sut.UpdateStudent.On("Handle", mock.Anything, sut.Input).
-			Return(&service.UpdateStudentOutput{}, nil)
+		sut.UpdateStudent.
+			On("Handle", mock.Anything, sut.Input).
+			Return(&model.Student{}, nil)
 
 		ctx := gintest.MustRequest(sut.Sut, gintest.Option{
 			Data:   sut.Input,

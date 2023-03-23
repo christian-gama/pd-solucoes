@@ -3,12 +3,16 @@ package service
 import (
 	"context"
 
+	"github.com/christian-gama/pd-solucoes/internal/domain/model"
 	"github.com/christian-gama/pd-solucoes/internal/domain/repo"
 )
 
 type FindOneCollege interface {
 	// Handle finds one college.
-	Handle(ctx context.Context, input *FindOneCollegeInput) (*FindOneCollegeOutput, error)
+	Handle(
+		ctx context.Context,
+		input *FindOneCollegeInput,
+	) (*model.College, error)
 }
 
 type findOneCollegeImpl struct {
@@ -24,29 +28,14 @@ func NewFindOneCollege(collegeRepo repo.College) FindOneCollege {
 func (s *findOneCollegeImpl) Handle(
 	ctx context.Context,
 	input *FindOneCollegeInput,
-) (*FindOneCollegeOutput, error) {
+) (*model.College, error) {
 	findOneCollegeParams := repo.FindOneCollegeParams{
 		ID: input.ID,
 	}
-	college, err := s.College.FindOne(ctx, findOneCollegeParams, "courses")
+	course, err := s.College.FindOne(ctx, findOneCollegeParams, "courses")
 	if err != nil {
 		return nil, err
 	}
 
-	courseOuput := make([]*findOneCollegeCourseOutput, len(college.Courses))
-	for i, course := range college.Courses {
-		courseOuput[i] = &findOneCollegeCourseOutput{
-			ID:   course.ID,
-			Name: course.Name,
-		}
-	}
-
-	output := &FindOneCollegeOutput{
-		ID:      college.ID,
-		Name:    college.Name,
-		Cnpj:    college.Cnpj,
-		Courses: courseOuput,
-	}
-
-	return output, nil
+	return course, nil
 }

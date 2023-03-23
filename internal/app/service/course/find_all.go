@@ -3,12 +3,17 @@ package service
 import (
 	"context"
 
+	"github.com/christian-gama/pd-solucoes/internal/domain/model"
+	"github.com/christian-gama/pd-solucoes/internal/domain/querying"
 	"github.com/christian-gama/pd-solucoes/internal/domain/repo"
 )
 
 type FindAllCourses interface {
 	// Handle finds all courses.
-	Handle(ctx context.Context, input *FindAllCoursesInput) (*FindAllCoursesOutput, error)
+	Handle(
+		ctx context.Context,
+		input *FindAllCoursesInput,
+	) (*querying.PaginationOutput[*model.Course], error)
 }
 
 type findAllCoursesImpl struct {
@@ -24,29 +29,22 @@ func NewFindAllCourses(courseRepo repo.Course) FindAllCourses {
 func (s *findAllCoursesImpl) Handle(
 	ctx context.Context,
 	input *FindAllCoursesInput,
-) (*FindAllCoursesOutput, error) {
+) (*querying.PaginationOutput[*model.Course], error) {
 	findAllCourseParams := repo.FindAllCourseParams{
 		Paginator: &input.Pagination,
 		Filterer:  input.Filter,
 		Sorter:    input.Sort,
 	}
-	course, err := s.Course.FindAll(ctx, findAllCourseParams)
+	paginationOutput, err := s.Course.FindAll(
+		ctx,
+		findAllCourseParams,
+		"enrollments",
+		"subjects.students",
+		"college",
+	)
 	if err != nil {
 		return nil, err
 	}
 
-	result := make([]*FindOneCourseOutput, 0, len(course.Results))
-	for _, c := range course.Results {
-		result = append(result, &FindOneCourseOutput{
-			ID:   c.ID,
-			Name: c.Name,
-		})
-	}
-
-	output := &FindAllCoursesOutput{
-		Total:   course.Total,
-		Results: result,
-	}
-
-	return output, nil
+	return paginationOutput, nil
 }

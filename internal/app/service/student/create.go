@@ -9,7 +9,7 @@ import (
 
 type CreateStudent interface {
 	// Handle creates a new student.
-	Handle(ctx context.Context, input *CreateStudentInput) (*CreateStudentOutput, error)
+	Handle(ctx context.Context, input *CreateStudentInput) (*model.Student, error)
 }
 
 type createStudentImpl struct {
@@ -25,7 +25,7 @@ func NewCreateStudent(studentRepo repo.Student) CreateStudent {
 func (s *createStudentImpl) Handle(
 	ctx context.Context,
 	input *CreateStudentInput,
-) (*CreateStudentOutput, error) {
+) (*model.Student, error) {
 	student, err := model.NewStudent(0, input.Name, input.Cpf)
 	if err != nil {
 		return nil, err
@@ -39,11 +39,5 @@ func (s *createStudentImpl) Handle(
 		return nil, err
 	}
 
-	output := &CreateStudentOutput{
-		ID:   student.ID,
-		Name: student.Name,
-		Cpf:  student.Cpf,
-	}
-
-	return output, nil
+	return student, nil
 }

@@ -8,17 +8,19 @@ import (
 
 // Student is the model that contains the student information.
 type Student struct {
-	ID   uint   `faker:"uint"`
-	Name string `faker:"len=50"`
-	Cpf  string `faker:"cpf"`
+	ID             uint             `json:"id,omitempty"             faker:"uint"`
+	Name           string           `json:"name,omitempty"           faker:"len=50"`
+	Cpf            string           `json:"cpf,omitempty"            faker:"cpf"`
+	CourseSubjects []*CourseSubject `json:"courseSubjects,omitempty" faker:"-"`
 }
 
 // NewStudent creates a new Student.
 func NewStudent(id uint, name string, cpf string) (*Student, error) {
 	m := &Student{
-		ID:   id,
-		Name: name,
-		Cpf:  cpf,
+		ID:             id,
+		Name:           name,
+		Cpf:            cpf,
+		CourseSubjects: nil,
 	}
 
 	if err := m.Validate(); err != nil {

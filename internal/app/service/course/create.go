@@ -9,7 +9,7 @@ import (
 
 type CreateCourse interface {
 	// Handle creates a new course.
-	Handle(ctx context.Context, input *CreateCourseInput) (*CreateCourseOutput, error)
+	Handle(ctx context.Context, input *CreateCourseInput) (*model.Course, error)
 }
 
 type createCourseImpl struct {
@@ -25,8 +25,8 @@ func NewCreateCourse(courseRepo repo.Course) CreateCourse {
 func (s *createCourseImpl) Handle(
 	ctx context.Context,
 	input *CreateCourseInput,
-) (*CreateCourseOutput, error) {
-	course, err := model.NewCourse(0, input.Name, input.CollegeID, nil)
+) (*model.Course, error) {
+	course, err := model.NewCourse(0, input.Name, input.CollegeID)
 	if err != nil {
 		return nil, err
 	}
@@ -39,11 +39,5 @@ func (s *createCourseImpl) Handle(
 		return nil, err
 	}
 
-	output := &CreateCourseOutput{
-		ID:        course.ID,
-		Name:      course.Name,
-		CollegeID: course.CollegeID,
-	}
-
-	return output, nil
+	return course, nil
 }

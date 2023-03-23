@@ -4,12 +4,12 @@ import "time"
 
 // CourseEnrollment represents the courseEnrollment database schema.
 type CourseEnrollment struct {
-	ID              uint
+	ID              uint `gorm:"primaryKey"`
 	StudentID       uint
-	Student         *Student
-	CourseSubjectID uint
-	CourseSubject   *CourseSubject
+	Student         *Student `gorm:"foreignKey:StudentID"`
 	EnrollmentDate  time.Time
+	CourseSubjectID uint
+	CourseSubject   *CourseSubject `gorm:"foreignKey:CourseSubjectID"`
 }
 
 // TableName returns the table name.

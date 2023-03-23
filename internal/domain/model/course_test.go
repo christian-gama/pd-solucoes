@@ -26,7 +26,7 @@ func (s *CourseSuite) TestNewCourse() {
 		data := fake.Course()
 
 		sut := func() (*model.Course, error) {
-			return model.NewCourse(data.ID, data.Name, data.CollegeID, data.College)
+			return model.NewCourse(data.ID, data.Name, data.CollegeID)
 		}
 
 		return &Sut{Sut: sut, Data: data}

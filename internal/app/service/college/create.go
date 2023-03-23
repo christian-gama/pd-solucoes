@@ -9,7 +9,7 @@ import (
 
 type CreateCollege interface {
 	// Handle creates a new college.
-	Handle(ctx context.Context, input *CreateCollegeInput) (*CreateCollegeOutput, error)
+	Handle(ctx context.Context, input *CreateCollegeInput) (*model.College, error)
 }
 
 type createCollegeImpl struct {
@@ -25,7 +25,7 @@ func NewCreateCollege(collegeRepo repo.College) CreateCollege {
 func (s *createCollegeImpl) Handle(
 	ctx context.Context,
 	input *CreateCollegeInput,
-) (*CreateCollegeOutput, error) {
+) (*model.College, error) {
 	college, err := model.NewCollege(0, input.Name, input.Cnpj)
 	if err != nil {
 		return nil, err
@@ -39,11 +39,5 @@ func (s *createCollegeImpl) Handle(
 		return nil, err
 	}
 
-	output := &CreateCollegeOutput{
-		ID:   college.ID,
-		Name: college.Name,
-		Cnpj: college.Cnpj,
-	}
-
-	return output, nil
+	return college, nil
 }

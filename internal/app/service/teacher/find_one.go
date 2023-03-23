@@ -3,12 +3,13 @@ package service
 import (
 	"context"
 
+	"github.com/christian-gama/pd-solucoes/internal/domain/model"
 	"github.com/christian-gama/pd-solucoes/internal/domain/repo"
 )
 
 type FindOneTeacher interface {
 	// Handle finds one teacher.
-	Handle(ctx context.Context, input *FindOneTeacherInput) (*FindOneTeacherOutput, error)
+	Handle(ctx context.Context, input *FindOneTeacherInput) (*model.Teacher, error)
 }
 
 type findOneTeacherImpl struct {
@@ -24,7 +25,7 @@ func NewFindOneTeacher(teacherRepo repo.Teacher) FindOneTeacher {
 func (s *findOneTeacherImpl) Handle(
 	ctx context.Context,
 	input *FindOneTeacherInput,
-) (*FindOneTeacherOutput, error) {
+) (*model.Teacher, error) {
 	findOneTeacherParams := repo.FindOneTeacherParams{
 		ID: input.ID,
 	}
@@ -33,11 +34,5 @@ func (s *findOneTeacherImpl) Handle(
 		return nil, err
 	}
 
-	output := &FindOneTeacherOutput{
-		ID:     teacher.ID,
-		Name:   teacher.Name,
-		Degree: teacher.Degree,
-	}
-
-	return output, nil
+	return teacher, nil
 }

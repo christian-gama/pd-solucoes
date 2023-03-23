@@ -9,29 +9,27 @@ import (
 
 // CourseEnrollment is the model of a course enrollment.
 type CourseEnrollment struct {
-	ID              uint `faker:"uint"`
-	StudentID       uint `faker:"uint"`
-	Student         *Student
-	EnrollmentDate  time.Time `faker:"time_now"`
-	CourseSubjectID uint      `faker:"uint"`
-	CourseSubject   *CourseSubject
+	ID              uint           `json:"id,omitempty"              faker:"uint"`
+	StudentID       uint           `json:"studentID,omitempty"       faker:"uint"`
+	Student         *Student       `json:"student,omitempty"         faker:"-"`
+	EnrollmentDate  time.Time      `json:"enrollmentDate,omitempty"  faker:"time_now"`
+	CourseSubjectID uint           `json:"courseSubjectID,omitempty" faker:"uint"`
+	CourseSubject   *CourseSubject `json:"courseSubject,omitempty"   faker:"-"`
 }
 
 func NewCourseEnrollment(
 	id uint,
 	studentID uint,
-	student *Student,
 	enrollmentDate time.Time,
 	courseSubjectID uint,
-	courseSubject *CourseSubject,
 ) (*CourseEnrollment, error) {
 	m := &CourseEnrollment{
 		ID:              id,
 		StudentID:       studentID,
-		Student:         student,
+		Student:         nil,
 		EnrollmentDate:  enrollmentDate,
 		CourseSubjectID: courseSubjectID,
-		CourseSubject:   courseSubject,
+		CourseSubject:   nil,
 	}
 
 	if err := m.Validate(); err != nil {
@@ -48,12 +46,6 @@ func (m *CourseEnrollment) Validate() error {
 		errs = errutil.Append(errs, errors.New("student is required"))
 	}
 
-	if m.Student == nil {
-		errs = errutil.Append(errs, errors.New("student is required"))
-	} else if err := m.Student.Validate(); err != nil {
-		errs = errutil.Append(errs, errors.New("student is invalid"))
-	}
-
 	if m.EnrollmentDate.IsZero() {
 		errs = errutil.Append(errs, errors.New("enrollment date is required"))
 	}
@@ -67,12 +59,6 @@ func (m *CourseEnrollment) Validate() error {
 
 	if m.CourseSubjectID == 0 {
 		errs = errutil.Append(errs, errors.New("course is required"))
-	}
-
-	if m.CourseSubject == nil {
-		errs = errutil.Append(errs, errors.New("course is required"))
-	} else if err := m.CourseSubject.Validate(); err != nil {
-		errs = errutil.Append(errs, errors.New("course is invalid"))
 	}
 
 	if errs.HasErrors() {

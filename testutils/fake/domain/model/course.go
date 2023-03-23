@@ -11,6 +11,9 @@ func Course() *model.Course {
 	course := new(model.Course)
 	faker.FakeData(course)
 
+	course.College = College()
+	course.CollegeID = course.College.ID
+
 	if err := course.Validate(); err != nil {
 		panic(fmt.Errorf("error while generating fake course: %w", err))
 	}

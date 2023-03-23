@@ -1,7 +1,6 @@
 package service
 
 import (
-	queryingPort "github.com/christian-gama/pd-solucoes/internal/domain/querying"
 	"github.com/christian-gama/pd-solucoes/internal/infra/querying"
 )
 
@@ -10,5 +9,3 @@ type FindAllStudentsInput struct {
 	Sort   querying.Sort   `validate:"query,sort=name cpf"   form:"sort"   faker:"-"`
 	querying.Pagination
 }
-
-type FindAllStudentsOutput = queryingPort.PaginationOutput[*FindOneStudentOutput]

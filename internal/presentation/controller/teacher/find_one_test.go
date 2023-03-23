@@ -6,6 +6,7 @@ import (
 	"testing"
 
 	service "github.com/christian-gama/pd-solucoes/internal/app/service/teacher"
+	"github.com/christian-gama/pd-solucoes/internal/domain/model"
 	controller "github.com/christian-gama/pd-solucoes/internal/presentation/controller/teacher"
 	fake "github.com/christian-gama/pd-solucoes/testutils/fake/app/service/teacher"
 	"github.com/christian-gama/pd-solucoes/testutils/gintest"
@@ -40,8 +41,9 @@ func (s *FindOneTeacherSuite) TestHandle() {
 	s.Run("should find one teacher", func() {
 		sut := makeSut()
 
-		sut.FindOneTeacher.On("Handle", mock.Anything, sut.Input).
-			Return(&service.FindOneTeacherOutput{}, nil)
+		sut.FindOneTeacher.
+			On("Handle", mock.Anything, sut.Input).
+			Return(&model.Teacher{}, nil)
 
 		ctx := gintest.MustRequest(sut.Sut, gintest.Option{
 			Params: []string{fmt.Sprint(sut.Input.ID)},

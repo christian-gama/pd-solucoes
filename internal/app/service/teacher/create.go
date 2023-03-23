@@ -9,7 +9,7 @@ import (
 
 type CreateTeacher interface {
 	// Handle creates a new teacher.
-	Handle(ctx context.Context, input *CreateTeacherInput) (*CreateTeacherOutput, error)
+	Handle(ctx context.Context, input *CreateTeacherInput) (*model.Teacher, error)
 }
 
 type createTeacherImpl struct {
@@ -25,7 +25,7 @@ func NewCreateTeacher(teacherRepo repo.Teacher) CreateTeacher {
 func (s *createTeacherImpl) Handle(
 	ctx context.Context,
 	input *CreateTeacherInput,
-) (*CreateTeacherOutput, error) {
+) (*model.Teacher, error) {
 	teacher, err := model.NewTeacher(0, input.Name, input.Degree)
 	if err != nil {
 		return nil, err
@@ -39,11 +39,5 @@ func (s *createTeacherImpl) Handle(
 		return nil, err
 	}
 
-	output := &CreateTeacherOutput{
-		ID:     teacher.ID,
-		Name:   teacher.Name,
-		Degree: teacher.Degree,
-	}
-
-	return output, nil
+	return teacher, nil
 }

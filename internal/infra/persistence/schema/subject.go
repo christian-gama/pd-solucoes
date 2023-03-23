@@ -2,10 +2,11 @@ package schema
 
 // Subject represents the subject database schema.
 type Subject struct {
-	ID        uint
+	ID        uint `gorm:"primaryKey"`
 	Name      string
 	TeacherID uint
-	Teacher   *Teacher
+	Teacher   *Teacher         `gorm:"foreignKey:TeacherID"`
+	Courses   []*CourseSubject `gorm:"foreignKey:SubjectID"`
 }
 
 // TableName returns the table name.

@@ -5,6 +5,8 @@ import (
 	"testing"
 
 	service "github.com/christian-gama/pd-solucoes/internal/app/service/student"
+	"github.com/christian-gama/pd-solucoes/internal/domain/model"
+	"github.com/christian-gama/pd-solucoes/internal/domain/querying"
 	controller "github.com/christian-gama/pd-solucoes/internal/presentation/controller/student"
 	fake "github.com/christian-gama/pd-solucoes/testutils/fake/app/service/student"
 	"github.com/christian-gama/pd-solucoes/testutils/gintest"
@@ -39,8 +41,9 @@ func (s *FindAllStudentSuite) TestHandle() {
 	s.Run("should find all students", func() {
 		sut := makeSut()
 
-		sut.FindAllStudents.On("Handle", mock.Anything, mock.Anything).
-			Return(&service.FindAllStudentsOutput{}, nil)
+		sut.FindAllStudents.
+			On("Handle", mock.Anything, mock.Anything).
+			Return(&querying.PaginationOutput[*model.Student]{}, nil)
 
 		ctx := gintest.MustRequest(sut.Sut, gintest.Option{})
 

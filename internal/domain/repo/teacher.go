@@ -48,12 +48,14 @@ type Teacher interface {
 	FindAll(
 		ctx context.Context,
 		params FindAllTeacherParams,
+		preloads ...string,
 	) (*querying.PaginationOutput[*model.Teacher], error)
 
 	// FindOne returns a teacher by its ID.
 	FindOne(
 		ctx context.Context,
 		params FindOneTeacherParams,
+		preloads ...string,
 	) (*model.Teacher, error)
 
 	// Update updates a teacher.

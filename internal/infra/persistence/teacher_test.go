@@ -120,6 +120,7 @@ func (s *TeacherSuite) TestFindOne() {
 		Sut func(
 			ctx context.Context,
 			params repo.FindOneTeacherParams,
+			preload ...string,
 		) (*model.Teacher, error)
 		Ctx    context.Context
 		Params repo.FindOneTeacherParams
@@ -168,6 +169,7 @@ func (s *TeacherSuite) TestFindAll() {
 		Sut func(
 			ctx context.Context,
 			params repo.FindAllTeacherParams,
+			preload ...string,
 		) (*queryingPort.PaginationOutput[*model.Teacher], error)
 		Ctx    context.Context
 		Params repo.FindAllTeacherParams

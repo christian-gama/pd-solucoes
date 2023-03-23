@@ -5,8 +5,9 @@ type CourseSubject struct {
 	ID        uint `gorm:"primaryKey"`
 	CourseID  uint
 	SubjectID uint
-	Course    *Course
-	Subject   *Subject
+	Course    *Course    `gorm:"foreignKey:CourseID"`
+	Subject   *Subject   `gorm:"foreignKey:SubjectID"`
+	Students  []*Student `gorm:"many2many:course_enrollments;"`
 }
 
 // TableName returns the table name.

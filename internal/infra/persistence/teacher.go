@@ -62,14 +62,19 @@ func (p *teacherImpl) Delete(ctx context.Context, params repo.DeleteTeacherParam
 func (p *teacherImpl) FindAll(
 	ctx context.Context,
 	params repo.FindAllTeacherParams,
+	preload ...string,
 ) (*queryingPort.PaginationOutput[*model.Teacher], error) {
 	db := p.db.WithContext(ctx)
 
-	var teacherWithCount []querying.PaginationOutput[schema.Teacher]
+	var teacherWithCount []struct {
+		Total  int64
+		Schema *schema.Teacher `gorm:"embedded"`
+	}
 
 	if err := db.
 		Model(&schema.Teacher{}).
 		Scopes(
+			sql.PreloadScope(preload),
 			querying.FilterScope(params.Filterer),
 			querying.PaginationScope(params.Paginator),
 			querying.SortScope(params.Sorter),
@@ -80,12 +85,12 @@ func (p *teacherImpl) FindAll(
 	}
 
 	pagination := &queryingPort.PaginationOutput[*model.Teacher]{}
-	for _, schema := range teacherWithCount {
+	for _, sch := range teacherWithCount {
 		pagination.Results = append(
 			pagination.Results,
-			convert.ToModel(&model.Teacher{}, schema.Schema),
+			convert.ToModel(&model.Teacher{}, sch.Schema),
 		)
-		pagination.Total = int(schema.Total)
+		pagination.Total = int(sch.Total)
 	}
 
 	return pagination, nil
@@ -95,6 +100,7 @@ func (p *teacherImpl) FindAll(
 func (p *teacherImpl) FindOne(
 	ctx context.Context,
 	params repo.FindOneTeacherParams,
+	preload ...string,
 ) (*model.Teacher, error) {
 	db := p.db.WithContext(ctx)
 
@@ -102,6 +108,7 @@ func (p *teacherImpl) FindOne(
 
 	if err := db.
 		Model(&teacherSchema).
+		Scopes(sql.PreloadScope(preload)).
 		Where("id = ?", params.ID).
 		First(&teacherSchema).
 		Error; err != nil {

@@ -11,6 +11,9 @@ func Subject() *model.Subject {
 	subject := new(model.Subject)
 	faker.FakeData(subject)
 
+	subject.Teacher = Teacher()
+	subject.TeacherID = subject.Teacher.ID
+
 	if err := subject.Validate(); err != nil {
 		panic(fmt.Errorf("error while generating fake subject: %w", err))
 	}

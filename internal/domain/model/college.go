@@ -8,10 +8,10 @@ import (
 
 // College is the model of a college.
 type College struct {
-	ID      uint   `faker:"uint"`
-	Name    string `faker:"len=50"`
-	Cnpj    string `faker:"cnpj"`
-	Courses []*Course
+	ID      uint      `json:"id,omitempty"      faker:"uint"`
+	Name    string    `json:"name,omitempty"    faker:"len=50"`
+	Cnpj    string    `json:"cnpj,omitempty"    faker:"cnpj"`
+	Courses []*Course `json:"courses,omitempty" faker:"-"`
 }
 
 // NewCollege creates a new College.

@@ -1,13 +1,26 @@
 package sql
 
 import (
+	"strings"
+
 	"github.com/iancoleman/strcase"
 	"gorm.io/gorm"
 )
 
 func preload(db *gorm.DB, name []string) *gorm.DB {
 	for _, n := range name {
-		db = db.Preload(strcase.ToCamel(n))
+		splittedByDot := strings.Split(n, ".")
+		output := ""
+
+		for i, s := range splittedByDot {
+			if i != 0 {
+				output += "."
+			}
+
+			output += strcase.ToCamel(s)
+		}
+
+		db = db.Preload(output)
 	}
 
 	return db

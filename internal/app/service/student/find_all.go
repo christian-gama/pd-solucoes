@@ -3,12 +3,17 @@ package service
 import (
 	"context"
 
+	"github.com/christian-gama/pd-solucoes/internal/domain/model"
+	"github.com/christian-gama/pd-solucoes/internal/domain/querying"
 	"github.com/christian-gama/pd-solucoes/internal/domain/repo"
 )
 
 type FindAllStudents interface {
 	// Handle finds all students.
-	Handle(ctx context.Context, input *FindAllStudentsInput) (*FindAllStudentsOutput, error)
+	Handle(
+		ctx context.Context,
+		input *FindAllStudentsInput,
+	) (*querying.PaginationOutput[*model.Student], error)
 }
 
 type findAllStudentsImpl struct {
@@ -24,30 +29,16 @@ func NewFindAllStudents(studentRepo repo.Student) FindAllStudents {
 func (s *findAllStudentsImpl) Handle(
 	ctx context.Context,
 	input *FindAllStudentsInput,
-) (*FindAllStudentsOutput, error) {
+) (*querying.PaginationOutput[*model.Student], error) {
 	findAllStudentParams := repo.FindAllStudentParams{
 		Paginator: &input.Pagination,
 		Filterer:  input.Filter,
 		Sorter:    input.Sort,
 	}
-	student, err := s.Student.FindAll(ctx, findAllStudentParams)
+	paginationOutput, err := s.Student.FindAll(ctx, findAllStudentParams)
 	if err != nil {
 		return nil, err
 	}
 
-	result := make([]*FindOneStudentOutput, 0, len(student.Results))
-	for _, c := range student.Results {
-		result = append(result, &FindOneStudentOutput{
-			ID:   c.ID,
-			Name: c.Name,
-			Cpf:  c.Cpf,
-		})
-	}
-
-	output := &FindAllStudentsOutput{
-		Total:   student.Total,
-		Results: result,
-	}
-
-	return output, nil
+	return paginationOutput, nil
 }

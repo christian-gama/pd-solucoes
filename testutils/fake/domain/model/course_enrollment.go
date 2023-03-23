@@ -12,17 +12,15 @@ func CourseEnrollment() *model.CourseEnrollment {
 	faker.FakeData(courseEnrollment)
 
 	courseEnrollment.CourseSubject = CourseSubject()
-	courseEnrollment.Student = Student()
-	courseEnrollment.CourseSubject.Course = Course()
-	courseEnrollment.CourseSubject.Course.College = College()
-	courseEnrollment.CourseSubject.Subject.Teacher = Teacher()
-	courseEnrollment.CourseSubject.Subject = Subject()
 
-	courseEnrollment.CourseSubject.Course.CollegeID = courseEnrollment.CourseSubject.Course.College.ID
-	courseEnrollment.CourseSubject.CourseID = courseEnrollment.CourseSubject.Course.ID
-	courseEnrollment.CourseSubject.SubjectID = courseEnrollment.CourseSubject.Subject.ID
-	courseEnrollment.CourseSubject.Subject.TeacherID = courseEnrollment.CourseSubject.Subject.Teacher.ID
+	courseEnrollment.Student = Student()
 	courseEnrollment.StudentID = courseEnrollment.Student.ID
+
+	courseEnrollment.CourseSubject.Course = Course()
+	courseEnrollment.CourseSubject.CourseID = courseEnrollment.CourseSubject.Course.ID
+
+	courseEnrollment.CourseSubject.Subject = Subject()
+	courseEnrollment.CourseSubject.SubjectID = courseEnrollment.CourseSubject.Subject.ID
 	courseEnrollment.CourseSubjectID = courseEnrollment.CourseSubject.ID
 
 	if err := courseEnrollment.Validate(); err != nil {

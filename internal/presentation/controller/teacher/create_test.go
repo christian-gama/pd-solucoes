@@ -6,6 +6,7 @@ import (
 	"testing"
 
 	service "github.com/christian-gama/pd-solucoes/internal/app/service/teacher"
+	"github.com/christian-gama/pd-solucoes/internal/domain/model"
 	controller "github.com/christian-gama/pd-solucoes/internal/presentation/controller/teacher"
 	fake "github.com/christian-gama/pd-solucoes/testutils/fake/app/service/teacher"
 	"github.com/christian-gama/pd-solucoes/testutils/gintest"
@@ -40,8 +41,9 @@ func (s *CreateTeacherSuite) TestHandle() {
 	s.Run("should create a teacher", func() {
 		sut := makeSut()
 
-		sut.CreateTeacher.On("Handle", mock.Anything, sut.Input).
-			Return(&service.CreateTeacherOutput{}, nil)
+		sut.CreateTeacher.
+			On("Handle", mock.Anything, sut.Input).
+			Return(&model.Teacher{}, nil)
 
 		ctx := gintest.MustRequest(sut.Sut, gintest.Option{
 			Data: sut.Input,

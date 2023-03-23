@@ -30,10 +30,8 @@ func (s *CourseEnrollmentSuite) TestNewCourseEnrollment() {
 			return model.NewCourseEnrollment(
 				data.ID,
 				data.StudentID,
-				data.Student,
 				data.EnrollmentDate,
 				data.CourseSubjectID,
-				data.CourseSubject,
 			)
 		}
 
@@ -53,28 +51,6 @@ func (s *CourseEnrollmentSuite) TestNewCourseEnrollment() {
 		sut := makeSut()
 
 		sut.Data.StudentID = 0
-
-		model, err := sut.Sut()
-
-		s.Error(err)
-		s.Nil(model, "model should be nil")
-	})
-
-	s.Run("should return an error when 'student' is nil", func() {
-		sut := makeSut()
-
-		sut.Data.Student = nil
-
-		model, err := sut.Sut()
-
-		s.Error(err)
-		s.Nil(model, "model should be nil")
-	})
-
-	s.Run("should return an error when 'student' is invalid", func() {
-		sut := makeSut()
-
-		sut.Data.Student.Name = ""
 
 		model, err := sut.Sut()
 
@@ -108,17 +84,6 @@ func (s *CourseEnrollmentSuite) TestNewCourseEnrollment() {
 		sut := makeSut()
 
 		sut.Data.CourseSubjectID = 0
-
-		model, err := sut.Sut()
-
-		s.Error(err)
-		s.Nil(model, "model should be nil")
-	})
-
-	s.Run("should return an error when 'courseSubject' is nil", func() {
-		sut := makeSut()
-
-		sut.Data.CourseSubject = nil
 
 		model, err := sut.Sut()
 

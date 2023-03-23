@@ -8,25 +8,24 @@ import (
 
 // CourseSubject is the model that contains the relationship between courses and subjects.
 type CourseSubject struct {
-	ID        uint `faker:"uint"`
-	CourseID  uint `faker:"uint"`
-	SubjectID uint `faker:"uint"`
-	Course    *Course
-	Subject   *Subject
+	ID        uint       `json:"id,omitempty"        faker:"uint"`
+	CourseID  uint       `json:"courseID,omitempty"  faker:"uint"`
+	SubjectID uint       `json:"subjectID,omitempty" faker:"uint"`
+	Course    *Course    `json:"course,omitempty"    faker:"-"`
+	Subject   *Subject   `json:"subject,omitempty"   faker:"-"`
+	Students  []*Student `json:"students,omitempty"  faker:"-"`
 }
 
 // NewCourseSubject creates a new CourseSubject.
-func NewCourseSubject(
-	id, courseID, subjectID uint,
-	course *Course,
-	subject *Subject,
+func NewCourseSubject(id, courseID, subjectID uint,
 ) (*CourseSubject, error) {
 	m := &CourseSubject{
 		ID:        id,
 		CourseID:  courseID,
 		SubjectID: subjectID,
-		Course:    course,
-		Subject:   subject,
+		Course:    nil,
+		Subject:   nil,
+		Students:  nil,
 	}
 
 	if err := m.Validate(); err != nil {
@@ -46,18 +45,6 @@ func (m *CourseSubject) Validate() error {
 
 	if m.SubjectID == 0 {
 		errs = errutil.Append(errs, errors.New("subjectID is required"))
-	}
-
-	if m.Course == nil {
-		errs = errutil.Append(errs, errors.New("course is required"))
-	} else if err := m.Course.Validate(); err != nil {
-		errs = errutil.Append(errs, errors.New("course is invalid"))
-	}
-
-	if m.Subject == nil {
-		errs = errutil.Append(errs, errors.New("subject is required"))
-	} else if err := m.Subject.Validate(); err != nil {
-		errs = errutil.Append(errs, errors.New("subject is invalid"))
 	}
 
 	if errs.HasErrors() {

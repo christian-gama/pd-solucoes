@@ -65,7 +65,10 @@ func (p *studentImpl) FindAll(
 ) (*queryingPort.PaginationOutput[*model.Student], error) {
 	db := p.db.WithContext(ctx)
 
-	var studentWithCount []querying.PaginationOutput[schema.Student]
+	var studentWithCount []struct {
+		Total  int64
+		Schema *schema.Student `gorm:"embedded"`
+	}
 
 	if err := db.
 		Model(&schema.Student{}).
