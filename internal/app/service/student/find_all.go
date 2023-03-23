@@ -35,7 +35,13 @@ func (s *findAllStudentsImpl) Handle(
 		Filterer:  input.Filter,
 		Sorter:    input.Sort,
 	}
-	paginationOutput, err := s.Student.FindAll(ctx, findAllStudentParams, "courseSubjects")
+	paginationOutput, err := s.Student.FindAll(
+		ctx,
+		findAllStudentParams,
+		"courseSubjects",
+		"courseSubjects.subject",
+		"courseSubjects.course",
+	)
 	if err != nil {
 		return nil, err
 	}

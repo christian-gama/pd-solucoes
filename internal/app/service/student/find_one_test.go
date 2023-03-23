@@ -46,7 +46,11 @@ func (s *FindOneStudentSuite) TestHandle() {
 		sut := makeSut()
 
 		sut.StudentRepo.
-			On("FindOne", mock.Anything, mock.Anything, "courseSubjects").
+			On("FindOne", mock.Anything, mock.Anything,
+				"courseSubjects",
+				"courseSubjects.subject",
+				"courseSubjects.course",
+			).
 			Return(sut.Student, nil)
 
 		result, err := sut.Sut.Handle(context.Background(), sut.Input)
@@ -61,7 +65,11 @@ func (s *FindOneStudentSuite) TestHandle() {
 		sut := makeSut()
 
 		sut.StudentRepo.
-			On("FindOne", mock.Anything, mock.Anything, "courseSubjects").
+			On("FindOne", mock.Anything, mock.Anything,
+				"courseSubjects",
+				"courseSubjects.subject",
+				"courseSubjects.course",
+			).
 			Return(nil, assert.AnError)
 
 		result, err := sut.Sut.Handle(context.Background(), sut.Input)
