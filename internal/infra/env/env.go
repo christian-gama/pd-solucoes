@@ -14,6 +14,7 @@ type db struct {
 type app struct {
 	Env  string `env:"APP_ENV,required"`
 	Port int    `env:"APP_PORT,required"`
+	Host string `env:"APP_HOST,required"`
 }
 
 // config is the application configuration.

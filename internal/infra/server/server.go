@@ -14,7 +14,7 @@ import (
 // Start starts the HTTP server.
 func Start(ctx context.Context, router *gin.Engine, log log.Logger) {
 	log.Infof("Started in %s environment", env.App.Env)
-	log.Infof("Server is running on port :%d", env.App.Port)
+	log.Infof("Server is running on %s:%d", env.App.Host, env.App.Port)
 
 	server := &http.Server{
 		Addr:              fmt.Sprintf(":%d", env.App.Port),

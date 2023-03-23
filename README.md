@@ -3,7 +3,7 @@
 This is a RESTful API built using GoLang and PostgreSQL for the Passei Direto college. The API provides CRUD operations for the entity-relationship model of the college.
 This project is following the principles of Clean Architecture, SOLID and Domain-Driven Design.
 
-[API documentation](https://documenter.getpostman.com/view/11922466/Tz5qbiX5) available on Postman.
+[API documentation](https://www.postman.com/christiangama/workspace/passei-direto-api/api/b77c83a2-2f9e-44ff-b453-55cf48af891f?version=b725d2f7-91d0-4bcc-b6d6-fdfd7d60096a) available on Postman.
 
 ## Features
 - All **GET** endpoints have **sorting**, **filtering** and **pagination** (consult API documentation for more details)
