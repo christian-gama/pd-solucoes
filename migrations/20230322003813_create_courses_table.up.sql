@@ -13,6 +13,6 @@ REFERENCES "colleges" ("id")
 ON DELETE CASCADE ON UPDATE CASCADE;
 
 CREATE UNIQUE INDEX "uidx__courses__name"
-ON "courses" ("name");
+ON "courses" ("name", "college_id");
 
 COMMIT;

@@ -3,9 +3,9 @@ package service
 import (
 	"context"
 
-	"github.com/christian-gama/pd-solucoes/internal/domain/model"
 	"github.com/christian-gama/pd-solucoes/internal/domain/querying"
 	"github.com/christian-gama/pd-solucoes/internal/domain/repo"
+	"github.com/christian-gama/pd-solucoes/pkg/copy"
 )
 
 type FindAllCourses interface {
@@ -13,7 +13,7 @@ type FindAllCourses interface {
 	Handle(
 		ctx context.Context,
 		input *FindAllCoursesInput,
-	) (*querying.PaginationOutput[*model.Course], error)
+	) (*querying.PaginationOutput[*Output], error)
 }
 
 type findAllCoursesImpl struct {
@@ -29,7 +29,7 @@ func NewFindAllCourses(courseRepo repo.Course) FindAllCourses {
 func (s *findAllCoursesImpl) Handle(
 	ctx context.Context,
 	input *FindAllCoursesInput,
-) (*querying.PaginationOutput[*model.Course], error) {
+) (*querying.PaginationOutput[*Output], error) {
 	findAllCourseParams := repo.FindAllCourseParams{
 		Paginator: &input.Pagination,
 		Filterer:  input.Filter,
@@ -38,12 +38,11 @@ func (s *findAllCoursesImpl) Handle(
 	paginationOutput, err := s.Course.FindAll(
 		ctx,
 		findAllCourseParams,
-		"enrollments",
 		"subjects.students",
 	)
 	if err != nil {
 		return nil, err
 	}
 
-	return paginationOutput, nil
+	return copy.MustCopy(&querying.PaginationOutput[*Output]{}, paginationOutput), nil
 }

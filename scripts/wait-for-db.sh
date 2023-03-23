@@ -6,18 +6,18 @@
 # Email: christiangama.dev@gmail.com
 # Date Created: 2023/03/21
 
-set -e
+#!/bin/bash
 
 container_name="$1"
-shift
-test_mode="$1"
-shift
-cmd="$@"
+
+is_first_time=true
 
 until docker inspect --format "{{.State.Health.Status}}" $container_name | grep "healthy" > /dev/null; do
-  >&2 echo "Postgres is unavailable - waiting..."
+  if $is_first_time; then
+    >&2 echo "Connecting to Postgres - the first time may take a while"
+    is_first_time=false
+  else
+    >&2 echo "Waiting for Postgres to be up and running..."
+  fi
   sleep 2
 done
-
-export $test_mode
-exec $cmd

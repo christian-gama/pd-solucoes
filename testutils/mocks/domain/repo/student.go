@@ -55,13 +55,20 @@ func (_m *Student) Delete(ctx context.Context, params repo.DeleteStudentParams) 
 	return r0
 }
 
-// FindAll provides a mock function with given fields: ctx, params
-func (_m *Student) FindAll(ctx context.Context, params repo.FindAllStudentParams) (*querying.PaginationOutput[*model.Student], error) {
-	ret := _m.Called(ctx, params)
+// FindAll provides a mock function with given fields: ctx, params, preload
+func (_m *Student) FindAll(ctx context.Context, params repo.FindAllStudentParams, preload ...string) (*querying.PaginationOutput[*model.Student], error) {
+	_va := make([]interface{}, len(preload))
+	for _i := range preload {
+		_va[_i] = preload[_i]
+	}
+	var _ca []interface{}
+	_ca = append(_ca, ctx, params)
+	_ca = append(_ca, _va...)
+	ret := _m.Called(_ca...)
 
 	var r0 *querying.PaginationOutput[*model.Student]
-	if rf, ok := ret.Get(0).(func(context.Context, repo.FindAllStudentParams) *querying.PaginationOutput[*model.Student]); ok {
-		r0 = rf(ctx, params)
+	if rf, ok := ret.Get(0).(func(context.Context, repo.FindAllStudentParams, ...string) *querying.PaginationOutput[*model.Student]); ok {
+		r0 = rf(ctx, params, preload...)
 	} else {
 		if ret.Get(0) != nil {
 			r0 = ret.Get(0).(*querying.PaginationOutput[*model.Student])
@@ -69,8 +76,8 @@ func (_m *Student) FindAll(ctx context.Context, params repo.FindAllStudentParams
 	}
 
 	var r1 error
-	if rf, ok := ret.Get(1).(func(context.Context, repo.FindAllStudentParams) error); ok {
-		r1 = rf(ctx, params)
+	if rf, ok := ret.Get(1).(func(context.Context, repo.FindAllStudentParams, ...string) error); ok {
+		r1 = rf(ctx, params, preload...)
 	} else {
 		r1 = ret.Error(1)
 	}
@@ -78,13 +85,20 @@ func (_m *Student) FindAll(ctx context.Context, params repo.FindAllStudentParams
 	return r0, r1
 }
 
-// FindOne provides a mock function with given fields: ctx, params
-func (_m *Student) FindOne(ctx context.Context, params repo.FindOneStudentParams) (*model.Student, error) {
-	ret := _m.Called(ctx, params)
+// FindOne provides a mock function with given fields: ctx, params, preload
+func (_m *Student) FindOne(ctx context.Context, params repo.FindOneStudentParams, preload ...string) (*model.Student, error) {
+	_va := make([]interface{}, len(preload))
+	for _i := range preload {
+		_va[_i] = preload[_i]
+	}
+	var _ca []interface{}
+	_ca = append(_ca, ctx, params)
+	_ca = append(_ca, _va...)
+	ret := _m.Called(_ca...)
 
 	var r0 *model.Student
-	if rf, ok := ret.Get(0).(func(context.Context, repo.FindOneStudentParams) *model.Student); ok {
-		r0 = rf(ctx, params)
+	if rf, ok := ret.Get(0).(func(context.Context, repo.FindOneStudentParams, ...string) *model.Student); ok {
+		r0 = rf(ctx, params, preload...)
 	} else {
 		if ret.Get(0) != nil {
 			r0 = ret.Get(0).(*model.Student)
@@ -92,8 +106,8 @@ func (_m *Student) FindOne(ctx context.Context, params repo.FindOneStudentParams
 	}
 
 	var r1 error
-	if rf, ok := ret.Get(1).(func(context.Context, repo.FindOneStudentParams) error); ok {
-		r1 = rf(ctx, params)
+	if rf, ok := ret.Get(1).(func(context.Context, repo.FindOneStudentParams, ...string) error); ok {
+		r1 = rf(ctx, params, preload...)
 	} else {
 		r1 = ret.Error(1)
 	}

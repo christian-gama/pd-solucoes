@@ -9,11 +9,6 @@ type Output struct {
 }
 
 type courseOutput struct {
-	ID   uint   `json:"id"   faker:"uint"`
-	Name string `json:"name" faker:"len=50"`
-}
-
-type PaginationOutput struct {
-	Total   int       `json:"total"`
-	Results []*Output `json:"results"`
+	ID   uint   `json:"id"`
+	Name string `json:"name"`
 }

@@ -5,12 +5,6 @@ import (
 	"gorm.io/gorm"
 )
 
-// PaginationOutput is a struct used to return paginated results directly from the database.
-type PaginationOutput[Schema any] struct {
-	Total  int64  `gorm:"column:total"`
-	Schema Schema `gorm:"embedded"`
-}
-
 // Pagination is a struct used to paginate queries.
 type Pagination struct {
 	Page  int `form:"page"  validate:"omitempty,min=1"`

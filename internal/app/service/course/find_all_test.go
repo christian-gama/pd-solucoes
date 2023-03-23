@@ -46,11 +46,11 @@ func (s *FindAllCourseSuite) TestHandle() {
 		}
 	}
 
-	s.Run("should find one course", func() {
+	s.Run("should find all courses", func() {
 		sut := makeSut()
 
 		sut.CourseRepo.
-			On("FindAll", mock.Anything, mock.Anything, "enrollments", "subjects.students").
+			On("FindAll", mock.Anything, mock.Anything, "subjects.students").
 			Return(sut.Pagination, nil)
 
 		result, err := sut.Sut.Handle(context.Background(), sut.Input)
@@ -64,7 +64,7 @@ func (s *FindAllCourseSuite) TestHandle() {
 		sut := makeSut()
 
 		sut.CourseRepo.
-			On("FindAll", mock.Anything, mock.Anything, "enrollments", "subjects.students").
+			On("FindAll", mock.Anything, mock.Anything, "subjects.students").
 			Return(nil, assert.AnError)
 
 		result, err := sut.Sut.Handle(context.Background(), sut.Input)

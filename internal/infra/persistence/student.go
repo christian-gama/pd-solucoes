@@ -62,6 +62,7 @@ func (p *studentImpl) Delete(ctx context.Context, params repo.DeleteStudentParam
 func (p *studentImpl) FindAll(
 	ctx context.Context,
 	params repo.FindAllStudentParams,
+	preload ...string,
 ) (*queryingPort.PaginationOutput[*model.Student], error) {
 	db := p.db.WithContext(ctx)
 
@@ -98,6 +99,7 @@ func (p *studentImpl) FindAll(
 func (p *studentImpl) FindOne(
 	ctx context.Context,
 	params repo.FindOneStudentParams,
+	preload ...string,
 ) (*model.Student, error) {
 	db := p.db.WithContext(ctx)
 

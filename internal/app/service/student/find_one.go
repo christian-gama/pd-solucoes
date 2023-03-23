@@ -3,13 +3,13 @@ package service
 import (
 	"context"
 
-	"github.com/christian-gama/pd-solucoes/internal/domain/model"
 	"github.com/christian-gama/pd-solucoes/internal/domain/repo"
+	"github.com/christian-gama/pd-solucoes/pkg/copy"
 )
 
 type FindOneStudent interface {
 	// Handle finds one student.
-	Handle(ctx context.Context, input *FindOneStudentInput) (*model.Student, error)
+	Handle(ctx context.Context, input *FindOneStudentInput) (*Output, error)
 }
 
 type findOneStudentImpl struct {
@@ -25,14 +25,14 @@ func NewFindOneStudent(studentRepo repo.Student) FindOneStudent {
 func (s *findOneStudentImpl) Handle(
 	ctx context.Context,
 	input *FindOneStudentInput,
-) (*model.Student, error) {
+) (*Output, error) {
 	findOneStudentParams := repo.FindOneStudentParams{
 		ID: input.ID,
 	}
-	student, err := s.Student.FindOne(ctx, findOneStudentParams)
+	student, err := s.Student.FindOne(ctx, findOneStudentParams, "courseSubjects")
 	if err != nil {
 		return nil, err
 	}
 
-	return student, nil
+	return copy.MustCopy(&Output{}, student), nil
 }

@@ -5,7 +5,7 @@ import (
 )
 
 type FindAllTeachersInput struct {
-	Filter querying.Filter `validate:"query,filter=name degree" form:"filter" faker:"-"`
-	Sort   querying.Sort   `validate:"query,sort=name degree"   form:"sort"   faker:"-"`
+	Filter querying.Filter `validate:"query,filter=name degree"  form:"filter" faker:"-"`
+	Sort   querying.Sort   `validate:"query,sort=id name degree" form:"sort"   faker:"-"`
 	querying.Pagination
 }

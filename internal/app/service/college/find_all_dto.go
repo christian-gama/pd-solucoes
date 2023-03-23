@@ -5,7 +5,7 @@ import (
 )
 
 type FindAllCollegesInput struct {
-	Filter querying.Filter `validate:"query,filter=name cnpj" form:"filter" faker:"-"`
-	Sort   querying.Sort   `validate:"query,sort=name cnpj"   form:"sort"   faker:"-"`
+	Filter querying.Filter `validate:"query,filter=name cnpj"  form:"filter" faker:"-"`
+	Sort   querying.Sort   `validate:"query,sort=id name cnpj" form:"sort"   faker:"-"`
 	querying.Pagination
 }

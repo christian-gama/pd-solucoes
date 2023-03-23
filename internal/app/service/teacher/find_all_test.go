@@ -46,7 +46,7 @@ func (s *FindAllTeacherSuite) TestHandle() {
 		}
 	}
 
-	s.Run("should find one teacher", func() {
+	s.Run("should find all teachers", func() {
 		sut := makeSut()
 
 		sut.TeacherRepo.

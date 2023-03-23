@@ -5,10 +5,8 @@ package mocks
 import (
 	context "context"
 
-	model "github.com/christian-gama/pd-solucoes/internal/domain/model"
-	mock "github.com/stretchr/testify/mock"
-
 	querying "github.com/christian-gama/pd-solucoes/internal/domain/querying"
+	mock "github.com/stretchr/testify/mock"
 
 	service "github.com/christian-gama/pd-solucoes/internal/app/service/teacher"
 )
@@ -19,15 +17,15 @@ type FindAllTeachers struct {
 }
 
 // Handle provides a mock function with given fields: ctx, input
-func (_m *FindAllTeachers) Handle(ctx context.Context, input *service.FindAllTeachersInput) (*querying.PaginationOutput[*model.Teacher], error) {
+func (_m *FindAllTeachers) Handle(ctx context.Context, input *service.FindAllTeachersInput) (*querying.PaginationOutput[*service.Output], error) {
 	ret := _m.Called(ctx, input)
 
-	var r0 *querying.PaginationOutput[*model.Teacher]
-	if rf, ok := ret.Get(0).(func(context.Context, *service.FindAllTeachersInput) *querying.PaginationOutput[*model.Teacher]); ok {
+	var r0 *querying.PaginationOutput[*service.Output]
+	if rf, ok := ret.Get(0).(func(context.Context, *service.FindAllTeachersInput) *querying.PaginationOutput[*service.Output]); ok {
 		r0 = rf(ctx, input)
 	} else {
 		if ret.Get(0) != nil {
-			r0 = ret.Get(0).(*querying.PaginationOutput[*model.Teacher])
+			r0 = ret.Get(0).(*querying.PaginationOutput[*service.Output])
 		}
 	}
 

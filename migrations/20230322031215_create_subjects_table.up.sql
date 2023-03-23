@@ -13,6 +13,6 @@ REFERENCES "teachers" ("id")
 ON DELETE CASCADE ON UPDATE CASCADE;
 
 CREATE UNIQUE INDEX "uidx__subjects__name"
-ON "subjects" ("name");
+ON "subjects" ("name", "teacher_id");
 
 COMMIT;

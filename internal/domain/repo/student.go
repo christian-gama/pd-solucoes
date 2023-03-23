@@ -48,12 +48,14 @@ type Student interface {
 	FindAll(
 		ctx context.Context,
 		params FindAllStudentParams,
+		preload ...string,
 	) (*querying.PaginationOutput[*model.Student], error)
 
 	// FindOne returns a student by its ID.
 	FindOne(
 		ctx context.Context,
 		params FindOneStudentParams,
+		preload ...string,
 	) (*model.Student, error)
 
 	// Update updates a student.

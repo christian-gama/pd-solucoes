@@ -5,11 +5,12 @@ import (
 
 	"github.com/christian-gama/pd-solucoes/internal/domain/model"
 	"github.com/christian-gama/pd-solucoes/internal/domain/repo"
+	"github.com/christian-gama/pd-solucoes/pkg/copy"
 )
 
 type CreateTeacher interface {
 	// Handle creates a new teacher.
-	Handle(ctx context.Context, input *CreateTeacherInput) (*model.Teacher, error)
+	Handle(ctx context.Context, input *CreateTeacherInput) (*Output, error)
 }
 
 type createTeacherImpl struct {
@@ -25,7 +26,7 @@ func NewCreateTeacher(teacherRepo repo.Teacher) CreateTeacher {
 func (s *createTeacherImpl) Handle(
 	ctx context.Context,
 	input *CreateTeacherInput,
-) (*model.Teacher, error) {
+) (*Output, error) {
 	teacher, err := model.NewTeacher(0, input.Name, input.Degree)
 	if err != nil {
 		return nil, err
@@ -39,5 +40,5 @@ func (s *createTeacherImpl) Handle(
 		return nil, err
 	}
 
-	return teacher, nil
+	return copy.MustCopy(&Output{}, teacher), nil
 }

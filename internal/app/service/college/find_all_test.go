@@ -46,7 +46,7 @@ func (s *FindAllCollegeSuite) TestHandle() {
 		}
 	}
 
-	s.Run("should find one college", func() {
+	s.Run("should find all colleges", func() {
 		sut := makeSut()
 
 		sut.CollegeRepo.On("FindAll", mock.Anything, mock.Anything, "courses").

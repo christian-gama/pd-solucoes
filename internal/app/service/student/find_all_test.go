@@ -40,16 +40,20 @@ func (s *FindAllStudentSuite) TestHandle() {
 			StudentRepo: studentRepo,
 			Input:       fake.FindAllStudentsInput(),
 			Pagination: &querying.PaginationOutput[*model.Student]{
-				Total:   100,
-				Results: []*model.Student{fakeModel.Student()},
+				Total: 100,
+				Results: []*model.Student{
+					fakeModel.Student(),
+				},
 			},
 		}
 	}
 
-	s.Run("should find one student", func() {
+	s.Run("should find all students", func() {
 		sut := makeSut()
 
-		sut.StudentRepo.On("FindAll", mock.Anything, mock.Anything).Return(sut.Pagination, nil)
+		sut.StudentRepo.
+			On("FindAll", mock.Anything, mock.Anything, "courseSubjects").
+			Return(sut.Pagination, nil)
 
 		result, err := sut.Sut.Handle(context.Background(), sut.Input)
 
@@ -61,7 +65,9 @@ func (s *FindAllStudentSuite) TestHandle() {
 	s.Run("studentRepo.FindAll returns an error", func() {
 		sut := makeSut()
 
-		sut.StudentRepo.On("FindAll", mock.Anything, mock.Anything).Return(nil, assert.AnError)
+		sut.StudentRepo.
+			On("FindAll", mock.Anything, mock.Anything, "courseSubjects").
+			Return(nil, assert.AnError)
 
 		result, err := sut.Sut.Handle(context.Background(), sut.Input)
 
