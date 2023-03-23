@@ -3,14 +3,16 @@
 This is a RESTful API built using GoLang and PostgreSQL for the Passei Direto college. The API provides CRUD operations for the entity-relationship model of the college.
 This project is following the principles of Clean Architecture, SOLID and Domain-Driven Design.
 
+[API documentation](https://documenter.getpostman.com/view/11922466/Tz5qbiX5) available on Postman.
+
 ## Features
-- All endpoints have **sorting**, **filtering** and **pagination** (consult API documentation for more details)
+- All **GET** endpoints have **sorting**, **filtering** and **pagination** (consult API documentation for more details)
 - All endpoints have validation for the request body
 - Over 600 tests, including unit and integration tests
 - All endpoints have documentation
-- API documentation is available in Postman
-- Domain-Driven Design and Clean Architecture principles
-- SOLID principles
+- [Domain-Driven Design](https://en.wikipedia.org/wiki/Domain-driven_design) principles
+- [Clean Architecture](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html) principles
+- [SOLID](https://en.wikipedia.org/wiki/SOLID) principles
 - CI/CD pipeline with GitHub Actions
 - Docker containers for the API and the database
 - Easy migrations using task automation
