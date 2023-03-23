@@ -50,7 +50,7 @@ func (s *FindAllCourseSuite) TestHandle() {
 		sut := makeSut()
 
 		sut.CourseRepo.
-			On("FindAll", mock.Anything, mock.Anything, "enrollments", "subjects.students", "college").
+			On("FindAll", mock.Anything, mock.Anything, "enrollments", "subjects.students").
 			Return(sut.Pagination, nil)
 
 		result, err := sut.Sut.Handle(context.Background(), sut.Input)
@@ -64,7 +64,7 @@ func (s *FindAllCourseSuite) TestHandle() {
 		sut := makeSut()
 
 		sut.CourseRepo.
-			On("FindAll", mock.Anything, mock.Anything, "enrollments", "subjects.students", "college").
+			On("FindAll", mock.Anything, mock.Anything, "enrollments", "subjects.students").
 			Return(nil, assert.AnError)
 
 		result, err := sut.Sut.Handle(context.Background(), sut.Input)

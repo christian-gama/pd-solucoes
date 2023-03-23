@@ -66,32 +66,39 @@ func (p *collegeImpl) FindAll(
 ) (*queryingPort.PaginationOutput[*model.College], error) {
 	db := p.db.WithContext(ctx)
 
-	var collegeWithCount []struct {
-		Total  int64
-		Schema *schema.College `gorm:"embedded"`
-	}
+	var colleges []*schema.College
 
+	// Differently of the other FindAll methods that uses the schemaWithCount struct,
+	// this one must separate in two queries, because GORM cannot run hooks in a embedded struct.
 	if err := db.
-		Model(&schema.College{}).
 		Scopes(
 			sql.PreloadScope(preload),
 			querying.FilterScope(params.Filterer),
 			querying.PaginationScope(params.Paginator),
 			querying.SortScope(params.Sorter),
 		).
-		Find(&collegeWithCount).
+		Find(&colleges).
 		Error; err != nil {
 		return nil, sql.Error(err, "college")
 	}
 
+	var totalCount int64
+	err := db.
+		Model(&schema.College{}).
+		Scopes(querying.FilterScope(params.Filterer)).
+		Count(&totalCount).Error
+	if err != nil {
+		return nil, sql.Error(err, "college")
+	}
+
 	pagination := &queryingPort.PaginationOutput[*model.College]{}
-	for _, schema := range collegeWithCount {
+	for _, collegeSchema := range colleges {
 		pagination.Results = append(
 			pagination.Results,
-			convert.ToModel(&model.College{}, schema.Schema),
+			convert.ToModel(&model.College{}, collegeSchema),
 		)
-		pagination.Total = int(schema.Total)
 	}
+	pagination.Total = int(totalCount)
 
 	return pagination, nil
 }

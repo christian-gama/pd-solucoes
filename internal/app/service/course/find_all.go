@@ -40,7 +40,6 @@ func (s *findAllCoursesImpl) Handle(
 		findAllCourseParams,
 		"enrollments",
 		"subjects.students",
-		"college",
 	)
 	if err != nil {
 		return nil, err

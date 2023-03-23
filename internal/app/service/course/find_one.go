@@ -34,7 +34,6 @@ func (s *findOneCourseImpl) Handle(
 		findOneCourseParams,
 		"enrollments",
 		"subjects.students",
-		"college",
 	)
 	if err != nil {
 		return nil, err
