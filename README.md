@@ -68,3 +68,14 @@ make test
 ```
 
 It will start a PostgreSQL container, run migrations and run the tests.
+
+### Running the project
+To run the project, run the following command:
+
+```bash
+make docker-dev
+```
+or
+```bash
+make docker-prod
+```
