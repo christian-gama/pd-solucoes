@@ -1,9 +1,9 @@
 package service
 
 type Output struct {
-	ID             uint                   `json:"id,omitempty"`
-	Name           string                 `json:"name,omitempty"`
-	Cpf            string                 `json:"cpf,omitempty"`
+	ID             uint                   `json:"id"`
+	Name           string                 `json:"name"`
+	Cpf            string                 `json:"cpf"`
 	CourseSubjects []*courseSubjectOutput `json:"courseSubjects"`
 }
 

@@ -12,7 +12,7 @@ FOREIGN KEY ("teacher_id")
 REFERENCES "teachers" ("id")
 ON DELETE CASCADE ON UPDATE CASCADE;
 
-CREATE UNIQUE INDEX "uidx__subjects__name"
+CREATE UNIQUE INDEX "uidx__subjects__name__teacher_id"
 ON "subjects" ("name", "teacher_id");
 
 COMMIT;
