@@ -12,7 +12,7 @@ type FindOneCollege interface {
 	Handle(
 		ctx context.Context,
 		input *FindOneCollegeInput,
-	) (*FindOneCollegeOutput, error)
+	) (*Output, error)
 }
 
 type findOneCollegeImpl struct {
@@ -28,7 +28,7 @@ func NewFindOneCollege(collegeRepo repo.College) FindOneCollege {
 func (s *findOneCollegeImpl) Handle(
 	ctx context.Context,
 	input *FindOneCollegeInput,
-) (*FindOneCollegeOutput, error) {
+) (*Output, error) {
 	findOneCollegeParams := repo.FindOneCollegeParams{
 		ID: input.ID,
 	}
@@ -37,5 +37,5 @@ func (s *findOneCollegeImpl) Handle(
 		return nil, err
 	}
 
-	return copy.MustCopy(&FindOneCollegeOutput{}, course), nil
+	return copy.MustCopy(&Output{}, course), nil
 }

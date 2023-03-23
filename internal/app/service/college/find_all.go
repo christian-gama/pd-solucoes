@@ -3,9 +3,8 @@ package service
 import (
 	"context"
 
-	"github.com/christian-gama/pd-solucoes/internal/domain/model"
-	"github.com/christian-gama/pd-solucoes/internal/domain/querying"
 	"github.com/christian-gama/pd-solucoes/internal/domain/repo"
+	"github.com/christian-gama/pd-solucoes/pkg/copy"
 )
 
 type FindAllColleges interface {
@@ -13,7 +12,7 @@ type FindAllColleges interface {
 	Handle(
 		ctx context.Context,
 		input *FindAllCollegesInput,
-	) (*querying.PaginationOutput[*model.College], error)
+	) (*PaginationOutput, error)
 }
 
 type findAllCollegesImpl struct {
@@ -29,7 +28,7 @@ func NewFindAllColleges(collegeRepo repo.College) FindAllColleges {
 func (s *findAllCollegesImpl) Handle(
 	ctx context.Context,
 	input *FindAllCollegesInput,
-) (*querying.PaginationOutput[*model.College], error) {
+) (*PaginationOutput, error) {
 	findAllCollegeParams := repo.FindAllCollegeParams{
 		Paginator: &input.Pagination,
 		Filterer:  input.Filter,
@@ -40,5 +39,5 @@ func (s *findAllCollegesImpl) Handle(
 		return nil, err
 	}
 
-	return paginationOutput, nil
+	return copy.MustCopy(&PaginationOutput{}, paginationOutput), err
 }

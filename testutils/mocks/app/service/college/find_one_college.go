@@ -15,15 +15,15 @@ type FindOneCollege struct {
 }
 
 // Handle provides a mock function with given fields: ctx, input
-func (_m *FindOneCollege) Handle(ctx context.Context, input *service.FindOneCollegeInput) (*service.FindOneCollegeOutput, error) {
+func (_m *FindOneCollege) Handle(ctx context.Context, input *service.FindOneCollegeInput) (*service.Output, error) {
 	ret := _m.Called(ctx, input)
 
-	var r0 *service.FindOneCollegeOutput
-	if rf, ok := ret.Get(0).(func(context.Context, *service.FindOneCollegeInput) *service.FindOneCollegeOutput); ok {
+	var r0 *service.Output
+	if rf, ok := ret.Get(0).(func(context.Context, *service.FindOneCollegeInput) *service.Output); ok {
 		r0 = rf(ctx, input)
 	} else {
 		if ret.Get(0) != nil {
-			r0 = ret.Get(0).(*service.FindOneCollegeOutput)
+			r0 = ret.Get(0).(*service.Output)
 		}
 	}
 

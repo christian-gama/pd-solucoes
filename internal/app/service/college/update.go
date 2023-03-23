@@ -5,11 +5,12 @@ import (
 
 	"github.com/christian-gama/pd-solucoes/internal/domain/model"
 	"github.com/christian-gama/pd-solucoes/internal/domain/repo"
+	"github.com/christian-gama/pd-solucoes/pkg/copy"
 )
 
 type UpdateCollege interface {
 	// Handle updates a college.
-	Handle(ctx context.Context, input *UpdateCollegeInput) (*model.College, error)
+	Handle(ctx context.Context, input *UpdateCollegeInput) (*Output, error)
 }
 
 type updateCollegeImpl struct {
@@ -25,7 +26,7 @@ func NewUpdateCollege(collegeRepo repo.College) UpdateCollege {
 func (s *updateCollegeImpl) Handle(
 	ctx context.Context,
 	input *UpdateCollegeInput,
-) (*model.College, error) {
+) (*Output, error) {
 	college, err := model.NewCollege(input.ID, input.Name, input.Cnpj)
 	if err != nil {
 		return nil, err
@@ -39,5 +40,5 @@ func (s *updateCollegeImpl) Handle(
 		return nil, err
 	}
 
-	return college, nil
+	return copy.MustCopy(&Output{}, college), nil
 }

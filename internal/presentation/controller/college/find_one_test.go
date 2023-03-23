@@ -41,7 +41,7 @@ func (s *FindOneCollegeSuite) TestHandle() {
 		sut := makeSut()
 
 		sut.FindOneCollege.On("Handle", mock.Anything, sut.Input).
-			Return(&service.FindOneCollegeOutput{}, nil)
+			Return(&service.Output{}, nil)
 
 		ctx := gintest.MustRequest(sut.Sut, gintest.Option{
 			Params: []string{fmt.Sprint(sut.Input.ID)},
