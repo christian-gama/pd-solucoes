@@ -22,9 +22,10 @@ func Bootstrap(ctx context.Context, log log.Logger, envFile string) {
 	r := router.New()
 	routing.Registerer(r.Group("/api/v1"),
 		routes.Global(),
-		routes.College(),
-		routes.Teacher(),
-		routes.Student(),
+		routes.Colleges(),
+		routes.Teachers(),
+		routes.Students(),
+		routes.Courses(),
 	)
 
 	server.Start(ctx, r, log)

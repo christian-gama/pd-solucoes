@@ -4,6 +4,7 @@ import (
 	"github.com/christian-gama/pd-solucoes/internal/infra/http"
 	"github.com/christian-gama/pd-solucoes/internal/infra/router/routing"
 	collegeController "github.com/christian-gama/pd-solucoes/internal/presentation/controller/college"
+	courseController "github.com/christian-gama/pd-solucoes/internal/presentation/controller/course"
 	studentController "github.com/christian-gama/pd-solucoes/internal/presentation/controller/student"
 	teacherController "github.com/christian-gama/pd-solucoes/internal/presentation/controller/teacher"
 	"github.com/christian-gama/pd-solucoes/internal/presentation/middleware"
@@ -17,7 +18,7 @@ func Global() *routing.Routing {
 	}
 }
 
-func College() *routing.Routing {
+func Colleges() *routing.Routing {
 	return &routing.Routing{
 		Group: "/colleges",
 		Routes: []*routing.Route{
@@ -30,7 +31,7 @@ func College() *routing.Routing {
 	}
 }
 
-func Teacher() *routing.Routing {
+func Teachers() *routing.Routing {
 	return &routing.Routing{
 		Group: "/teachers",
 		Routes: []*routing.Route{
@@ -43,7 +44,7 @@ func Teacher() *routing.Routing {
 	}
 }
 
-func Student() *routing.Routing {
+func Students() *routing.Routing {
 	return &routing.Routing{
 		Group: "/students",
 		Routes: []*routing.Route{
@@ -52,6 +53,19 @@ func Student() *routing.Routing {
 			{Controller: studentController.MakeFindOneStudent()},
 			{Controller: studentController.MakeFindAllStudents()},
 			{Controller: studentController.MakeDeleteStudent()},
+		},
+	}
+}
+
+func Courses() *routing.Routing {
+	return &routing.Routing{
+		Group: "/courses",
+		Routes: []*routing.Route{
+			{Controller: courseController.MakeCreateCourse()},
+			{Controller: courseController.MakeUpdateCourse()},
+			{Controller: courseController.MakeFindOneCourse()},
+			{Controller: courseController.MakeFindAllCourses()},
+			{Controller: courseController.MakeDeleteCourse()},
 		},
 	}
 }

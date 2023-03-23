@@ -42,12 +42,6 @@ func (m *Course) Validate() error {
 		errs = errutil.Append(errs, errors.New("collegeID is required"))
 	}
 
-	if m.College == nil {
-		errs = errutil.Append(errs, errors.New("college is required"))
-	} else if err := m.College.Validate(); err != nil {
-		errs = errutil.Append(errs, errors.New("college is invalid"))
-	}
-
 	if errs.HasErrors() {
 		return errs
 	}

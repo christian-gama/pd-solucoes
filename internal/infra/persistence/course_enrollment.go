@@ -108,6 +108,7 @@ func (p *courseEnrollmentImpl) FindOne(
 
 	if err := db.
 		Model(&courseEnrollmentSchema).
+		Scopes(sql.PreloadScope(preload)).
 		Where("id = ?", params.ID).
 		First(&courseEnrollmentSchema).
 		Error; err != nil {
