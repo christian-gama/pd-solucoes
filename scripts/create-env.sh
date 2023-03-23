@@ -18,6 +18,10 @@ create_env_file() {
             sed -i "s/DB_HOST=.*/DB_HOST=psql/" "$env_file"
         fi
 
+        if [ "$env_name" == "test" ]; then
+            sed -i "s/DB_PORT=.*/DB_PORT=5433/" "$env_file"
+        fi
+
         echo "Created $env_file"
     else
         echo "$env_file already exists. Skipping."
