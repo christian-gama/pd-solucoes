@@ -15,7 +15,7 @@ jobs:
 
       - uses: ./.github/actions/create-env
         with:
-          APP_ENV: ${{ secrets.ENV }}
+          APP_ENV: ${{ secrets.APP_ENV }}
           APP_HOST: ${{ secrets.APP_HOST }}
           APP_PORT: ${{ secrets.APP_PORT }}
           CONFIG_GLOBAL_RATE_LIMIT: ${{ secrets.CONFIG_GLOBAL_RATE_LIMIT }}
