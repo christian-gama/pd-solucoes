@@ -60,7 +60,7 @@ jobs:
         with:
           path: |
             ~/.cache/go-build
-          key: ${{ runner.os }}-test-${{ hashFiles('**.go') }}
+          key: ${{ runner.os }}-test-${{ github.sha }}
           restore-keys: |
             ${{ runner.os }}-test
 
