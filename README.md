@@ -39,16 +39,6 @@ If you plan to not use Docker, you will need to install the dependencies and run
 git clone "https://github.com/christian-gama/pd-solucoes"
 ```
 
-### Setting up the environment
-
-The project needs three environment variables to run, they are:
-
-- .env.dev
-- .env.test
-- .env.prod
-
-The .env.dev file is used to run the project locally, the .env.test file is used to run the tests and the .env.prod file is used to run the project in production. There is a .env.example file that can be used as a template for the .env files.
-
 ### Initializing the project
 
 To initialize the project, run the following command (requires Docker):
@@ -58,6 +48,16 @@ make init
 ```
 
 If you don't have Docker installed, you can run the commands inside the Makefile manually.
+
+### Setting up the environment
+
+The project needs three environment variables to run, they are:
+
+- .env.dev
+- .env.test
+- .env.prod
+
+The .env.dev file is used to run the project locally, the .env.test file is used to run the tests and the .env.prod file is used to run the project in production. There is a .env.example file that can be used as a template for the .env files, but if you ran the init command, the .env files will already be created.
 
 ### Running the tests
 
