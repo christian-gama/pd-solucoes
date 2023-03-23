@@ -8,12 +8,12 @@ import (
 
 // CourseSubject is the model that contains the relationship between courses and subjects.
 type CourseSubject struct {
-	ID        uint       `json:"id,omitempty"        faker:"uint"`
-	CourseID  uint       `json:"courseID,omitempty"  faker:"uint"`
-	SubjectID uint       `json:"subjectID,omitempty" faker:"uint"`
-	Course    *Course    `json:"course,omitempty"    faker:"-"`
-	Subject   *Subject   `json:"subject,omitempty"   faker:"-"`
-	Students  []*Student `json:"students,omitempty"  faker:"-"`
+	ID        uint       `faker:"uint"`
+	CourseID  uint       `faker:"uint"`
+	SubjectID uint       `faker:"uint"`
+	Course    *Course    `faker:"-"`
+	Subject   *Subject   `faker:"-"`
+	Students  []*Student `faker:"-"`
 }
 
 // NewCourseSubject creates a new CourseSubject.

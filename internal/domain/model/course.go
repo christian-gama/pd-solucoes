@@ -8,12 +8,12 @@ import (
 
 // Course is a model that represents a course of a college.
 type Course struct {
-	ID          uint                `json:"id,omitempty"          faker:"uint"`
-	Name        string              `json:"name,omitempty"        faker:"len=50"`
-	CollegeID   uint                `json:"collegeID,omitempty"   faker:"uint"`
-	College     *College            `json:"college,omitempty"     faker:"-"`
-	Subjects    []*CourseSubject    `json:"subject,omitempty"     faker:"-"`
-	Enrollments []*CourseEnrollment `json:"enrollments,omitempty" faker:"-"`
+	ID          uint                `faker:"uint"`
+	Name        string              `faker:"len=50"`
+	CollegeID   uint                `faker:"uint"`
+	College     *College            `faker:"-"`
+	Subjects    []*CourseSubject    `faker:"-"`
+	Enrollments []*CourseEnrollment `faker:"-"`
 }
 
 // NewCourse creates a new Course.

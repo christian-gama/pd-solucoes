@@ -8,10 +8,10 @@ import (
 
 // Student is the model that contains the student information.
 type Student struct {
-	ID             uint             `json:"id,omitempty"             faker:"uint"`
-	Name           string           `json:"name,omitempty"           faker:"len=50"`
-	Cpf            string           `json:"cpf,omitempty"            faker:"cpf"`
-	CourseSubjects []*CourseSubject `json:"courseSubjects,omitempty" faker:"-"`
+	ID             uint             `faker:"uint"`
+	Name           string           `faker:"len=50"`
+	Cpf            string           `faker:"cpf"`
+	CourseSubjects []*CourseSubject `faker:"-"`
 }
 
 // NewStudent creates a new Student.

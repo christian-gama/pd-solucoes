@@ -8,11 +8,11 @@ import (
 
 // Subject is the model of a subject.
 type Subject struct {
-	ID        uint             `json:"id,omitempty"        faker:"uint"`
-	Name      string           `json:"name,omitempty"      faker:"len=50"`
-	TeacherID uint             `json:"teacherID,omitempty" faker:"uint"`
-	Teacher   *Teacher         `json:"teacher,omitempty"   faker:"-"`
-	Courses   []*CourseSubject `json:"courses,omitempty"   faker:"-"`
+	ID        uint             `faker:"uint"`
+	Name      string           `faker:"len=50"`
+	TeacherID uint             `faker:"uint"`
+	Teacher   *Teacher         `faker:"-"`
+	Courses   []*CourseSubject `faker:"-"`
 }
 
 func NewSubject(id uint, name string, teacherID uint) (*Subject, error) {

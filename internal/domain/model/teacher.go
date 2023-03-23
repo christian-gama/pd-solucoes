@@ -8,10 +8,10 @@ import (
 
 // Teacher is the model that contains the teacher information.
 type Teacher struct {
-	ID       uint       `json:"id,omitempty"       faker:"uint"`
-	Name     string     `json:"name,omitempty"     faker:"len=50"`
-	Degree   string     `json:"degree,omitempty"   faker:"len=50"`
-	Subjects []*Subject `json:"subjects,omitempty" faker:"-"`
+	ID       uint       `faker:"uint"`
+	Name     string     `faker:"len=50"`
+	Degree   string     `faker:"len=50"`
+	Subjects []*Subject `faker:"-"`
 }
 
 // NewTeacher creates a new Teacher.

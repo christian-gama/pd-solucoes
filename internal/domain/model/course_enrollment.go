@@ -9,12 +9,12 @@ import (
 
 // CourseEnrollment is the model of a course enrollment.
 type CourseEnrollment struct {
-	ID              uint           `json:"id,omitempty"              faker:"uint"`
-	StudentID       uint           `json:"studentID,omitempty"       faker:"uint"`
-	Student         *Student       `json:"student,omitempty"         faker:"-"`
-	EnrollmentDate  time.Time      `json:"enrollmentDate,omitempty"  faker:"time_now"`
-	CourseSubjectID uint           `json:"courseSubjectID,omitempty" faker:"uint"`
-	CourseSubject   *CourseSubject `json:"courseSubject,omitempty"   faker:"-"`
+	ID              uint           `faker:"uint"`
+	StudentID       uint           `faker:"uint"`
+	Student         *Student       `faker:"-"`
+	EnrollmentDate  time.Time      `faker:"time_now"`
+	CourseSubjectID uint           `faker:"uint"`
+	CourseSubject   *CourseSubject `faker:"-"`
 }
 
 func NewCourseEnrollment(
