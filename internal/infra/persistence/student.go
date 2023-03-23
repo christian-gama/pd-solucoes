@@ -74,6 +74,7 @@ func (p *studentImpl) FindAll(
 	if err := db.
 		Model(&schema.Student{}).
 		Scopes(
+			sql.PreloadScope(preload),
 			querying.FilterScope(params.Filterer),
 			querying.PaginationScope(params.Paginator),
 			querying.SortScope(params.Sorter),
@@ -107,6 +108,7 @@ func (p *studentImpl) FindOne(
 
 	if err := db.
 		Model(&studentSchema).
+		Scopes(sql.PreloadScope(preload)).
 		Where("id = ?", params.ID).
 		First(&studentSchema).
 		Error; err != nil {

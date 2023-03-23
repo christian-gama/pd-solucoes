@@ -29,7 +29,13 @@ func (s *findOneStudentImpl) Handle(
 	findOneStudentParams := repo.FindOneStudentParams{
 		ID: input.ID,
 	}
-	student, err := s.Student.FindOne(ctx, findOneStudentParams, "courseSubjects")
+	student, err := s.Student.FindOne(
+		ctx,
+		findOneStudentParams,
+		"courseSubjects",
+		"courseSubjects.subject",
+		"courseSubjects.course",
+	)
 	if err != nil {
 		return nil, err
 	}
