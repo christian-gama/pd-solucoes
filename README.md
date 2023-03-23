@@ -57,7 +57,7 @@ The project needs three environment variables to run, they are:
 - .env.test
 - .env.prod
 
-The .env.dev file is used to run the project locally, the .env.test file is used to run the tests and the .env.prod file is used to run the project in production. There is a .env.example file that can be used as a template for the .env files, but if you ran the init command, the .env files will already be created.
+If you ran the init command, the .env files will already be created, otherwise you can use the .env.example file as a template.
 
 ### Running the tests
 
