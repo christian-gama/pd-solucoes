@@ -30,6 +30,11 @@ else
 endif
 
 
+.PHONY: seed
+seed: cmd-exists-docker
+	@$(MAKE) docker ENV_FILE=$(ENV_FILE) ENTRY_POINT="go run ./cmd/seed/*.go -e $(ENV_FILE)"
+
+
 .PHONY: build
 build: cmd-exists-go
 	@echo "Generating build for $(APP_NAME) using $(ARCH) architecture..."
@@ -68,7 +73,36 @@ migrate-%: cmd-exists-docker
 
 .PHONY: migrate
 migrate: cmd-exists-docker
-	@$(MAKE) docker ENV_FILE=$(ENV_FILE) ENTRY_POINT="go run ./cmd/migrate/*.go -e $(ENV_FILE) $(MIGRATION) $(VERSION)"
+	@if [ -z "$(ENV_FILE)" ]; then \
+		echo "Error: expected ENV_FILE"; \
+		exit 1; \
+	fi;
+
+	@if [ "$(ENV_FILE)" != ".env.dev" ] && [ "$(ENV_FILE)" != ".env.prod" ] && [ "$(ENV_FILE)" != ".env.test" ]; then \
+		echo "Error: expected .env.dev, .env.test or .env.prod"; \
+		exit 1; \
+	fi;
+
+	@if [ -z "$(MIGRATION)" ]; then \
+		echo "Error: expected MIGRATION"; \
+		exit 1; \
+	fi;
+
+	@if [ "$(MIGRATION)" != "up" ] && [ "$(MIGRATION)" != "down" ] && [ "$(MIGRATION)" != "force" ] && [ "$(MIGRATION)" != "drop" ] && [ "$(MIGRATION)" != "steps" ] && [ "$(MIGRATION)" != "version" ]; then \
+		echo "Error: expected [up|down|force|drop|steps|version]"; \
+		exit 1; \
+	fi;
+
+	@if [ "$(MIGRATION)" = "steps" ] && [ -z "$(VERSION)" ]; then \
+		echo "Error: expected VERSION"; \
+		exit 1; \
+	fi;
+
+	@if [ "$(SEED)" = "true" ]; then \
+		$(MAKE) docker ENV_FILE=$(ENV_FILE) ENTRY_POINT="go run ./cmd/migrate/*.go -s -e $(ENV_FILE) $(MIGRATION) $(VERSION)"; \
+	else \
+		$(MAKE) docker ENV_FILE=$(ENV_FILE) ENTRY_POINT="go run ./cmd/migrate/*.go -e $(ENV_FILE) $(MIGRATION) $(VERSION)"; \
+	fi;
 
 
 .PHONY: psql-open

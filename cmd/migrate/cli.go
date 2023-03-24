@@ -1,24 +1,30 @@
 package main
 
 import (
-	"log"
+	"context"
+	glog "log"
 	"os"
 	"strconv"
+	"time"
 
+	"github.com/christian-gama/pd-solucoes/cmd/migrate/seed"
 	"github.com/christian-gama/pd-solucoes/internal/infra/env"
+	"github.com/christian-gama/pd-solucoes/pkg/log"
 	"github.com/christian-gama/pd-solucoes/pkg/migrate"
 	"github.com/spf13/cobra"
 )
 
 var (
-	envFile string
-	silent  bool
+	envFile    string
+	silent     bool
+	shouldSeed bool
 )
 
 func init() {
 	os.Stdout.Write([]byte("\033[H\033[2J"))
 	cmd.PersistentFlags().StringVarP(&envFile, "env-file", "e", "", "environment file")
-	cmd.PersistentFlags().BoolVarP(&silent, "silent", "s", false, "silent mode (no logs)")
+	cmd.PersistentFlags().BoolVarP(&silent, "silent", "q", false, "silent mode (no logs)")
+	cmd.PersistentFlags().BoolVarP(&shouldSeed, "seed", "s", false, "seed the database")
 	cmd.AddCommand(upCmd)
 	cmd.AddCommand(dropCmd)
 	cmd.AddCommand(forceCmd)
@@ -40,6 +46,12 @@ var upCmd = &cobra.Command{
 	Run: func(cmd *cobra.Command, args []string) {
 		setupEnvFile()
 		migrate.MakeMigrate(silent).Up()
+
+		ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
+		defer cancel()
+		if shouldSeed {
+			seed.Execute(ctx, log.MakeLog())
+		}
 	},
 }
 
@@ -112,11 +124,11 @@ var stepsCmd = &cobra.Command{
 
 func setupEnvFile() {
 	if envFile == "" {
-		log.Fatalf("Please specify an environment file")
+		glog.Fatalf("Please specify an environment file")
 	}
 
 	if _, err := os.Stat(envFile); os.IsNotExist(err) {
-		log.Fatalf("The file %s does not exist", envFile)
+		glog.Fatalf("The file %s does not exist", envFile)
 	}
 
 	env.Load(envFile)

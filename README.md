@@ -73,15 +73,22 @@ make test
 It will start a PostgreSQL container, run migrations and run the tests.
 
 ### Running the project
+##### Migration
 To run the project, you have to make sure the migrations are up-to-date. To do that, run the following command:
 
 ```bash
 make migrate-up ENV_FILE=.env.dev
 ```
-Change from `dev` to `prod` if you want to run the migrations in the production environment.
+Change from `dev` to `prod` if you want to run the migrations in the production environment. This instruction serves for the other commands that requires the environment variable.
 
-After that, you are ready to go. To run the project, run the following command:
+Optionally, you can also run the migration with seed, which will populate the database with some data, using the following command:
 
+```bash
+make migrate-up ENV_FILE=.env.dev SEED=true
+```
+
+##### Run project
+Finally, you can run the project with the following command:
 
 ```bash
 make docker-dev

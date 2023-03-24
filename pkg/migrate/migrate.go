@@ -2,7 +2,6 @@ package migrate
 
 import (
 	"database/sql"
-	"errors"
 	"fmt"
 
 	"github.com/christian-gama/pd-solucoes/internal/infra/env"
@@ -38,11 +37,7 @@ func New(db *sql.DB) *Migrate {
 func (m *Migrate) Up() {
 	fmt.Println("Migrating database UP...")
 	if err := m.mig.Up(); err != nil {
-		if errors.Is(err, migrate.ErrNoChange) {
-			fmt.Println("Already at the most recent version")
-		} else {
-			panic(err)
-		}
+		panic(err)
 	}
 }
 
@@ -50,11 +45,7 @@ func (m *Migrate) Up() {
 func (m *Migrate) Down() {
 	fmt.Println("Migrating database DOWN...")
 	if err := m.mig.Down(); err != nil {
-		if errors.Is(err, migrate.ErrNoChange) {
-			fmt.Println("Already at the first version")
-		} else {
-			panic(err)
-		}
+		panic(err)
 	}
 }
 
