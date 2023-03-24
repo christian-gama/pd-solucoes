@@ -8,8 +8,8 @@ import (
 	"gorm.io/gorm"
 )
 
-func CollegeData() []*service.CreateCollegeInput {
-	return []*service.CreateCollegeInput{
+func CollegeData() []*service.CreateInput {
+	return []*service.CreateInput{
 		{
 			Name: "Universidade Federal de Minas Gerais",
 			Cnpj: "05124078523150",

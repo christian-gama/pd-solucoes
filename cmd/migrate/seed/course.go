@@ -8,8 +8,8 @@ import (
 	"gorm.io/gorm"
 )
 
-func CourseData() []*service.CreateCourseInput {
-	return []*service.CreateCourseInput{
+func CourseData() []*service.CreateInput {
+	return []*service.CreateInput{
 		{
 			Name:      "Engenharia de Software",
 			CollegeID: 1,

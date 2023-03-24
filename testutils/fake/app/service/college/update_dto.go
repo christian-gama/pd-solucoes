@@ -5,8 +5,8 @@ import (
 	"github.com/go-faker/faker/v4"
 )
 
-func UpdateCollegeInput() *service.UpdateCollegeInput {
-	input := new(service.UpdateCollegeInput)
+func UpdateCollegeInput() *service.UpdateInput {
+	input := new(service.UpdateInput)
 	faker.FakeData(input)
 
 	return input

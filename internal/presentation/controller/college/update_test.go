@@ -27,7 +27,7 @@ func TestUpdateCollegeSuite(t *testing.T) {
 func (s *UpdateCollegeSuite) TestHandle() {
 	type Sut struct {
 		Sut           controller.UpdateCollege
-		Input         *service.UpdateCollegeInput
+		Input         *service.UpdateInput
 		UpdateCollege *mocks.UpdateCollege
 	}
 

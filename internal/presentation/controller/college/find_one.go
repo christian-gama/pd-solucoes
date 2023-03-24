@@ -18,7 +18,7 @@ func NewFindOneCollege(s service.FindOneCollege) FindOneCollege {
 	}
 
 	return http.NewController(
-		func(ctx *gin.Context, input *service.FindOneCollegeInput) {
+		func(ctx *gin.Context, input *service.FindOneInput) {
 			college, err := s.Handle(ctx.Request.Context(), input)
 			if err != nil {
 				panic(err)

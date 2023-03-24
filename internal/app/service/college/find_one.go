@@ -11,7 +11,7 @@ type FindOneCollege interface {
 	// Handle finds one college.
 	Handle(
 		ctx context.Context,
-		input *FindOneCollegeInput,
+		input *FindOneInput,
 	) (*Output, error)
 }
 
@@ -27,7 +27,7 @@ func NewFindOneCollege(collegeRepo repo.College) FindOneCollege {
 // Handle findOnes a new college.
 func (s *findOneCollegeImpl) Handle(
 	ctx context.Context,
-	input *FindOneCollegeInput,
+	input *FindOneInput,
 ) (*Output, error) {
 	findOneCollegeParams := repo.FindOneCollegeParams{
 		ID: input.ID,

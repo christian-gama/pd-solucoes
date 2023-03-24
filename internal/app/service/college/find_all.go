@@ -12,7 +12,7 @@ type FindAllColleges interface {
 	// Handle finds all colleges.
 	Handle(
 		ctx context.Context,
-		input *FindAllCollegesInput,
+		input *FindAllInput,
 	) (*querying.PaginationOutput[*Output], error)
 }
 
@@ -28,7 +28,7 @@ func NewFindAllColleges(collegeRepo repo.College) FindAllColleges {
 // Handle findAlls a new college.
 func (s *findAllCollegesImpl) Handle(
 	ctx context.Context,
-	input *FindAllCollegesInput,
+	input *FindAllInput,
 ) (*querying.PaginationOutput[*Output], error) {
 	findAllCollegeParams := repo.FindAllCollegeParams{
 		Paginator: &input.Pagination,

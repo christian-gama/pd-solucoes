@@ -18,7 +18,7 @@ func NewCreateCourse(s service.CreateCourse) CreateCourse {
 	}
 
 	return http.NewController(
-		func(ctx *gin.Context, input *service.CreateCourseInput) {
+		func(ctx *gin.Context, input *service.CreateInput) {
 			course, err := s.Handle(ctx.Request.Context(), input)
 			if err != nil {
 				panic(err)

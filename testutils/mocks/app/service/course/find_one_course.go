@@ -15,11 +15,11 @@ type FindOneCourse struct {
 }
 
 // Handle provides a mock function with given fields: ctx, input
-func (_m *FindOneCourse) Handle(ctx context.Context, input *service.FindOneCourseInput) (*service.Output, error) {
+func (_m *FindOneCourse) Handle(ctx context.Context, input *service.FindOneInput) (*service.Output, error) {
 	ret := _m.Called(ctx, input)
 
 	var r0 *service.Output
-	if rf, ok := ret.Get(0).(func(context.Context, *service.FindOneCourseInput) *service.Output); ok {
+	if rf, ok := ret.Get(0).(func(context.Context, *service.FindOneInput) *service.Output); ok {
 		r0 = rf(ctx, input)
 	} else {
 		if ret.Get(0) != nil {
@@ -28,7 +28,7 @@ func (_m *FindOneCourse) Handle(ctx context.Context, input *service.FindOneCours
 	}
 
 	var r1 error
-	if rf, ok := ret.Get(1).(func(context.Context, *service.FindOneCourseInput) error); ok {
+	if rf, ok := ret.Get(1).(func(context.Context, *service.FindOneInput) error); ok {
 		r1 = rf(ctx, input)
 	} else {
 		r1 = ret.Error(1)

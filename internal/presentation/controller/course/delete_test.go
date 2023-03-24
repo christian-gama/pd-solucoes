@@ -26,7 +26,7 @@ func TestDeleteCourseSuite(t *testing.T) {
 func (s *DeleteCourseSuite) TestHandle() {
 	type Sut struct {
 		Sut          controller.DeleteCourse
-		Input        *service.DeleteCourseInput
+		Input        *service.DeleteInput
 		DeleteCourse *mocks.DeleteCourse
 	}
 

@@ -25,7 +25,7 @@ func (s *DeleteCollegeSuite) TestHandle() {
 	type Sut struct {
 		Sut         service.DeleteCollege
 		CollegeRepo *mocks.College
-		Input       *service.DeleteCollegeInput
+		Input       *service.DeleteInput
 		College     *model.College
 	}
 
