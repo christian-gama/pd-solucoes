@@ -14,12 +14,6 @@ type courseSubjectOutput struct {
 	Subject *subjectOutput `json:"subject"`
 }
 
-type studentOutput struct {
-	ID   uint   `json:"id"`
-	Name string `json:"name"`
-	CPF  string `json:"cpf"`
-}
-
 type courseOutput struct {
 	ID        uint   `json:"id"`
 	Name      string `json:"name"`
