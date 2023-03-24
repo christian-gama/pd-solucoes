@@ -12,7 +12,7 @@ type FindAllCourseEnrollments interface {
 	// Handle finds all courseEnrollments.
 	Handle(
 		ctx context.Context,
-		input *FindAllCourseEnrollmentsInput,
+		input *FindAllInput,
 	) (*querying.PaginationOutput[*Output], error)
 }
 
@@ -30,7 +30,7 @@ func NewFindAllCourseEnrollments(
 // Handle findAlls a new courseEnrollment.
 func (s *findAllCourseEnrollmentsImpl) Handle(
 	ctx context.Context,
-	input *FindAllCourseEnrollmentsInput,
+	input *FindAllInput,
 ) (*querying.PaginationOutput[*Output], error) {
 	findAllCourseEnrollmentParams := repo.FindAllCourseEnrollmentParams{
 		Paginator: &input.Pagination,

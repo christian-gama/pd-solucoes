@@ -6,10 +6,8 @@ import (
 
 	service "github.com/christian-gama/pd-solucoes/internal/app/service/enrollment"
 	"github.com/christian-gama/pd-solucoes/internal/domain/model"
-	"github.com/christian-gama/pd-solucoes/pkg/copy"
 	fake "github.com/christian-gama/pd-solucoes/testutils/fake/app/service/enrollment"
 	fakeModel "github.com/christian-gama/pd-solucoes/testutils/fake/domain/model"
-	mocksEnrollmentService "github.com/christian-gama/pd-solucoes/testutils/mocks/app/service/enrollment"
 	mocks "github.com/christian-gama/pd-solucoes/testutils/mocks/domain/repo"
 	"github.com/christian-gama/pd-solucoes/testutils/suite"
 	"github.com/stretchr/testify/assert"
@@ -26,24 +24,21 @@ func TestCreateCourseEnrollmentSuite(t *testing.T) {
 
 func (s *CreateCourseEnrollmentSuite) TestHandle() {
 	type Sut struct {
-		Sut                            service.CreateCourseEnrollment
-		CourseEnrollmentRepo           *mocks.CourseEnrollment
-		Input                          *service.CreateCourseEnrollmentInput
-		CourseEnrollment               *model.CourseEnrollment
-		FindOneCourseEnrollmentService *mocksEnrollmentService.FindOneCourseEnrollment
+		Sut                  service.CreateCourseEnrollment
+		CourseEnrollmentRepo *mocks.CourseEnrollment
+		Input                *service.CreateInput
+		CourseEnrollment     *model.CourseEnrollment
 	}
 
 	makeSut := func() *Sut {
 		courseEnrollmentRepo := mocks.NewCourseEnrollment(s.T())
-		findOneCourseEnrollmentService := mocksEnrollmentService.NewFindOneCourseEnrollment(s.T())
-		sut := service.NewCreateCourseEnrollment(courseEnrollmentRepo, findOneCourseEnrollmentService)
+		sut := service.NewCreateCourseEnrollment(courseEnrollmentRepo)
 
 		return &Sut{
-			Sut:                            sut,
-			CourseEnrollmentRepo:           courseEnrollmentRepo,
-			Input:                          fake.CreateCourseEnrollmentInput(),
-			CourseEnrollment:               fakeModel.CourseEnrollment(),
-			FindOneCourseEnrollmentService: findOneCourseEnrollmentService,
+			Sut:                  sut,
+			CourseEnrollmentRepo: courseEnrollmentRepo,
+			Input:                fake.CreateCourseEnrollmentInput(),
+			CourseEnrollment:     fakeModel.CourseEnrollment(),
 		}
 	}
 
@@ -54,15 +49,12 @@ func (s *CreateCourseEnrollmentSuite) TestHandle() {
 			On("Create", mock.Anything, mock.Anything).
 			Return(sut.CourseEnrollment, nil)
 
-		sut.FindOneCourseEnrollmentService.
-			On("Handle", mock.Anything, mock.Anything).
-			Return(copy.MustCopy(&service.Output{}, sut.CourseEnrollment), nil)
-
 		result, err := sut.Sut.Handle(context.Background(), sut.Input)
 
 		s.NoError(err)
 		s.Equal(sut.CourseEnrollment.ID, result.ID)
-		s.Equal(sut.CourseEnrollment.CourseSubjectID, result.CourseSubject.ID)
+		s.Equal(sut.CourseEnrollment.CourseSubjectID, result.CourseSubjectID)
+		s.Equal(sut.CourseEnrollment.StudentID, result.StudentID)
 	})
 
 	s.Run("courseEnrollmentRepo.Create returns an error", func() {
@@ -70,23 +62,6 @@ func (s *CreateCourseEnrollmentSuite) TestHandle() {
 
 		sut.CourseEnrollmentRepo.
 			On("Create", mock.Anything, mock.Anything).
-			Return(nil, assert.AnError)
-
-		result, err := sut.Sut.Handle(context.Background(), sut.Input)
-
-		s.ErrorIs(err, assert.AnError)
-		s.Nil(result)
-	})
-
-	s.Run("findOneCourseEnrollment.Handle returns an error", func() {
-		sut := makeSut()
-
-		sut.CourseEnrollmentRepo.
-			On("Create", mock.Anything, mock.Anything).
-			Return(sut.CourseEnrollment, nil)
-
-		sut.FindOneCourseEnrollmentService.
-			On("Handle", mock.Anything, mock.Anything).
 			Return(nil, assert.AnError)
 
 		result, err := sut.Sut.Handle(context.Background(), sut.Input)

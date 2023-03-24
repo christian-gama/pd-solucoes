@@ -7,6 +7,6 @@ type CreateInput struct {
 
 type CreateOutput struct {
 	ID        uint `json:"id"`
-	CourseID  uint `json:"courseID"  validate:"required,numeric" faker:"uint"`
-	SubjectID uint `json:"subjectID" validate:"required,numeric" faker:"uint"`
+	CourseID  uint `json:"courseID"`
+	SubjectID uint `json:"subjectID"`
 }

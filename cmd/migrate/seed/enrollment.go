@@ -8,12 +8,12 @@ import (
 	"gorm.io/gorm"
 )
 
-func CourseEnrollmentData() []*service.CreateCourseEnrollmentInput {
-	output := make([]*service.CreateCourseEnrollmentInput, 0)
+func CourseEnrollmentData() []*service.CreateInput {
+	output := make([]*service.CreateInput, 0)
 
 	for i := range CourseSubjectData() {
 		for j := range StudentData() {
-			output = append(output, &service.CreateCourseEnrollmentInput{
+			output = append(output, &service.CreateInput{
 				StudentID:       uint(j + 1),
 				CourseSubjectID: uint(i + 1),
 			})
@@ -25,7 +25,7 @@ func CourseEnrollmentData() []*service.CreateCourseEnrollmentInput {
 
 func CourseEnrollment(ctx context.Context, db *gorm.DB) {
 	repo := persistence.NewCourseEnrollment(db.Session(&gorm.Session{NewDB: true}))
-	s := service.NewCreateCourseEnrollment(repo, service.NewFindOneCourseEnrollment(repo))
+	s := service.NewCreateCourseEnrollment(repo)
 
 	for _, input := range CourseEnrollmentData() {
 		if _, err := s.Handle(ctx, input); err != nil {

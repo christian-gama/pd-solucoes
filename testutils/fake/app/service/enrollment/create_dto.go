@@ -5,8 +5,8 @@ import (
 	"github.com/go-faker/faker/v4"
 )
 
-func CreateCourseEnrollmentInput() *service.CreateCourseEnrollmentInput {
-	input := new(service.CreateCourseEnrollmentInput)
+func CreateCourseEnrollmentInput() *service.CreateInput {
+	input := new(service.CreateInput)
 	faker.FakeData(input)
 
 	return input

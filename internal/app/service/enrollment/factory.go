@@ -5,17 +5,11 @@ import (
 )
 
 func MakeCreateCourseEnrollment() CreateCourseEnrollment {
-	return NewCreateCourseEnrollment(
-		persistence.MakeCourseEnrollment(),
-		MakeFindOneCourseEnrollment(),
-	)
+	return NewCreateCourseEnrollment(persistence.MakeCourseEnrollment())
 }
 
 func MakeUpdateCourseEnrollment() UpdateCourseEnrollment {
-	return NewUpdateCourseEnrollment(
-		persistence.MakeCourseEnrollment(),
-		MakeFindOneCourseEnrollment(),
-	)
+	return NewUpdateCourseEnrollment(persistence.MakeCourseEnrollment())
 }
 
 func MakeFindOneCourseEnrollment() FindOneCourseEnrollment {

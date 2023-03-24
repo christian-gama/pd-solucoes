@@ -18,7 +18,7 @@ func NewFindAllCourseEnrollments(s service.FindAllCourseEnrollments) FindAllCour
 	}
 
 	return http.NewController(
-		func(ctx *gin.Context, input *service.FindAllCourseEnrollmentsInput) {
+		func(ctx *gin.Context, input *service.FindAllInput) {
 			courseEnrollment, err := s.Handle(ctx.Request.Context(), input)
 			if err != nil {
 				panic(err)

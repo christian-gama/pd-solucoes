@@ -5,8 +5,8 @@ import (
 	"github.com/go-faker/faker/v4"
 )
 
-func DeleteCourseEnrollmentInput() *service.DeleteCourseEnrollmentInput {
-	input := new(service.DeleteCourseEnrollmentInput)
+func DeleteCourseEnrollmentInput() *service.DeleteInput {
+	input := new(service.DeleteInput)
 	faker.FakeData(input)
 
 	return input

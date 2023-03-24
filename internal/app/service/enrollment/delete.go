@@ -8,7 +8,7 @@ import (
 
 type DeleteCourseEnrollment interface {
 	// Handle deletes a courseEnrollment.
-	Handle(ctx context.Context, input *DeleteCourseEnrollmentInput) error
+	Handle(ctx context.Context, input *DeleteInput) error
 }
 
 type deleteCourseEnrollmentImpl struct {
@@ -23,7 +23,7 @@ func NewDeleteCourseEnrollment(courseEnrollmentRepo repo.CourseEnrollment) Delet
 // Handle deletes a courseEnrollment.
 func (s *deleteCourseEnrollmentImpl) Handle(
 	ctx context.Context,
-	input *DeleteCourseEnrollmentInput,
+	input *DeleteInput,
 ) error {
 	if _, err := s.
 		CourseEnrollment.

@@ -1,6 +1,8 @@
 package service
 
-type UpdateCourseEnrollmentInput struct {
+type UpdateInput struct {
 	ID uint `uri:"id" validate:"required" faker:"uint"`
-	CreateCourseEnrollmentInput
+	CreateInput
 }
+
+type UpdateOutput = CreateOutput

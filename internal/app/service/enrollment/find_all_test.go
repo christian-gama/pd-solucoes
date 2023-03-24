@@ -27,7 +27,7 @@ func (s *FindAllCourseEnrollmentSuite) TestHandle() {
 	type Sut struct {
 		Sut                  service.FindAllCourseEnrollments
 		CourseEnrollmentRepo *mocks.CourseEnrollment
-		Input                *service.FindAllCourseEnrollmentsInput
+		Input                *service.FindAllInput
 		Pagination           *querying.PaginationOutput[*model.CourseEnrollment]
 	}
 

@@ -26,7 +26,7 @@ func TestFindOneCourseEnrollmentSuite(t *testing.T) {
 func (s *FindOneCourseEnrollmentSuite) TestHandle() {
 	type Sut struct {
 		Sut                     controller.FindOneCourseEnrollment
-		Input                   *service.FindOneCourseEnrollmentInput
+		Input                   *service.FindOneInput
 		FindOneCourseEnrollment *mocks.FindOneCourseEnrollment
 	}
 

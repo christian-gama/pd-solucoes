@@ -26,7 +26,7 @@ func (s *FindOneCourseEnrollmentSuite) TestHandle() {
 	type Sut struct {
 		Sut                  service.FindOneCourseEnrollment
 		CourseEnrollmentRepo *mocks.CourseEnrollment
-		Input                *service.FindOneCourseEnrollmentInput
+		Input                *service.FindOneInput
 		CourseEnrollment     *model.CourseEnrollment
 	}
 

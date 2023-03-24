@@ -25,7 +25,7 @@ func TestCreateCourseEnrollmentSuite(t *testing.T) {
 func (s *CreateCourseEnrollmentSuite) TestHandle() {
 	type Sut struct {
 		Sut                    controller.CreateCourseEnrollment
-		Input                  *service.CreateCourseEnrollmentInput
+		Input                  *service.CreateInput
 		CreateCourseEnrollment *mocks.CreateCourseEnrollment
 	}
 
@@ -41,7 +41,7 @@ func (s *CreateCourseEnrollmentSuite) TestHandle() {
 
 		sut.CreateCourseEnrollment.
 			On("Handle", mock.Anything, sut.Input).
-			Return(&service.Output{}, nil)
+			Return(&service.CreateOutput{}, nil)
 
 		ctx := gintest.MustRequest(sut.Sut, gintest.Option{
 			Data: sut.Input,
