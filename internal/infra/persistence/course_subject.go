@@ -69,32 +69,37 @@ func (p *courseSubjectImpl) FindAll(
 ) (*queryingPort.PaginationOutput[*model.CourseSubject], error) {
 	db := p.db.WithContext(ctx)
 
-	var courseSubjectWithCount []struct {
-		Total  int64
-		Schema *schema.CourseSubject `gorm:"embedded"`
-	}
+	var courseSubjects []*schema.CourseSubject
 
 	if err := db.
-		Model(&schema.CourseSubject{}).
 		Scopes(
 			sql.PreloadScope(preload),
 			querying.FilterScope(params.Filterer),
 			querying.PaginationScope(params.Paginator),
 			querying.SortScope(params.Sorter),
 		).
-		Find(&courseSubjectWithCount).
+		Find(&courseSubjects).
 		Error; err != nil {
-		return nil, sql.Error(err, "courseSubject")
+		return nil, sql.Error(err, "courseSubjects")
+	}
+
+	var totalCount int64
+	err := db.
+		Model(&schema.CourseSubject{}).
+		Scopes(querying.FilterScope(params.Filterer)).
+		Count(&totalCount).Error
+	if err != nil {
+		return nil, sql.Error(err, "courseSubjects")
 	}
 
 	pagination := &queryingPort.PaginationOutput[*model.CourseSubject]{}
-	for _, schema := range courseSubjectWithCount {
+	for _, courseSubjectSchema := range courseSubjects {
 		pagination.Results = append(
 			pagination.Results,
-			convert.ToModel(&model.CourseSubject{}, schema.Schema),
+			convert.ToModel(&model.CourseSubject{}, courseSubjectSchema),
 		)
-		pagination.Total = int(schema.Total)
 	}
+	pagination.Total = int(totalCount)
 
 	return pagination, nil
 }

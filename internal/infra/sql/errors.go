@@ -1,6 +1,10 @@
 package sql
 
-import "fmt"
+import (
+	"fmt"
+
+	"github.com/iancoleman/strcase"
+)
 
 // ErrNotFound is the error returned when a resource is not found.
 type ErrNotFound struct {
@@ -48,7 +52,7 @@ func NewErrForeignKeyConstraint(field string, referenceTable string) error {
 
 // Error implements error.
 func (e *ErrForeignKeyConstraint) Error() string {
-	return fmt.Sprintf("%s does not exist on %s", e.Field, e.ReferenceTable)
+	return fmt.Sprintf("%s does not exist on %s", e.Field, strcase.ToLowerCamel(e.ReferenceTable))
 }
 
 // ErrCheckConstraint is the error returned when a check constraint is violated.

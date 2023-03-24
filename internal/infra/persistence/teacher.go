@@ -66,32 +66,37 @@ func (p *teacherImpl) FindAll(
 ) (*queryingPort.PaginationOutput[*model.Teacher], error) {
 	db := p.db.WithContext(ctx)
 
-	var teacherWithCount []struct {
-		Total  int64
-		Schema *schema.Teacher `gorm:"embedded"`
-	}
+	var teachers []*schema.Teacher
 
 	if err := db.
-		Model(&schema.Teacher{}).
 		Scopes(
 			sql.PreloadScope(preload),
 			querying.FilterScope(params.Filterer),
 			querying.PaginationScope(params.Paginator),
 			querying.SortScope(params.Sorter),
 		).
-		Find(&teacherWithCount).
+		Find(&teachers).
 		Error; err != nil {
-		return nil, sql.Error(err, "teacher")
+		return nil, sql.Error(err, "teachers")
+	}
+
+	var totalCount int64
+	err := db.
+		Model(&schema.Teacher{}).
+		Scopes(querying.FilterScope(params.Filterer)).
+		Count(&totalCount).Error
+	if err != nil {
+		return nil, sql.Error(err, "teachers")
 	}
 
 	pagination := &queryingPort.PaginationOutput[*model.Teacher]{}
-	for _, sch := range teacherWithCount {
+	for _, teacherSchema := range teachers {
 		pagination.Results = append(
 			pagination.Results,
-			convert.ToModel(&model.Teacher{}, sch.Schema),
+			convert.ToModel(&model.Teacher{}, teacherSchema),
 		)
-		pagination.Total = int(sch.Total)
 	}
+	pagination.Total = int(totalCount)
 
 	return pagination, nil
 }

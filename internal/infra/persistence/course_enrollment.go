@@ -38,7 +38,7 @@ func (p *courseEnrollmentImpl) Create(
 		Omit(clause.Associations).
 		Create(courseEnrollmentSchema).
 		Error; err != nil {
-		return nil, sql.Error(err, "courseEnrollment")
+		return nil, sql.Error(err, "enrollment")
 	}
 
 	return convert.ToModel(&model.CourseEnrollment{}, courseEnrollmentSchema), nil
@@ -55,7 +55,7 @@ func (p *courseEnrollmentImpl) Delete(
 		Where("id = ?", params.ID).
 		Delete(&schema.CourseEnrollment{}).
 		Error; err != nil {
-		return sql.Error(err, "courseEnrollment")
+		return sql.Error(err, "enrollment")
 	}
 
 	return nil
@@ -69,32 +69,37 @@ func (p *courseEnrollmentImpl) FindAll(
 ) (*queryingPort.PaginationOutput[*model.CourseEnrollment], error) {
 	db := p.db.WithContext(ctx)
 
-	var courseEnrollmentWithCount []struct {
-		Total  int64
-		Schema *schema.CourseEnrollment `gorm:"embedded"`
-	}
+	var enrollments []*schema.CourseEnrollment
 
 	if err := db.
-		Model(&schema.CourseEnrollment{}).
 		Scopes(
 			sql.PreloadScope(preload),
 			querying.FilterScope(params.Filterer),
 			querying.PaginationScope(params.Paginator),
 			querying.SortScope(params.Sorter),
 		).
-		Find(&courseEnrollmentWithCount).
+		Find(&enrollments).
 		Error; err != nil {
-		return nil, sql.Error(err, "courseEnrollment")
+		return nil, sql.Error(err, "enrollments")
+	}
+
+	var totalCount int64
+	err := db.
+		Model(&schema.CourseEnrollment{}).
+		Scopes(querying.FilterScope(params.Filterer)).
+		Count(&totalCount).Error
+	if err != nil {
+		return nil, sql.Error(err, "enrollments")
 	}
 
 	pagination := &queryingPort.PaginationOutput[*model.CourseEnrollment]{}
-	for _, schema := range courseEnrollmentWithCount {
+	for _, enrollmentSchema := range enrollments {
 		pagination.Results = append(
 			pagination.Results,
-			convert.ToModel(&model.CourseEnrollment{}, schema.Schema),
+			convert.ToModel(&model.CourseEnrollment{}, enrollmentSchema),
 		)
-		pagination.Total = int(schema.Total)
 	}
+	pagination.Total = int(totalCount)
 
 	return pagination, nil
 }
@@ -115,7 +120,7 @@ func (p *courseEnrollmentImpl) FindOne(
 		Where("id = ?", params.ID).
 		First(&courseEnrollmentSchema).
 		Error; err != nil {
-		return nil, sql.Error(err, "courseEnrollment")
+		return nil, sql.Error(err, "enrollment")
 	}
 
 	return convert.ToModel(&model.CourseEnrollment{}, &courseEnrollmentSchema), nil
@@ -140,7 +145,7 @@ func (p *courseEnrollmentImpl) Update(
 		Where("id = ?", params.CourseEnrollment.ID).
 		Updates(courseEnrollmentSchema).
 		Error; err != nil {
-		return nil, sql.Error(err, "courseEnrollment")
+		return nil, sql.Error(err, "enrollment")
 	}
 
 	return convert.ToModel(&model.CourseEnrollment{}, courseEnrollmentSchema), nil

@@ -5,6 +5,7 @@ import (
 	"github.com/christian-gama/pd-solucoes/internal/infra/router/routing"
 	collegeController "github.com/christian-gama/pd-solucoes/internal/presentation/controller/college"
 	courseController "github.com/christian-gama/pd-solucoes/internal/presentation/controller/course"
+	enrollmentController "github.com/christian-gama/pd-solucoes/internal/presentation/controller/enrollment"
 	studentController "github.com/christian-gama/pd-solucoes/internal/presentation/controller/student"
 	subjectController "github.com/christian-gama/pd-solucoes/internal/presentation/controller/subject"
 	teacherController "github.com/christian-gama/pd-solucoes/internal/presentation/controller/teacher"
@@ -80,6 +81,19 @@ func Subjects() *routing.Routing {
 			{Controller: subjectController.MakeFindOneSubject()},
 			{Controller: subjectController.MakeFindAllSubjects()},
 			{Controller: subjectController.MakeDeleteSubject()},
+		},
+	}
+}
+
+func Enrollments() *routing.Routing {
+	return &routing.Routing{
+		Group: "/enrollments",
+		Routes: []*routing.Route{
+			{Controller: enrollmentController.MakeCreateCourseEnrollment()},
+			{Controller: enrollmentController.MakeUpdateCourseEnrollment()},
+			{Controller: enrollmentController.MakeFindOneCourseEnrollment()},
+			{Controller: enrollmentController.MakeFindAllCourseEnrollments()},
+			{Controller: enrollmentController.MakeDeleteCourseEnrollment()},
 		},
 	}
 }

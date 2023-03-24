@@ -66,32 +66,37 @@ func (p *subjectImpl) FindAll(
 ) (*queryingPort.PaginationOutput[*model.Subject], error) {
 	db := p.db.WithContext(ctx)
 
-	var subjectWithCount []struct {
-		Total  int64
-		Schema *schema.Subject `gorm:"embedded"`
-	}
+	var subjects []*schema.Subject
 
 	if err := db.
-		Model(&schema.Subject{}).
 		Scopes(
 			sql.PreloadScope(preload),
 			querying.FilterScope(params.Filterer),
 			querying.PaginationScope(params.Paginator),
 			querying.SortScope(params.Sorter),
 		).
-		Find(&subjectWithCount).
+		Find(&subjects).
 		Error; err != nil {
-		return nil, sql.Error(err, "subject")
+		return nil, sql.Error(err, "subjects")
+	}
+
+	var totalCount int64
+	err := db.
+		Model(&schema.Subject{}).
+		Scopes(querying.FilterScope(params.Filterer)).
+		Count(&totalCount).Error
+	if err != nil {
+		return nil, sql.Error(err, "subjects")
 	}
 
 	pagination := &queryingPort.PaginationOutput[*model.Subject]{}
-	for _, schema := range subjectWithCount {
+	for _, subjectSchema := range subjects {
 		pagination.Results = append(
 			pagination.Results,
-			convert.ToModel(&model.Subject{}, schema.Schema),
+			convert.ToModel(&model.Subject{}, subjectSchema),
 		)
-		pagination.Total = int(schema.Total)
 	}
+	pagination.Total = int(totalCount)
 
 	return pagination, nil
 }
