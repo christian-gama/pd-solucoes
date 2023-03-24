@@ -1,6 +1,8 @@
 package sql
 
 import (
+	"time"
+
 	"gorm.io/gorm"
 )
 
@@ -23,6 +25,15 @@ func (c *conn) Open() *gorm.DB {
 	if err != nil {
 		panic(err)
 	}
+
+	sqlDB, err := db.DB()
+	if err != nil {
+		panic(err)
+	}
+
+	sqlDB.SetMaxIdleConns(10)
+	sqlDB.SetMaxOpenConns(100)
+	sqlDB.SetConnMaxLifetime(time.Hour)
 
 	return db
 }
