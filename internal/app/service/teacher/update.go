@@ -10,7 +10,7 @@ import (
 
 type UpdateTeacher interface {
 	// Handle updates a teacher.
-	Handle(ctx context.Context, input *UpdateInput) (*Output, error)
+	Handle(ctx context.Context, input *UpdateInput) (*UpdateOutput, error)
 }
 
 type updateTeacherImpl struct {
@@ -26,7 +26,7 @@ func NewUpdateTeacher(teacherRepo repo.Teacher) UpdateTeacher {
 func (s *updateTeacherImpl) Handle(
 	ctx context.Context,
 	input *UpdateInput,
-) (*Output, error) {
+) (*UpdateOutput, error) {
 	teacher, err := model.NewTeacher(input.ID, input.Name, input.Degree)
 	if err != nil {
 		return nil, err
@@ -40,5 +40,5 @@ func (s *updateTeacherImpl) Handle(
 		return nil, err
 	}
 
-	return copy.MustCopy(&Output{}, teacher), nil
+	return copy.MustCopy(&UpdateOutput{}, teacher), nil
 }

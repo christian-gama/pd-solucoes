@@ -15,15 +15,15 @@ type UpdateTeacher struct {
 }
 
 // Handle provides a mock function with given fields: ctx, input
-func (_m *UpdateTeacher) Handle(ctx context.Context, input *service.UpdateInput) (*service.Output, error) {
+func (_m *UpdateTeacher) Handle(ctx context.Context, input *service.UpdateInput) (*service.CreateOutput, error) {
 	ret := _m.Called(ctx, input)
 
-	var r0 *service.Output
-	if rf, ok := ret.Get(0).(func(context.Context, *service.UpdateInput) *service.Output); ok {
+	var r0 *service.CreateOutput
+	if rf, ok := ret.Get(0).(func(context.Context, *service.UpdateInput) *service.CreateOutput); ok {
 		r0 = rf(ctx, input)
 	} else {
 		if ret.Get(0) != nil {
-			r0 = ret.Get(0).(*service.Output)
+			r0 = ret.Get(0).(*service.CreateOutput)
 		}
 	}
 
