@@ -43,7 +43,7 @@ func (s *UpdateSubjectSuite) TestHandle() {
 
 		sut.UpdateSubject.
 			On("Handle", mock.Anything, sut.Input).
-			Return(&service.Output{}, nil)
+			Return(&service.UpdateOutput{}, nil)
 
 		ctx := gintest.MustRequest(sut.Sut, gintest.Option{
 			Data:   sut.Input,

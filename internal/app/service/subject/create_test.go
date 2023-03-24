@@ -52,7 +52,7 @@ func (s *CreateSubjectSuite) TestHandle() {
 		s.NoError(err)
 		s.Equal(sut.Subject.ID, result.ID)
 		s.Equal(sut.Subject.Name, result.Name)
-		s.Equal(sut.Subject.TeacherID, result.Teacher.ID)
+		s.Equal(sut.Subject.TeacherID, result.TeacherID)
 	})
 
 	s.Run("subjectRepo.Create returns an error", func() {
