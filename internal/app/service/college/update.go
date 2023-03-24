@@ -10,7 +10,7 @@ import (
 
 type UpdateCollege interface {
 	// Handle updates a college.
-	Handle(ctx context.Context, input *UpdateCollegeInput) (*Output, error)
+	Handle(ctx context.Context, input *UpdateCollegeInput) (*UpdateOutput, error)
 }
 
 type updateCollegeImpl struct {
@@ -26,7 +26,7 @@ func NewUpdateCollege(collegeRepo repo.College) UpdateCollege {
 func (s *updateCollegeImpl) Handle(
 	ctx context.Context,
 	input *UpdateCollegeInput,
-) (*Output, error) {
+) (*UpdateOutput, error) {
 	college, err := model.NewCollege(input.ID, input.Name, input.Cnpj)
 	if err != nil {
 		return nil, err
@@ -40,5 +40,5 @@ func (s *updateCollegeImpl) Handle(
 		return nil, err
 	}
 
-	return copy.MustCopy(&Output{}, college), nil
+	return copy.MustCopy(&UpdateOutput{}, college), nil
 }
