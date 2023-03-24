@@ -3,9 +3,9 @@ package service
 import "time"
 
 type Output struct {
-	ID             uint
-	EnrollmentDate time.Time
-	CourseSubject  *courseSubjectOutput
+	ID             uint                 `json:"id"`
+	EnrollmentDate time.Time            `json:"enrollmentDate"`
+	CourseSubject  *courseSubjectOutput `json:"courseSubject"`
 }
 
 type courseSubjectOutput struct {

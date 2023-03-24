@@ -3,12 +3,13 @@ package routes
 import (
 	"github.com/christian-gama/pd-solucoes/internal/infra/http"
 	"github.com/christian-gama/pd-solucoes/internal/infra/router/routing"
-	collegeController "github.com/christian-gama/pd-solucoes/internal/presentation/controller/college"
-	courseController "github.com/christian-gama/pd-solucoes/internal/presentation/controller/course"
-	enrollmentController "github.com/christian-gama/pd-solucoes/internal/presentation/controller/enrollment"
-	studentController "github.com/christian-gama/pd-solucoes/internal/presentation/controller/student"
-	subjectController "github.com/christian-gama/pd-solucoes/internal/presentation/controller/subject"
-	teacherController "github.com/christian-gama/pd-solucoes/internal/presentation/controller/teacher"
+	collegeCtrl "github.com/christian-gama/pd-solucoes/internal/presentation/controller/college"
+	courseCtrl "github.com/christian-gama/pd-solucoes/internal/presentation/controller/course"
+	courseSubjectCtrl "github.com/christian-gama/pd-solucoes/internal/presentation/controller/courseSubject"
+	enrollmentCtrl "github.com/christian-gama/pd-solucoes/internal/presentation/controller/enrollment"
+	studentCtrl "github.com/christian-gama/pd-solucoes/internal/presentation/controller/student"
+	subjectCtrl "github.com/christian-gama/pd-solucoes/internal/presentation/controller/subject"
+	teacherCtrl "github.com/christian-gama/pd-solucoes/internal/presentation/controller/teacher"
 	"github.com/christian-gama/pd-solucoes/internal/presentation/middleware"
 )
 
@@ -24,11 +25,11 @@ func Colleges() *routing.Routing {
 	return &routing.Routing{
 		Group: "/colleges",
 		Routes: []*routing.Route{
-			{Controller: collegeController.MakeCreateCollege()},
-			{Controller: collegeController.MakeUpdateCollege()},
-			{Controller: collegeController.MakeFindOneCollege()},
-			{Controller: collegeController.MakeFindAllColleges()},
-			{Controller: collegeController.MakeDeleteCollege()},
+			{Controller: collegeCtrl.MakeCreateCollege()},
+			{Controller: collegeCtrl.MakeUpdateCollege()},
+			{Controller: collegeCtrl.MakeFindOneCollege()},
+			{Controller: collegeCtrl.MakeFindAllColleges()},
+			{Controller: collegeCtrl.MakeDeleteCollege()},
 		},
 	}
 }
@@ -37,11 +38,11 @@ func Teachers() *routing.Routing {
 	return &routing.Routing{
 		Group: "/teachers",
 		Routes: []*routing.Route{
-			{Controller: teacherController.MakeCreateTeacher()},
-			{Controller: teacherController.MakeUpdateTeacher()},
-			{Controller: teacherController.MakeFindOneTeacher()},
-			{Controller: teacherController.MakeFindAllTeachers()},
-			{Controller: teacherController.MakeDeleteTeacher()},
+			{Controller: teacherCtrl.MakeCreateTeacher()},
+			{Controller: teacherCtrl.MakeUpdateTeacher()},
+			{Controller: teacherCtrl.MakeFindOneTeacher()},
+			{Controller: teacherCtrl.MakeFindAllTeachers()},
+			{Controller: teacherCtrl.MakeDeleteTeacher()},
 		},
 	}
 }
@@ -50,11 +51,11 @@ func Students() *routing.Routing {
 	return &routing.Routing{
 		Group: "/students",
 		Routes: []*routing.Route{
-			{Controller: studentController.MakeCreateStudent()},
-			{Controller: studentController.MakeUpdateStudent()},
-			{Controller: studentController.MakeFindOneStudent()},
-			{Controller: studentController.MakeFindAllStudents()},
-			{Controller: studentController.MakeDeleteStudent()},
+			{Controller: studentCtrl.MakeCreateStudent()},
+			{Controller: studentCtrl.MakeUpdateStudent()},
+			{Controller: studentCtrl.MakeFindOneStudent()},
+			{Controller: studentCtrl.MakeFindAllStudents()},
+			{Controller: studentCtrl.MakeDeleteStudent()},
 		},
 	}
 }
@@ -63,11 +64,11 @@ func Courses() *routing.Routing {
 	return &routing.Routing{
 		Group: "/courses",
 		Routes: []*routing.Route{
-			{Controller: courseController.MakeCreateCourse()},
-			{Controller: courseController.MakeUpdateCourse()},
-			{Controller: courseController.MakeFindOneCourse()},
-			{Controller: courseController.MakeFindAllCourses()},
-			{Controller: courseController.MakeDeleteCourse()},
+			{Controller: courseCtrl.MakeCreateCourse()},
+			{Controller: courseCtrl.MakeUpdateCourse()},
+			{Controller: courseCtrl.MakeFindOneCourse()},
+			{Controller: courseCtrl.MakeFindAllCourses()},
+			{Controller: courseCtrl.MakeDeleteCourse()},
 		},
 	}
 }
@@ -76,11 +77,11 @@ func Subjects() *routing.Routing {
 	return &routing.Routing{
 		Group: "/subjects",
 		Routes: []*routing.Route{
-			{Controller: subjectController.MakeCreateSubject()},
-			{Controller: subjectController.MakeUpdateSubject()},
-			{Controller: subjectController.MakeFindOneSubject()},
-			{Controller: subjectController.MakeFindAllSubjects()},
-			{Controller: subjectController.MakeDeleteSubject()},
+			{Controller: subjectCtrl.MakeCreateSubject()},
+			{Controller: subjectCtrl.MakeUpdateSubject()},
+			{Controller: subjectCtrl.MakeFindOneSubject()},
+			{Controller: subjectCtrl.MakeFindAllSubjects()},
+			{Controller: subjectCtrl.MakeDeleteSubject()},
 		},
 	}
 }
@@ -89,11 +90,24 @@ func Enrollments() *routing.Routing {
 	return &routing.Routing{
 		Group: "/enrollments",
 		Routes: []*routing.Route{
-			{Controller: enrollmentController.MakeCreateCourseEnrollment()},
-			{Controller: enrollmentController.MakeUpdateCourseEnrollment()},
-			{Controller: enrollmentController.MakeFindOneCourseEnrollment()},
-			{Controller: enrollmentController.MakeFindAllCourseEnrollments()},
-			{Controller: enrollmentController.MakeDeleteCourseEnrollment()},
+			{Controller: enrollmentCtrl.MakeCreateCourseEnrollment()},
+			{Controller: enrollmentCtrl.MakeUpdateCourseEnrollment()},
+			{Controller: enrollmentCtrl.MakeFindOneCourseEnrollment()},
+			{Controller: enrollmentCtrl.MakeFindAllCourseEnrollments()},
+			{Controller: enrollmentCtrl.MakeDeleteCourseEnrollment()},
+		},
+	}
+}
+
+func CourseSubjects() *routing.Routing {
+	return &routing.Routing{
+		Group: "/course-subjects",
+		Routes: []*routing.Route{
+			{Controller: courseSubjectCtrl.MakeCreateCourseSubject()},
+			{Controller: courseSubjectCtrl.MakeUpdateCourseSubject()},
+			{Controller: courseSubjectCtrl.MakeFindOneCourseSubject()},
+			{Controller: courseSubjectCtrl.MakeFindAllCourseSubjects()},
+			{Controller: courseSubjectCtrl.MakeDeleteCourseSubject()},
 		},
 	}
 }

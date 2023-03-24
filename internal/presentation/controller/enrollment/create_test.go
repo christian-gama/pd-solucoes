@@ -36,7 +36,7 @@ func (s *CreateCourseEnrollmentSuite) TestHandle() {
 		return &Sut{Sut: sut, CreateCourseEnrollment: createCourseEnrollment, Input: input}
 	}
 
-	s.Run("should create a courseEnrollment", func() {
+	s.Run("should create an enrollment", func() {
 		sut := makeSut()
 
 		sut.CreateCourseEnrollment.
