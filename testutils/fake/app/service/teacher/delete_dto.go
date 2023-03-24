@@ -5,8 +5,8 @@ import (
 	"github.com/go-faker/faker/v4"
 )
 
-func DeleteTeacherInput() *service.DeleteTeacherInput {
-	input := new(service.DeleteTeacherInput)
+func DeleteTeacherInput() *service.DeleteInput {
+	input := new(service.DeleteInput)
 	faker.FakeData(input)
 
 	return input

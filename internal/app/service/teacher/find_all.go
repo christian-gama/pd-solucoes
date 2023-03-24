@@ -12,7 +12,7 @@ type FindAllTeachers interface {
 	// Handle finds all teachers.
 	Handle(
 		ctx context.Context,
-		input *FindAllTeachersInput,
+		input *FindAllInput,
 	) (*querying.PaginationOutput[*Output], error)
 }
 
@@ -28,7 +28,7 @@ func NewFindAllTeachers(teacherRepo repo.Teacher) FindAllTeachers {
 // Handle findAlls a new teacher.
 func (s *findAllTeachersImpl) Handle(
 	ctx context.Context,
-	input *FindAllTeachersInput,
+	input *FindAllInput,
 ) (*querying.PaginationOutput[*Output], error) {
 	findAllTeacherParams := repo.FindAllTeacherParams{
 		Paginator: &input.Pagination,

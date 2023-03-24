@@ -8,8 +8,8 @@ import (
 	"gorm.io/gorm"
 )
 
-func TeacherData() []*service.CreateTeacherInput {
-	return []*service.CreateTeacherInput{
+func TeacherData() []*service.CreateInput {
+	return []*service.CreateInput{
 		{
 			Name:   "Luana Alice Bianca Ramos",
 			Degree: "Engenharia de Software",

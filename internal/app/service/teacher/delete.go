@@ -8,7 +8,7 @@ import (
 
 type DeleteTeacher interface {
 	// Handle deletes a teacher.
-	Handle(ctx context.Context, input *DeleteTeacherInput) error
+	Handle(ctx context.Context, input *DeleteInput) error
 }
 
 type deleteTeacherImpl struct {
@@ -23,7 +23,7 @@ func NewDeleteTeacher(teacherRepo repo.Teacher) DeleteTeacher {
 // Handle deletes a teacher.
 func (s *deleteTeacherImpl) Handle(
 	ctx context.Context,
-	input *DeleteTeacherInput,
+	input *DeleteInput,
 ) error {
 	if _, err := s.Teacher.FindOne(ctx, repo.FindOneTeacherParams{ID: input.ID}); err != nil {
 		return err

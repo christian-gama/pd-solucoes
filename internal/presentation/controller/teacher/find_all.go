@@ -18,7 +18,7 @@ func NewFindAllTeachers(s service.FindAllTeachers) FindAllTeachers {
 	}
 
 	return http.NewController(
-		func(ctx *gin.Context, input *service.FindAllTeachersInput) {
+		func(ctx *gin.Context, input *service.FindAllInput) {
 			teacher, err := s.Handle(ctx.Request.Context(), input)
 			if err != nil {
 				panic(err)

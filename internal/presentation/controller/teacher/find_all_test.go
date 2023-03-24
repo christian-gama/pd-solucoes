@@ -26,7 +26,7 @@ func TestFindAllTeacherSuite(t *testing.T) {
 func (s *FindAllTeacherSuite) TestHandle() {
 	type Sut struct {
 		Sut             controller.FindAllTeachers
-		Input           *service.FindAllTeachersInput
+		Input           *service.FindAllInput
 		FindAllTeachers *mocks.FindAllTeachers
 	}
 

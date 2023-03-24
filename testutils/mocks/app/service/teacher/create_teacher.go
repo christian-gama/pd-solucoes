@@ -15,11 +15,11 @@ type CreateTeacher struct {
 }
 
 // Handle provides a mock function with given fields: ctx, input
-func (_m *CreateTeacher) Handle(ctx context.Context, input *service.CreateTeacherInput) (*service.Output, error) {
+func (_m *CreateTeacher) Handle(ctx context.Context, input *service.CreateInput) (*service.Output, error) {
 	ret := _m.Called(ctx, input)
 
 	var r0 *service.Output
-	if rf, ok := ret.Get(0).(func(context.Context, *service.CreateTeacherInput) *service.Output); ok {
+	if rf, ok := ret.Get(0).(func(context.Context, *service.CreateInput) *service.Output); ok {
 		r0 = rf(ctx, input)
 	} else {
 		if ret.Get(0) != nil {
@@ -28,7 +28,7 @@ func (_m *CreateTeacher) Handle(ctx context.Context, input *service.CreateTeache
 	}
 
 	var r1 error
-	if rf, ok := ret.Get(1).(func(context.Context, *service.CreateTeacherInput) error); ok {
+	if rf, ok := ret.Get(1).(func(context.Context, *service.CreateInput) error); ok {
 		r1 = rf(ctx, input)
 	} else {
 		r1 = ret.Error(1)

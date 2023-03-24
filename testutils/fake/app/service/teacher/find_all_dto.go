@@ -5,8 +5,8 @@ import (
 	"github.com/go-faker/faker/v4"
 )
 
-func FindAllTeachersInput() *service.FindAllTeachersInput {
-	input := new(service.FindAllTeachersInput)
+func FindAllTeachersInput() *service.FindAllInput {
+	input := new(service.FindAllInput)
 	faker.FakeData(input)
 
 	return input

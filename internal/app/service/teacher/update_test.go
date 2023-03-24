@@ -26,7 +26,7 @@ func (s *UpdateTeacherSuite) TestHandle() {
 	type Sut struct {
 		Sut         service.UpdateTeacher
 		TeacherRepo *mocks.Teacher
-		Input       *service.UpdateTeacherInput
+		Input       *service.UpdateInput
 		Teacher     *model.Teacher
 	}
 

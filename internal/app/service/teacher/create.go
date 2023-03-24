@@ -10,7 +10,7 @@ import (
 
 type CreateTeacher interface {
 	// Handle creates a new teacher.
-	Handle(ctx context.Context, input *CreateTeacherInput) (*Output, error)
+	Handle(ctx context.Context, input *CreateInput) (*Output, error)
 }
 
 type createTeacherImpl struct {
@@ -25,7 +25,7 @@ func NewCreateTeacher(teacherRepo repo.Teacher) CreateTeacher {
 // Handle creates a new teacher.
 func (s *createTeacherImpl) Handle(
 	ctx context.Context,
-	input *CreateTeacherInput,
+	input *CreateInput,
 ) (*Output, error) {
 	teacher, err := model.NewTeacher(0, input.Name, input.Degree)
 	if err != nil {
