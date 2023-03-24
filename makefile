@@ -37,7 +37,7 @@ seed: cmd-exists-docker
 
 .PHONY: build
 build: cmd-exists-go
-	@echo "Generating build for $(APP_NAME) using $(ARCH) architecture..."
+	@echo "Generating build for $(APP_NAME)..."
 	@CGO_ENABLED=0 go build -o $(BUILD_DIR)/$(APP_NAME) ./cmd/api/*.go
 	@echo "Build was generated at $(BUILD_DIR)/$(APP_NAME)"
 

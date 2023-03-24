@@ -58,26 +58,6 @@ func validate() {
 			),
 		)
 	}
-
-	if App.Env == Production {
-		if len(DB.Password) < 16 {
-			panic(
-				fmt.Errorf(
-					"Invalid env variable: '%s'. Password must be at least 16 characters long",
-					DB.Password,
-				),
-			)
-		}
-
-		if len(DB.User) < 16 {
-			panic(
-				fmt.Errorf(
-					"Invalid env variable: '%s'. User must be at least 16 characters long",
-					DB.User,
-				),
-			)
-		}
-	}
 }
 
 // Path returns the absolute path of the given environment file (envFile) in the Go module's

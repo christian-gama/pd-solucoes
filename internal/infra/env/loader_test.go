@@ -32,6 +32,9 @@ func (s *LoaderSuite) TestLoad() {
 
 			s.NotZero(env.App.Env, "env.App.Env")
 			s.NotZero(env.App.Port, "env.App.Port")
+			s.NotZero(env.App.Host, "env.App.Host")
+			s.NotZero(env.Config.GlobalRateLimit, "env.Config.GlobalRateLimit")
+			s.NotZero(env.Config.Debug, "env.Config.Debug")
 			s.NotZero(env.DB.Host, "env.DB.Host")
 			s.NotZero(env.DB.Name, "env.DB.Name")
 			s.NotZero(env.DB.Password, "env.DB.Password")
@@ -68,6 +71,9 @@ func createTempEnv(content string) (*os.File, string) {
 const validEnvContent = `
 APP_ENV=test
 APP_PORT=123
+APP_HOST=localhost
+CONFIG_GLOBAL_RATE_LIMIT=10
+CONFIG_DEBUG=true
 DB_HOST=localhost
 DB_NAME=test
 DB_PASSWORD=123

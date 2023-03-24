@@ -49,6 +49,11 @@ To initialize the project, run the following command (requires Docker):
 ```bash
 make init
 ```
+Optionally, you can also run the migration with seed, which will populate the database with some data (for development mode only), using the following command:
+
+```bash
+make init SEED=true
+```
 
 If you don't have Docker installed, you can run the commands inside the Makefile manually.
 
@@ -62,6 +67,8 @@ The project needs three environment variables to run, they are:
 
 If you ran the init command, the .env files will already be created, otherwise you can use the .env.example file as a template.
 
+##### Please make sure the ports are available in your machine. If you find any issue, it's probably because of the ports.
+
 ### Running the tests
 
 To run the tests, run the following command:
@@ -74,18 +81,12 @@ It will start a PostgreSQL container, run migrations and run the tests.
 
 ### Running the project
 ##### Migration
-To run the project, you have to make sure the migrations are up-to-date. To do that, run the following command:
+If you ran the `make init` command, the migrations will already be run for development environment. Production environment wont run migrations automatically, so you will need to run them as described below:
 
 ```bash
-make migrate-up ENV_FILE=.env.dev
+make migrate-up ENV_FILE=.env.prod
 ```
-Change from `dev` to `prod` if you want to run the migrations in the production environment. This instruction serves for the other commands that requires the environment variable.
-
-Optionally, you can also run the migration with seed, which will populate the database with some data, using the following command:
-
-```bash
-make migrate-up ENV_FILE=.env.dev SEED=true
-```
+Change from `prod` to `dev` if you want to run the migrations in the development environment. This instruction serves for the other commands that requires the environment variable.
 
 ##### Run project
 Finally, you can run the project with the following command:
@@ -93,7 +94,11 @@ Finally, you can run the project with the following command:
 ```bash
 make docker-dev
 ```
+The development mode will run with Gin, which can automatically reload the project when a file changes, making the development process easier.
+
 or
+
 ```bash
 make docker-prod
 ```
+The production mode will build the project and run it with the binary file.
