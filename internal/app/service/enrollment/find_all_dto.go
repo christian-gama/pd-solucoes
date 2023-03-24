@@ -5,7 +5,7 @@ import (
 )
 
 type FindAllCourseEnrollmentsInput struct {
-	Filter querying.Filter `validate:"query,filter=name teacherID"  form:"filter" faker:"-"`
-	Sort   querying.Sort   `validate:"query,sort=id name teacherID" form:"sort"   faker:"-"`
+	Filter querying.Filter `validate:"query,filter=studentID enrollmentDate courseSubjectID"  form:"filter" faker:"-"` // nolint: revive
+	Sort   querying.Sort   `validate:"query,sort=id studentID enrollmentDate courseSubjectID" form:"sort"   faker:"-"` // nolint: revive
 	querying.Pagination
 }
