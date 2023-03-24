@@ -20,6 +20,7 @@ type app struct {
 // config is the application configuration.
 type config struct {
 	GlobalRateLimit uint `env:"CONFIG_GLOBAL_RATE_LIMIT,required"`
+	Debug           bool `env:"CONFIG_DEBUG,required"`
 }
 
 var (

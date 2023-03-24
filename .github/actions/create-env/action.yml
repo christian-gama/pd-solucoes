@@ -58,6 +58,7 @@ runs:
               echo "APP_HOST=${{ inputs.APP_HOST }}" >> .env.${{ inputs.APP_ENV }}
               echo "APP_PORT=${{ inputs.APP_PORT }}" >> .env.${{ inputs.APP_ENV }}
               echo "CONFIG_GLOBAL_RATE_LIMIT=${{ inputs.CONFIG_GLOBAL_RATE_LIMIT }}" >> .env.${{ inputs.APP_ENV }}
+              echo "CONFIG_DEBUG=${{ inputs.CONFIG_DEBUG }}" >> .env.${{ inputs.APP_ENV }}
               echo "DB_NAME=${{ inputs.DB_NAME }}" >> .env.${{ inputs.APP_ENV }}
               echo "DB_USER=${{ inputs.DB_USER }}" >> .env.${{ inputs.APP_ENV }}
               echo "DB_PASSWORD=${{ inputs.DB_PASSWORD }}" >> .env.${{ inputs.APP_ENV }}
