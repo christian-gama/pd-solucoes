@@ -96,9 +96,12 @@ make docker-dev
 ```
 The development mode will run with Gin, which can automatically reload the project when a file changes, making the development process easier.
 
-or
-
+**or**
 ```bash
 make docker-prod
 ```
 The production mode will build the project and run it with the binary file.
+&nbsp;
+
+##### For Linux users
+If you are running the project in Linux, you may face permission issues because of the way Docker works with volumes. To solve this, you can run the command that failed with `sudo`, or you can change the permissions of the folder.
