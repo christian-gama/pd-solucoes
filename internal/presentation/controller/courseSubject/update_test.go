@@ -26,7 +26,7 @@ func TestUpdateCourseSubjectSuite(t *testing.T) {
 func (s *UpdateCourseSubjectSuite) TestHandle() {
 	type Sut struct {
 		Sut                 controller.UpdateCourseSubject
-		Input               *service.UpdateCourseSubjectInput
+		Input               *service.UpdateInput
 		UpdateCourseSubject *mocks.UpdateCourseSubject
 	}
 
@@ -42,7 +42,7 @@ func (s *UpdateCourseSubjectSuite) TestHandle() {
 
 		sut.UpdateCourseSubject.
 			On("Handle", mock.Anything, sut.Input).
-			Return(&service.Output{}, nil)
+			Return(&service.UpdateOutput{}, nil)
 
 		ctx := gintest.MustRequest(sut.Sut, gintest.Option{
 			Data:   sut.Input,

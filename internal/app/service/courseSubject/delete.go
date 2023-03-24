@@ -8,7 +8,7 @@ import (
 
 type DeleteCourseSubject interface {
 	// Handle deletes a courseSubject.
-	Handle(ctx context.Context, input *DeleteCourseSubjectInput) error
+	Handle(ctx context.Context, input *DeleleInput) error
 }
 
 type deleteCourseSubjectImpl struct {
@@ -25,7 +25,7 @@ func NewDeleteCourseSubject(
 // Handle deletes a courseSubject.
 func (s *deleteCourseSubjectImpl) Handle(
 	ctx context.Context,
-	input *DeleteCourseSubjectInput,
+	input *DeleleInput,
 ) error {
 	if _, err := s.
 		CourseSubject.

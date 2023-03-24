@@ -18,7 +18,7 @@ func NewUpdateCourseSubject(s service.UpdateCourseSubject) UpdateCourseSubject {
 	}
 
 	return http.NewController(
-		func(ctx *gin.Context, input *service.UpdateCourseSubjectInput) {
+		func(ctx *gin.Context, input *service.UpdateInput) {
 			courseSubject, err := s.Handle(ctx.Request.Context(), input)
 			if err != nil {
 				panic(err)

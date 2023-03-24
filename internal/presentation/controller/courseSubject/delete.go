@@ -18,7 +18,7 @@ func NewDeleteCourseSubject(s service.DeleteCourseSubject) DeleteCourseSubject {
 	}
 
 	return http.NewController(
-		func(ctx *gin.Context, input *service.DeleteCourseSubjectInput) {
+		func(ctx *gin.Context, input *service.DeleleInput) {
 			err := s.Handle(ctx.Request.Context(), input)
 			if err != nil {
 				panic(err)

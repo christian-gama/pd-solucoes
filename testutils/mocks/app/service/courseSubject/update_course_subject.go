@@ -15,20 +15,20 @@ type UpdateCourseSubject struct {
 }
 
 // Handle provides a mock function with given fields: ctx, input
-func (_m *UpdateCourseSubject) Handle(ctx context.Context, input *service.UpdateCourseSubjectInput) (*service.Output, error) {
+func (_m *UpdateCourseSubject) Handle(ctx context.Context, input *service.UpdateInput) (*service.CreateOutput, error) {
 	ret := _m.Called(ctx, input)
 
-	var r0 *service.Output
-	if rf, ok := ret.Get(0).(func(context.Context, *service.UpdateCourseSubjectInput) *service.Output); ok {
+	var r0 *service.CreateOutput
+	if rf, ok := ret.Get(0).(func(context.Context, *service.UpdateInput) *service.CreateOutput); ok {
 		r0 = rf(ctx, input)
 	} else {
 		if ret.Get(0) != nil {
-			r0 = ret.Get(0).(*service.Output)
+			r0 = ret.Get(0).(*service.CreateOutput)
 		}
 	}
 
 	var r1 error
-	if rf, ok := ret.Get(1).(func(context.Context, *service.UpdateCourseSubjectInput) error); ok {
+	if rf, ok := ret.Get(1).(func(context.Context, *service.UpdateInput) error); ok {
 		r1 = rf(ctx, input)
 	} else {
 		r1 = ret.Error(1)

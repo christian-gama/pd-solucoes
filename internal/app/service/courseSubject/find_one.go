@@ -9,7 +9,7 @@ import (
 
 type FindOneCourseSubject interface {
 	// Handle finds one courseSubject.
-	Handle(ctx context.Context, input *FindOneCourseSubjectInput) (*Output, error)
+	Handle(ctx context.Context, input *FindOneInput) (*Output, error)
 }
 
 type findOneCourseSubjectImpl struct {
@@ -26,7 +26,7 @@ func NewFindOneCourseSubject(
 // Handle findOnes a new courseSubject.
 func (s *findOneCourseSubjectImpl) Handle(
 	ctx context.Context,
-	input *FindOneCourseSubjectInput,
+	input *FindOneInput,
 ) (*Output, error) {
 	findOneCourseSubjectParams := repo.FindOneCourseSubjectParams{
 		ID: input.ID,

@@ -5,34 +5,30 @@ import (
 
 	"github.com/christian-gama/pd-solucoes/internal/domain/model"
 	"github.com/christian-gama/pd-solucoes/internal/domain/repo"
+	"github.com/christian-gama/pd-solucoes/pkg/copy"
 )
 
 type CreateCourseSubject interface {
 	// Handle creates a new courseSubject.
-	Handle(ctx context.Context, input *CreateCourseSubjectInput) (*Output, error)
+	Handle(ctx context.Context, input *CreateInput) (*CreateOutput, error)
 }
 
 type createCourseSubjectImpl struct {
 	repo.CourseSubject
-	FindOneCourseSubject
 }
 
 // NewCreateCourseSubject returns a CreateCourseSubject.
-func NewCreateCourseSubject(
-	courseSubjectRepo repo.CourseSubject,
-	findOneCourseSubjectService FindOneCourseSubject,
-) CreateCourseSubject {
+func NewCreateCourseSubject(courseSubjectRepo repo.CourseSubject) CreateCourseSubject {
 	return &createCourseSubjectImpl{
-		CourseSubject:        courseSubjectRepo,
-		FindOneCourseSubject: findOneCourseSubjectService,
+		CourseSubject: courseSubjectRepo,
 	}
 }
 
 // Handle creates a new courseSubject.
 func (s *createCourseSubjectImpl) Handle(
 	ctx context.Context,
-	input *CreateCourseSubjectInput,
-) (*Output, error) {
+	input *CreateInput,
+) (*CreateOutput, error) {
 	courseSubject, err := model.NewCourseSubject(
 		0,
 		input.CourseID,
@@ -50,13 +46,5 @@ func (s *createCourseSubjectImpl) Handle(
 		return nil, err
 	}
 
-	findOneCourseSubjectParams := &FindOneCourseSubjectInput{
-		ID: courseSubject.ID,
-	}
-	output, err := s.FindOneCourseSubject.Handle(ctx, findOneCourseSubjectParams)
-	if err != nil {
-		return nil, err
-	}
-
-	return output, err
+	return copy.MustCopy(&CreateOutput{}, courseSubject), nil
 }

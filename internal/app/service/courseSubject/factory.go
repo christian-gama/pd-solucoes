@@ -5,17 +5,11 @@ import (
 )
 
 func MakeCreateCourseSubject() CreateCourseSubject {
-	return NewCreateCourseSubject(
-		persistence.MakeCourseSubject(),
-		MakeFindOneCourseSubject(),
-	)
+	return NewCreateCourseSubject(persistence.MakeCourseSubject())
 }
 
 func MakeUpdateCourseSubject() UpdateCourseSubject {
-	return NewUpdateCourseSubject(
-		persistence.MakeCourseSubject(),
-		MakeFindOneCourseSubject(),
-	)
+	return NewUpdateCourseSubject(persistence.MakeCourseSubject())
 }
 
 func MakeFindOneCourseSubject() FindOneCourseSubject {

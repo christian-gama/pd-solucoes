@@ -12,7 +12,7 @@ type FindAllCourseSubjects interface {
 	// Handle finds all courseSubjects.
 	Handle(
 		ctx context.Context,
-		input *FindAllCourseSubjectsInput,
+		input *FindAllInput,
 	) (*querying.PaginationOutput[*Output], error)
 }
 
@@ -30,7 +30,7 @@ func NewFindAllCourseSubjects(
 // Handle findAlls a new courseSubject.
 func (s *findAllCourseSubjectsImpl) Handle(
 	ctx context.Context,
-	input *FindAllCourseSubjectsInput,
+	input *FindAllInput,
 ) (*querying.PaginationOutput[*Output], error) {
 	findAllCourseSubjectParams := repo.FindAllCourseSubjectParams{
 		Paginator: &input.Pagination,

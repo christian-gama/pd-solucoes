@@ -8,12 +8,12 @@ import (
 	"gorm.io/gorm"
 )
 
-func CourseSubjectData() []*service.CreateCourseSubjectInput {
-	output := make([]*service.CreateCourseSubjectInput, 0)
+func CourseSubjectData() []*service.CreateInput {
+	output := make([]*service.CreateInput, 0)
 
 	for i := range CourseData() {
 		for j := range SubjectData() {
-			output = append(output, &service.CreateCourseSubjectInput{
+			output = append(output, &service.CreateInput{
 				CourseID:  uint(i + 1),
 				SubjectID: uint(j + 1),
 			})
@@ -25,7 +25,7 @@ func CourseSubjectData() []*service.CreateCourseSubjectInput {
 
 func CourseSubject(ctx context.Context, db *gorm.DB) {
 	repo := persistence.NewCourseSubject(db.Session(&gorm.Session{NewDB: true}))
-	s := service.NewCreateCourseSubject(repo, service.NewFindOneCourseSubject(repo))
+	s := service.NewCreateCourseSubject(repo)
 
 	for _, input := range CourseSubjectData() {
 		if _, err := s.Handle(ctx, input); err != nil {
