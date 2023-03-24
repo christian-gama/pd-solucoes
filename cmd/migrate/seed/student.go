@@ -8,8 +8,8 @@ import (
 	"gorm.io/gorm"
 )
 
-func StudentData() []*service.CreateStudentInput {
-	return []*service.CreateStudentInput{
+func StudentData() []*service.CreateInput {
+	return []*service.CreateInput{
 		{
 			Name: "Enzo Antonio Fogaça",
 			Cpf:  "84093587434",

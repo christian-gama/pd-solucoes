@@ -8,7 +8,7 @@ import (
 
 type DeleteStudent interface {
 	// Handle deletes a student.
-	Handle(ctx context.Context, input *DeleteStudentInput) error
+	Handle(ctx context.Context, input *DeleteInput) error
 }
 
 type deleteStudentImpl struct {
@@ -23,7 +23,7 @@ func NewDeleteStudent(studentRepo repo.Student) DeleteStudent {
 // Handle deletes a student.
 func (s *deleteStudentImpl) Handle(
 	ctx context.Context,
-	input *DeleteStudentInput,
+	input *DeleteInput,
 ) error {
 	if _, err := s.Student.FindOne(ctx, repo.FindOneStudentParams{ID: input.ID}); err != nil {
 		return err

@@ -17,11 +17,11 @@ type FindAllStudents struct {
 }
 
 // Handle provides a mock function with given fields: ctx, input
-func (_m *FindAllStudents) Handle(ctx context.Context, input *service.FindAllStudentsInput) (*querying.PaginationOutput[*service.Output], error) {
+func (_m *FindAllStudents) Handle(ctx context.Context, input *service.FindAllInput) (*querying.PaginationOutput[*service.Output], error) {
 	ret := _m.Called(ctx, input)
 
 	var r0 *querying.PaginationOutput[*service.Output]
-	if rf, ok := ret.Get(0).(func(context.Context, *service.FindAllStudentsInput) *querying.PaginationOutput[*service.Output]); ok {
+	if rf, ok := ret.Get(0).(func(context.Context, *service.FindAllInput) *querying.PaginationOutput[*service.Output]); ok {
 		r0 = rf(ctx, input)
 	} else {
 		if ret.Get(0) != nil {
@@ -30,7 +30,7 @@ func (_m *FindAllStudents) Handle(ctx context.Context, input *service.FindAllStu
 	}
 
 	var r1 error
-	if rf, ok := ret.Get(1).(func(context.Context, *service.FindAllStudentsInput) error); ok {
+	if rf, ok := ret.Get(1).(func(context.Context, *service.FindAllInput) error); ok {
 		r1 = rf(ctx, input)
 	} else {
 		r1 = ret.Error(1)

@@ -15,11 +15,11 @@ type DeleteStudent struct {
 }
 
 // Handle provides a mock function with given fields: ctx, input
-func (_m *DeleteStudent) Handle(ctx context.Context, input *service.DeleteStudentInput) error {
+func (_m *DeleteStudent) Handle(ctx context.Context, input *service.DeleteInput) error {
 	ret := _m.Called(ctx, input)
 
 	var r0 error
-	if rf, ok := ret.Get(0).(func(context.Context, *service.DeleteStudentInput) error); ok {
+	if rf, ok := ret.Get(0).(func(context.Context, *service.DeleteInput) error); ok {
 		r0 = rf(ctx, input)
 	} else {
 		r0 = ret.Error(0)

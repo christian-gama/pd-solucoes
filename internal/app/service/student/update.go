@@ -10,7 +10,7 @@ import (
 
 type UpdateStudent interface {
 	// Handle updates a student.
-	Handle(ctx context.Context, input *UpdateStudentInput) (*Output, error)
+	Handle(ctx context.Context, input *UpdateInput) (*Output, error)
 }
 
 type updateStudentImpl struct {
@@ -25,7 +25,7 @@ func NewUpdateStudent(studentRepo repo.Student) UpdateStudent {
 // Handle updates a student.
 func (s *updateStudentImpl) Handle(
 	ctx context.Context,
-	input *UpdateStudentInput,
+	input *UpdateInput,
 ) (*Output, error) {
 	student, err := model.NewStudent(input.ID, input.Name, input.Cpf)
 	if err != nil {

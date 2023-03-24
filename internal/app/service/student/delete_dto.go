@@ -1,5 +1,5 @@
 package service
 
-type DeleteStudentInput struct {
+type DeleteInput struct {
 	ID uint `uri:"id" validate:"required" faker:"uint"`
 }

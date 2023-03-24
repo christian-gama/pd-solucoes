@@ -9,7 +9,7 @@ import (
 
 type FindOneStudent interface {
 	// Handle finds one student.
-	Handle(ctx context.Context, input *FindOneStudentInput) (*Output, error)
+	Handle(ctx context.Context, input *FindOneInput) (*Output, error)
 }
 
 type findOneStudentImpl struct {
@@ -24,7 +24,7 @@ func NewFindOneStudent(studentRepo repo.Student) FindOneStudent {
 // Handle findOnes a new student.
 func (s *findOneStudentImpl) Handle(
 	ctx context.Context,
-	input *FindOneStudentInput,
+	input *FindOneInput,
 ) (*Output, error) {
 	findOneStudentParams := repo.FindOneStudentParams{
 		ID: input.ID,

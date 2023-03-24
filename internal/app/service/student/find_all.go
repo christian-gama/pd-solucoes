@@ -12,7 +12,7 @@ type FindAllStudents interface {
 	// Handle finds all students.
 	Handle(
 		ctx context.Context,
-		input *FindAllStudentsInput,
+		input *FindAllInput,
 	) (*querying.PaginationOutput[*Output], error)
 }
 
@@ -28,7 +28,7 @@ func NewFindAllStudents(studentRepo repo.Student) FindAllStudents {
 // Handle findAlls a new student.
 func (s *findAllStudentsImpl) Handle(
 	ctx context.Context,
-	input *FindAllStudentsInput,
+	input *FindAllInput,
 ) (*querying.PaginationOutput[*Output], error) {
 	findAllStudentParams := repo.FindAllStudentParams{
 		Paginator: &input.Pagination,
