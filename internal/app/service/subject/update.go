@@ -10,7 +10,7 @@ import (
 
 type UpdateSubject interface {
 	// Handle updates a subject.
-	Handle(ctx context.Context, input *UpdateSubjectInput) (*Output, error)
+	Handle(ctx context.Context, input *UpdateInput) (*Output, error)
 }
 
 type updateSubjectImpl struct {
@@ -25,7 +25,7 @@ func NewUpdateSubject(subjectRepo repo.Subject) UpdateSubject {
 // Handle updates a subject.
 func (s *updateSubjectImpl) Handle(
 	ctx context.Context,
-	input *UpdateSubjectInput,
+	input *UpdateInput,
 ) (*Output, error) {
 	subject, err := model.NewSubject(input.ID, input.Name, input.TeacherID)
 	if err != nil {

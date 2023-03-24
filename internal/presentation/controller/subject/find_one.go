@@ -18,7 +18,7 @@ func NewFindOneSubject(s service.FindOneSubject) FindOneSubject {
 	}
 
 	return http.NewController(
-		func(ctx *gin.Context, input *service.FindOneSubjectInput) {
+		func(ctx *gin.Context, input *service.FindOneInput) {
 			subject, err := s.Handle(ctx.Request.Context(), input)
 			if err != nil {
 				panic(err)

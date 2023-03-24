@@ -26,7 +26,7 @@ func (s *FindOneSubjectSuite) TestHandle() {
 	type Sut struct {
 		Sut         service.FindOneSubject
 		SubjectRepo *mocks.Subject
-		Input       *service.FindOneSubjectInput
+		Input       *service.FindOneInput
 		Subject     *model.Subject
 	}
 

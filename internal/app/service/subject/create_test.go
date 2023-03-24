@@ -26,7 +26,7 @@ func (s *CreateSubjectSuite) TestHandle() {
 	type Sut struct {
 		Sut         service.CreateSubject
 		SubjectRepo *mocks.Subject
-		Input       *service.CreateSubjectInput
+		Input       *service.CreateInput
 		Subject     *model.Subject
 	}
 

@@ -18,7 +18,7 @@ func NewDeleteSubject(s service.DeleteSubject) DeleteSubject {
 	}
 
 	return http.NewController(
-		func(ctx *gin.Context, input *service.DeleteSubjectInput) {
+		func(ctx *gin.Context, input *service.DeleteInput) {
 			err := s.Handle(ctx.Request.Context(), input)
 			if err != nil {
 				panic(err)

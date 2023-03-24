@@ -27,7 +27,7 @@ func TestUpdateSubjectSuite(t *testing.T) {
 func (s *UpdateSubjectSuite) TestHandle() {
 	type Sut struct {
 		Sut           controller.UpdateSubject
-		Input         *service.UpdateSubjectInput
+		Input         *service.UpdateInput
 		UpdateSubject *mocks.UpdateSubject
 	}
 

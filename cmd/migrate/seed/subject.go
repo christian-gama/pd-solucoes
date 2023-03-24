@@ -8,8 +8,8 @@ import (
 	"gorm.io/gorm"
 )
 
-func SubjectData() []*service.CreateSubjectInput {
-	return []*service.CreateSubjectInput{
+func SubjectData() []*service.CreateInput {
+	return []*service.CreateInput{
 		{
 			Name:      "Algoritmos e Estrutura de Dados",
 			TeacherID: 1,

@@ -8,7 +8,7 @@ import (
 
 type DeleteSubject interface {
 	// Handle deletes a subject.
-	Handle(ctx context.Context, input *DeleteSubjectInput) error
+	Handle(ctx context.Context, input *DeleteInput) error
 }
 
 type deleteSubjectImpl struct {
@@ -23,7 +23,7 @@ func NewDeleteSubject(subjectRepo repo.Subject) DeleteSubject {
 // Handle deletes a subject.
 func (s *deleteSubjectImpl) Handle(
 	ctx context.Context,
-	input *DeleteSubjectInput,
+	input *DeleteInput,
 ) error {
 	if _, err := s.Subject.FindOne(ctx, repo.FindOneSubjectParams{ID: input.ID}); err != nil {
 		return err

@@ -10,7 +10,7 @@ import (
 
 type CreateSubject interface {
 	// Handle creates a new subject.
-	Handle(ctx context.Context, input *CreateSubjectInput) (*Output, error)
+	Handle(ctx context.Context, input *CreateInput) (*Output, error)
 }
 
 type createSubjectImpl struct {
@@ -25,7 +25,7 @@ func NewCreateSubject(subjectRepo repo.Subject) CreateSubject {
 // Handle creates a new subject.
 func (s *createSubjectImpl) Handle(
 	ctx context.Context,
-	input *CreateSubjectInput,
+	input *CreateInput,
 ) (*Output, error) {
 	subject, err := model.NewSubject(0, input.Name, input.TeacherID)
 	if err != nil {

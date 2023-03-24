@@ -26,7 +26,7 @@ func TestCreateSubjectSuite(t *testing.T) {
 func (s *CreateSubjectSuite) TestHandle() {
 	type Sut struct {
 		Sut           controller.CreateSubject
-		Input         *service.CreateSubjectInput
+		Input         *service.CreateInput
 		CreateSubject *mocks.CreateSubject
 	}
 
