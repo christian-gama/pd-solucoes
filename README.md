@@ -30,9 +30,12 @@ This project is following the principles of Clean Architecture, SOLID and Domain
 - PostgreSQL
 - Git
 - Docker (optional)
+- Make (optional)
 
 Even though Docker is optional, it is recommended to use it to run the project, as it will make the process of setting up the environment, dependencies and migrations easier. You can find the installation instructions for Docker [here](https://docs.docker.com/get-docker/).
 If you plan to not use Docker, you will need to install the dependencies and run the migrations manually.
+
+Make comes pre-installed in most Linux distributions, but if you are using Windows, you will need to install it manually. You can find the installation instructions [here](https://www.gnu.org/software/make/). It will simplify the process of running the project. If you don't plan to install Make, you can run the commands inside the Makefile manually.
 
 ## Getting Started
 
