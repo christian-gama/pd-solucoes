@@ -42,7 +42,7 @@ func (s *CreateStudentSuite) TestHandle() {
 
 		sut.CreateStudent.
 			On("Handle", mock.Anything, sut.Input).
-			Return(&service.Output{}, nil)
+			Return(&service.CreateOutput{}, nil)
 
 		ctx := gintest.MustRequest(sut.Sut, gintest.Option{
 			Data: sut.Input,

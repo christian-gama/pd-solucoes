@@ -10,7 +10,7 @@ import (
 
 type CreateStudent interface {
 	// Handle creates a new student.
-	Handle(ctx context.Context, input *CreateInput) (*Output, error)
+	Handle(ctx context.Context, input *CreateInput) (*CreateOutput, error)
 }
 
 type createStudentImpl struct {
@@ -26,7 +26,7 @@ func NewCreateStudent(studentRepo repo.Student) CreateStudent {
 func (s *createStudentImpl) Handle(
 	ctx context.Context,
 	input *CreateInput,
-) (*Output, error) {
+) (*CreateOutput, error) {
 	student, err := model.NewStudent(0, input.Name, input.Cpf)
 	if err != nil {
 		return nil, err
@@ -40,5 +40,5 @@ func (s *createStudentImpl) Handle(
 		return nil, err
 	}
 
-	return copy.MustCopy(&Output{}, student), nil
+	return copy.MustCopy(&CreateOutput{}, student), nil
 }
