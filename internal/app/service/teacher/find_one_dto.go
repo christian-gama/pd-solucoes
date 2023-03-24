@@ -1,5 +1,5 @@
 package service
 
 type FindOneTeacherInput struct {
-	ID uint `validate:"required" uri:"id"`
+	ID uint `validate:"required" uri:"id" faker:"uint"`
 }
